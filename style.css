@@ -341,7 +341,7 @@ h2 em {
 }
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 28px 17px;
 }
 .project-card {
@@ -357,15 +357,6 @@ h2 em {
   overflow: hidden;
   position: relative;
   background: var(--surface);
-}
-.project-card:nth-child(2) .project-image {
-  aspect-ratio: 0.88;
-}
-.project-card:nth-child(3) .project-image {
-  aspect-ratio: 0.88;
-}
-.project-card:nth-child(4) .project-image {
-  aspect-ratio: 1.25;
 }
 .project-image img {
   width: 100%;
@@ -1045,7 +1036,7 @@ h2 em {
   }
 }
 
-/* Phone */
+/* PHONE */
 @media (max-width: 640px) {
   :root {
     --mobile-pad: 20px;
@@ -1261,18 +1252,22 @@ h2 em {
   }
 
   .project-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 25px 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 10px;
   }
 
-  .project-card:first-child,
-  .project-card:last-child {
-    grid-column: 1 / -1;
+  .project-card .project-image {
+    aspect-ratio: 9 / 16;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
   }
 
-  .project-card:first-child .project-image,
-  .project-card:last-child .project-image {
-    aspect-ratio: 1.12;
+  .project-card .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .project-image {
