@@ -1390,7 +1390,21 @@ h2 em {
 }
 
 /* PHONE */
+/* =========================================================
+   MOBILE — CLEAN REBUILD
+   Replace the old max-width: 640px + max-width: 390px blocks
+========================================================== */
+
+/* =========================================================
+   MOBILE — FULL PHONE LAYOUT
+   Replace the old 640px + 390px blocks with this block
+========================================================== */
+
 @media (max-width: 640px) {
+  /* =======================================================
+     GLOBAL
+  ======================================================= */
+
   :root {
     --mobile-pad: 20px;
   }
@@ -1405,6 +1419,10 @@ h2 em {
     width: 100%;
     overflow: clip;
   }
+
+  /* =======================================================
+     TOPBAR
+  ======================================================= */
 
   .topbar {
     height: 64px;
@@ -1427,26 +1445,40 @@ h2 em {
   .menu-toggle {
     display: grid;
     place-items: center;
+
     width: 38px;
     height: 38px;
+
     padding: 0;
+
     color: var(--ink);
     flex: 0 0 auto;
   }
 
+  /* =======================================================
+     MOBILE NAV
+  ======================================================= */
+
   .nav-links {
     display: none;
+
     position: absolute;
     z-index: 30;
+
     top: 64px;
     left: 0;
     right: 0;
+
     margin: 0;
     padding: 18px var(--mobile-pad) 22px;
+
     background: rgba(255, 250, 252, 0.98);
+
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
+
     border-bottom: 1px solid var(--line);
+
     flex-direction: column;
     gap: 0;
   }
@@ -1458,9 +1490,14 @@ h2 em {
   .nav-links button {
     width: 100%;
     padding: 13px 0;
+
     text-align: left;
     font-size: 10px;
   }
+
+  /* =======================================================
+     HERO
+  ======================================================= */
 
   .hero {
     padding: 24px var(--mobile-pad) 18px;
@@ -1477,40 +1514,64 @@ h2 em {
   }
 
   .hero-stage {
-    min-height: 640px;
+    min-height: 600px;
+    position: relative;
   }
 
+  /* PORTFOLIO TITLE */
+
   .hero-title {
-    top: 28px;
-    left: -2px;
-    max-width: none;
+    position: absolute;
+
+    top: 27px;
+    left: 0;
+
     width: 100%;
-    font-size: clamp(70px, 23vw, 124px);
-    line-height: 0.84;
-    letter-spacing: -0.095em;
+    max-width: none;
+
+    font-size: clamp(64px, 18vw, 84px);
+
+    line-height: 0.86;
+    letter-spacing: -0.09em;
+
+    overflow: visible;
   }
 
   .hero-title span {
     letter-spacing: -0.12em;
   }
 
+  /* HERO PHOTO */
+
   .hero-image-wrap {
-    top: 118px;
-    right: -4px;
-    width: min(82vw, 390px);
-    height: auto;
+    position: absolute;
+
+    top: 102px;
+    right: -2px;
+
+    width: min(75vw, 350px);
+
+    z-index: 2;
   }
 
   .hero-image-wrap img {
+    display: block;
+
     width: 100%;
     height: auto;
+
+    object-fit: contain;
   }
+
+  /* ORBIT */
 
   .orbit-mark {
     width: 88px;
     height: 88px;
+
     right: -14px;
     top: 54px;
+
     font-size: 6px;
   }
 
@@ -1518,33 +1579,56 @@ h2 em {
     font-size: 23px;
   }
 
+  /* HERO COPY */
+
   .hero-copy {
     position: absolute;
+    z-index: 4;
+
     left: 0;
-    top: 422px;
-    max-width: 92%;
+    top: 387px;
+
+    max-width: 95%;
+
+    padding: 6px 10px 9px 0;
+
+    background: linear-gradient(
+      90deg,
+      rgba(247, 241, 255, 0.96) 0%,
+      rgba(247, 241, 255, 0.84) 62%,
+      rgba(247, 241, 255, 0) 100%
+    );
   }
 
   .display-copy {
-    max-width: 340px;
+    max-width: 330px;
+
     font-size: clamp(28px, 8.2vw, 34px);
+
     line-height: 1.08;
     letter-spacing: -1.2px;
+
+    text-shadow:
+      0 1px 0 var(--bg),
+      0 0 8px rgba(247, 241, 255, 0.55);
   }
 
   .short-rule {
-    margin: 20px 0 14px;
+    margin: 18px 0 13px;
   }
 
   .body-copy {
     max-width: 330px;
+
     font-size: 11px;
     line-height: 1.65;
   }
 
   .location {
-    margin-top: 18px;
+    margin-top: 17px;
+
     gap: 8px;
+
     font-size: 10px;
   }
 
@@ -1552,16 +1636,25 @@ h2 em {
     font-size: 9px;
   }
 
+  /* =======================================================
+     STATS
+  ======================================================= */
+
   .stats-strip {
-    margin: 8px var(--mobile-pad) 64px;
+    margin: 6px var(--mobile-pad) 48px;
+
     padding: 0;
+
     display: block;
   }
 
   .stat {
-    min-height: 68px;
-    padding: 12px 16px;
+    min-height: 64px;
+
+    padding: 11px 15px;
+
     grid-template-columns: 30px 52px minmax(0, 1fr);
+
     gap: 10px;
   }
 
@@ -1571,23 +1664,27 @@ h2 em {
 
   .stat span {
     max-width: none;
+
     font-size: 9px;
   }
+
+  /* =======================================================
+     GENERIC SECTION
+  ======================================================= */
 
   .section-pad {
     padding-inline: var(--mobile-pad);
   }
 
-  .work-layout {
-    gap: 56px;
-  }
-
   .section-heading {
     align-items: flex-start;
+
     flex-direction: column;
-    gap: 14px;
-    margin-bottom: 22px;
-    padding-bottom: 15px;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+    padding-bottom: 14px;
   }
 
   .section-heading h2,
@@ -1595,60 +1692,91 @@ h2 em {
   .process h2,
   .kind-words h2,
   .cta h2 {
-    font-size: clamp(32px, 10vw, 40px);
+    font-size: clamp(31px, 9.5vw, 39px);
+
     line-height: 1.02;
-    letter-spacing: -1.1px;
+    letter-spacing: -1.05px;
+  }
+
+  .section-note {
+    max-width: 340px;
+
+    margin-top: 0;
+
+    font-size: 10px;
+    line-height: 1.6;
   }
 
   .view-all {
     margin-top: 0;
   }
 
-  .project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px 10px;
+  /* =======================================================
+     WORK / PROJECTS
+  ======================================================= */
+
+  .work-layout {
+    gap: 38px;
   }
 
-  .project-card .project-image {
-    aspect-ratio: 9 / 16;
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 20px 10px;
+  }
+
+  .project-card .project-image,
+  .project-image {
     width: 100%;
+
+    aspect-ratio: 9 / 16;
+
     overflow: hidden;
+
     position: relative;
   }
 
-  .project-card .project-image img {
+  .project-card .project-image img,
+  .project-image img {
+    display: block;
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
-    display: block;
-  }
 
-  .project-image {
-    aspect-ratio: 0.82;
-  }
-
-  .project-image img {
     transition: transform 0.45s ease;
   }
 
   .project-arrow {
     width: 34px;
     height: 34px;
-    right: 9px;
-    top: 9px;
+
+    right: 8px;
+    top: 8px;
+
     opacity: 1;
     transform: none;
   }
 
   .project-meta {
-    padding-top: 10px;
-    font-size: 9px;
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
+
+    padding-top: 9px;
+
     gap: 8px;
+
+    font-size: 9px;
   }
 
   .project-meta span:first-child {
-    gap: 4px;
     min-width: 0;
+
+    gap: 4px;
   }
 
   .project-meta b,
@@ -1663,21 +1791,31 @@ h2 em {
 
   .project-year {
     font-size: 8px;
+
     flex: 0 0 auto;
   }
 
+  /* =======================================================
+     ARCHIVE
+  ======================================================= */
+
   .project-archive {
-    margin-top: 26px;
+    margin-top: 22px;
   }
 
   .archive-trigger {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
+
     gap: 12px;
-    padding: 18px 0;
+
+    padding: 17px 0;
   }
 
   .archive-label {
     grid-column: 1 / -1;
+
     padding-top: 0;
   }
 
@@ -1686,12 +1824,13 @@ h2 em {
   }
 
   .archive-copy strong {
-    font-size: 20px;
-    line-height: 1.15;
+    font-size: 19px;
+    line-height: 1.16;
   }
 
   .archive-copy small {
     max-width: none;
+
     font-size: 9px;
     line-height: 1.55;
   }
@@ -1701,9 +1840,14 @@ h2 em {
   }
 
   .archive-item {
-    grid-template-columns: 30px minmax(0, 1fr) 18px;
+    grid-template-columns:
+      30px
+      minmax(0, 1fr)
+      18px;
+
     gap: 10px;
-    padding: 15px 0;
+
+    padding: 14px 0;
   }
 
   .archive-year,
@@ -1725,22 +1869,32 @@ h2 em {
 
   .archive-item .archive-arrow {
     display: block;
+
     font-size: 14px;
   }
 
+  /* =======================================================
+     WHAT I BUILD / SERVICES
+  ======================================================= */
+
   .services-panel {
     margin-top: 0;
-    padding-top: 38px;
+
+    padding-top: 36px;
   }
 
   .services-panel h2 {
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .service-item {
-    grid-template-columns: 28px minmax(0, 1fr);
+    grid-template-columns:
+      28px
+      minmax(0, 1fr);
+
     gap: 10px;
-    padding: 15px 0;
+
+    padding: 14px 0;
   }
 
   .service-item p {
@@ -1748,35 +1902,41 @@ h2 em {
     line-height: 1.55;
   }
 
-  .process {
-    padding-top: 82px;
-    padding-bottom: 82px;
-  }
+  /* =======================================================
+     PROCESS
+  ======================================================= */
 
-  .section-note {
-    max-width: 340px;
-    margin-top: 2px;
-    font-size: 10px;
-    line-height: 1.6;
+  .process {
+    padding-top: 44px;
+    padding-bottom: 48px;
   }
 
   .process-grid {
     grid-template-columns: 1fr;
+
     gap: 0;
   }
 
   .process-step {
-    padding: 17px 0;
-    border-bottom: 1px solid var(--line);
     display: grid;
-    grid-template-columns: 48px minmax(0, 1fr);
+
+    grid-template-columns:
+      48px
+      minmax(0, 1fr);
+
     column-gap: 12px;
+
+    padding: 16px 0;
+
+    border-bottom: 1px solid var(--line);
   }
 
   .step-top {
-    border: 0;
-    padding: 0;
     grid-row: span 2;
+
+    border: 0;
+
+    padding: 0;
   }
 
   .step-top .step-arrow {
@@ -1788,19 +1948,90 @@ h2 em {
   }
 
   .process-step h3 {
-    margin: 0 0 6px;
+    margin: 0 0 5px;
+
     font-size: 10px;
   }
 
   .process-step p {
     grid-column: 2;
+
     max-width: none;
+
     font-size: 10px;
     line-height: 1.6;
   }
 
+  /* =======================================================
+     MANUFACTURING
+  ======================================================= */
+
+  .factory-chapter {
+    padding-top: 38px;
+    padding-bottom: 42px;
+  }
+
+  .factory-bridge {
+    padding-top: 18px;
+    padding-bottom: 34px;
+  }
+
+  /* =======================================================
+     CERTIFICATES
+  ======================================================= */
+
+  .certifications {
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .certificate-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 22px 8px;
+  }
+
+  .certificate-image {
+    aspect-ratio: 1.35 / 1;
+  }
+
+  .certificate-arrow {
+    width: 30px;
+    height: 30px;
+
+    top: 7px;
+    right: 7px;
+
+    opacity: 1;
+    transform: none;
+
+    font-size: 12px;
+  }
+
+  .certificate-meta {
+    padding-top: 9px;
+  }
+
+  .certificate-meta h3 {
+    font-size: 8.5px;
+    line-height: 1.25;
+  }
+
+  .certificate-meta span {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 8px;
+    line-height: 1.4;
+  }
+
+  /* =======================================================
+     FEEDBACK
+  ======================================================= */
+
   .kind-words {
-    padding-bottom: 78px;
+    padding-bottom: 48px;
   }
 
   .testimonial-grid {
@@ -1809,19 +2040,30 @@ h2 em {
 
   .testimonial {
     min-height: 180px;
-    padding: 22px 20px;
+
+    padding: 21px 19px;
   }
 
   .testimonial p {
     font-size: 17px;
   }
 
+  /* =======================================================
+     CTA
+  ======================================================= */
+
   .cta {
-    margin: 0 var(--mobile-pad) 60px;
+    margin: 0 var(--mobile-pad) 54px;
+
     display: grid;
-    grid-template-columns: 38px minmax(0, 1fr);
+
+    grid-template-columns:
+      38px
+      minmax(0, 1fr);
+
     gap: 14px;
-    padding: 24px 18px;
+
+    padding: 23px 17px;
   }
 
   .cta-icon {
@@ -1835,25 +2077,37 @@ h2 em {
 
   .cta-action {
     grid-column: 2;
+
     border: 0;
+
     padding: 0;
   }
 
   .cta-action p {
+    margin-bottom: 16px;
+
     font-size: 10px;
     line-height: 1.6;
-    margin-bottom: 17px;
   }
 
   .cta-action a {
     padding: 12px 14px;
+
     font-size: 9px;
   }
 
+  /* =======================================================
+     FOOTER
+  ======================================================= */
+
   .footer {
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 18px;
-    padding-bottom: 26px;
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 28px 18px;
+
+    padding-bottom: 24px;
   }
 
   .footer-brand {
@@ -1876,7 +2130,7 @@ h2 em {
   }
 
   .footer-column {
-    gap: 9px;
+    gap: 8px;
   }
 
   .footer-column .eyebrow {
@@ -1892,25 +2146,38 @@ h2 em {
   }
 
   .footer-bottom {
-    margin-top: 6px;
-    padding-top: 14px;
+    margin-top: 5px;
+
+    padding-top: 13px;
+
     flex-direction: column;
+
     gap: 7px;
+
     line-height: 1.4;
   }
+
+  /* =======================================================
+     PROJECT MODAL
+  ======================================================= */
 
   .project-modal {
     width: calc(100vw - 28px);
     max-width: none;
     max-height: calc(100vh - 28px);
+
     grid-template-columns: 1fr;
+
     overflow: auto;
   }
 
   .project-modal > img {
     min-height: 200px;
+
     height: 38vh;
+
     max-height: 250px;
+
     object-fit: cover;
   }
 
@@ -1920,6 +2187,7 @@ h2 em {
 
   .modal-content h2 {
     font-size: clamp(32px, 9vw, 38px);
+
     margin: 14px 0;
   }
 
@@ -1931,12 +2199,16 @@ h2 em {
   .modal-close {
     right: 10px;
     top: 10px;
+
     width: 34px;
     height: 34px;
   }
 }
 
-/* Small phones */
+/* =========================================================
+   SMALL PHONES
+========================================================== */
+
 @media (max-width: 390px) {
   :root {
     --mobile-pad: 16px;
@@ -1951,21 +2223,27 @@ h2 em {
   }
 
   .hero-stage {
-    min-height: 620px;
+    min-height: 590px;
   }
 
   .hero-title {
-    font-size: 22vw;
+    top: 27px;
+
+    font-size: 17.5vw;
+
+    letter-spacing: -0.085em;
   }
 
   .hero-image-wrap {
-    width: 86vw;
-    top: 114px;
+    top: 101px;
+
+    width: 75vw;
   }
 
   .hero-copy {
-    top: 412px;
-    max-width: 96%;
+    top: 387px;
+
+    max-width: 95%;
   }
 
   .display-copy {
@@ -1977,33 +2255,55 @@ h2 em {
   }
 
   .project-grid {
-    gap: 22px 8px;
+    gap: 19px 8px;
   }
 
   .project-meta {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
   }
 
   .section-heading h2,
   .services-panel h2,
   .process h2,
-  .kind-words h2 {
-    font-size: 32px;
+  .kind-words h2,
+  .cta h2 {
+    font-size: 31px;
+  }
+
+  .certificate-grid {
+    gap: 20px 8px;
   }
 
   .cta {
     margin-inline: var(--mobile-pad);
   }
+}
 
-  .footer {
-    grid-template-columns: 1fr;
+/* =========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+
+    scroll-behavior: auto !important;
   }
 
-  .footer-column {
-    grid-column: 1 / -1;
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }
+
+/* =========================================================
+   REDUCED MOTION
+========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -2013,6 +2313,7 @@ h2 em {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
   .reveal {
     opacity: 1;
     transform: none;
