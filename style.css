@@ -450,7 +450,7 @@ h2 em {
   padding: 0;
 }
 .process {
-  padding-top: 140px;
+  padding-top: 75px;
   padding-bottom: 140px;
 }
 .section-note {
@@ -914,6 +914,359 @@ h2 em {
   justify-self: end;
 }
 
+/* =========================================================
+   MANUFACTURING CHAPTER
+   ========================================================= */
+.factory-chapter {
+  padding-top: 10px;
+  padding-bottom: 80px;
+}
+
+.factory-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.55fr);
+  gap: 50px;
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 24px;
+}
+
+.factory-heading h2 {
+  margin: 10px 0 0;
+  font:
+    500 clamp(32px, 3.1vw, 48px)/1 "Playfair Display",
+    serif;
+  letter-spacing: -1.4px;
+}
+
+.factory-heading h2 em {
+  font-weight: 500;
+}
+
+.factory-note {
+  margin: 0 0 2px;
+  max-width: 280px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.factory-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(270px, 0.75fr);
+  gap: 70px;
+  padding-top: 38px;
+}
+
+.factory-story {
+  max-width: 720px;
+}
+
+.factory-lead {
+  margin: 0;
+  max-width: 680px;
+  font:
+    500 clamp(24px, 2.6vw, 36px)/1.16 "Playfair Display",
+    serif;
+  letter-spacing: -0.8px;
+}
+
+.factory-lead em {
+  font-weight: 500;
+}
+
+.factory-copy {
+  max-width: 560px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.factory-summary {
+  border-left: 1px solid var(--line);
+  padding-left: 30px;
+}
+
+.factory-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 0 17px;
+  margin-bottom: 17px;
+  border-bottom: 1px solid var(--line);
+}
+
+.factory-stat strong {
+  font:
+    500 34px "Playfair Display",
+    serif;
+  letter-spacing: -1px;
+}
+
+.factory-stat span {
+  max-width: 145px;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 1px;
+  line-height: 1.45;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.factory-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 22px;
+}
+
+.factory-tags span {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.4px;
+  line-height: 1;
+}
+
+.factory-company {
+  display: block;
+  margin-top: 22px;
+  color: var(--purple-deep);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .factory-heading {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .factory-note {
+    max-width: 520px;
+  }
+
+  .factory-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .factory-summary {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+    padding-top: 26px;
+  }
+}
+
+@media (max-width: 640px) {
+  .factory-chapter {
+    padding-top: 82px;
+    padding-bottom: 82px;
+  }
+
+  .factory-heading {
+    gap: 14px;
+    padding-bottom: 18px;
+  }
+
+  .factory-heading h2 {
+    font-size: clamp(30px, 9vw, 40px);
+    line-height: 1.02;
+  }
+
+  .factory-note {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .factory-grid {
+    gap: 32px;
+    padding-top: 28px;
+  }
+
+  .factory-lead {
+    font-size: 25px;
+    line-height: 1.15;
+  }
+
+  .factory-copy {
+    margin-top: 22px;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .factory-summary {
+    padding-top: 22px;
+  }
+
+  .factory-stat strong {
+    font-size: 30px;
+  }
+
+  .factory-tags {
+    gap: 6px;
+  }
+
+  .factory-tags span {
+    padding: 7px 9px;
+    font-size: 8px;
+  }
+}
+/* =========================
+   FACTORY → FEEDBACK BRIDGE
+========================== */
+
+.factory-bridge {
+  padding-top: 10px;
+  padding-bottom: 90px;
+}
+
+.factory-bridge p {
+  margin: 0;
+  max-width: 780px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(28px, 4vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+}
+
+.factory-bridge em {
+  font-weight: 500;
+}
+
+/* =========================================================
+   THINGS I LEARNED / CERTIFICATIONS
+========================================================== */
+
+.certifications {
+  padding-top: 95px;
+  padding-bottom: 110px;
+}
+
+/* =========================
+   CERTIFICATE GRID
+========================== */
+
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px 20px;
+}
+
+/* =========================
+   CERTIFICATE CARD
+========================== */
+
+.certificate-card {
+  min-width: 0;
+}
+
+/* =========================
+   IMAGE / PREVIEW
+========================== */
+
+.certificate-image {
+  display: block;
+  position: relative;
+  overflow: hidden;
+
+  aspect-ratio: 1.42 / 1;
+
+  background: var(--cream);
+  border: 1px solid var(--line);
+
+  text-decoration: none;
+}
+
+.certificate-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.35s ease;
+}
+
+/* subtle hover */
+
+.certificate-card:hover .certificate-image img {
+  transform: scale(1.025);
+}
+
+/* =========================
+   ARROW
+========================== */
+
+.certificate-arrow {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: var(--cream);
+  color: var(--ink);
+
+  font-size: 15px;
+
+  opacity: 0;
+  transform: translateY(7px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.certificate-card:hover .certificate-arrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   META
+========================== */
+
+.certificate-meta {
+  padding-top: 12px;
+}
+
+.certificate-meta h3 {
+  margin: 0;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.certificate-meta span {
+  display: block;
+
+  margin-top: 6px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+  line-height: 1.5;
+}
+
 /* =========================
    RESPONSIVE
 ========================= */
@@ -1023,7 +1376,7 @@ h2 em {
   }
 
   .process {
-    padding-top: 110px;
+    padding-top: 75px;
     padding-bottom: 110px;
   }
 
