@@ -72,7 +72,7 @@ module.exports = async (request, response) => {
     const providerResponse = await fetch(providerUrl, {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ model, messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history.slice(-MAX_HISTORY_MESSAGES), { role: "user", content: contextualMessage }], max_tokens: 900, temperature: 0.2 }),
+      body: JSON.stringify({ model, messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history.slice(-MAX_HISTORY_MESSAGES), { role: "user", content: contextualMessage }], max_tokens: 500, temperature: 0.2 }),
     });
     const providerBody = await providerResponse.text();
     if (!providerResponse.ok) {
