@@ -1114,7 +1114,11 @@
   const assistantRoot = document.querySelector("[data-assistant-root]");
   const assistantHistory = [];
   const assistantFallback =
-    "I couldn't connect right now. Please try again, or contact Dion directly by email.";
+    "Maaf, assistant lagi bermasalah. Coba lagi sebentar atau hubungi Dion lewat email.";
+  const assistantOutOfScopeSource =
+    "I'm here to help you explore Dion's portfolio. Try asking about his background, projects, skills, or experience.";
+  const assistantOutOfScope =
+    "Gue khusus bantu jelasin tentang Dion dan portfolio ini. Coba tanya soal background, project, skill, atau pengalaman dia.";
   let activeSection = "hero";
   let activeProject = "";
   let assistantBusy = false;
@@ -1134,7 +1138,7 @@
     if (!assistantMessages) return;
     assistantMessages.innerHTML = "";
     addAssistantMessage(
-      "Ask me about Dion's projects, background, skills, or experience.",
+      "Tanya gue soal project, background, skill, atau pengalaman Dion.",
       "assistant",
     );
   };
@@ -1182,7 +1186,7 @@
     addAssistantMessage(message, "user");
     assistantInput.value = "";
     setAssistantBusy(true);
-    const thinking = addAssistantMessage("Thinking…", "assistant", "is-thinking");
+    const thinking = addAssistantMessage("Lagi mikir…", "assistant", "is-thinking");
     try {
       const apiResponse = await fetch("/api/portfolio-assistant", {
         method: "POST",
@@ -1190,10 +1194,11 @@
         body: JSON.stringify({ message, section: activeSection, project: activeProject || undefined, history: assistantHistory.slice(-6) }),
       });
       const data = await apiResponse.json();
-      const answer = data?.success && typeof data.answer === "string" ? data.answer : assistantFallback;
+      const providerAnswer = data?.success && typeof data.answer === "string" ? data.answer : assistantFallback;
+      const answer = providerAnswer === assistantOutOfScopeSource ? assistantOutOfScope : providerAnswer;
       thinking?.remove();
       addAssistantMessage(answer, "assistant");
-      assistantHistory.push({ role: "user", content: message }, { role: "assistant", content: answer });
+      assistantHistory.push({ role: "user", content: message }, { role: "assistant", content: answer.slice(0, 600) });
       if (assistantHistory.length > 6) assistantHistory.splice(0, assistantHistory.length - 6);
     } catch {
       thinking?.remove();
