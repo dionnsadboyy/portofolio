@@ -900,7 +900,9 @@
     projectModal.setAttribute("aria-hidden", "false");
 
     document.dispatchEvent(
-      new CustomEvent("portfolio:project-open", { detail: { projectId: project.id } }),
+      new CustomEvent("portfolio:project-open", {
+        detail: { projectId: project.id },
+      }),
     );
 
     document.body.style.overflow = "hidden";
@@ -1126,7 +1128,8 @@
   const addAssistantMessage = (content, role, extraClass = "") => {
     if (!assistantMessages) return null;
     const message = document.createElement("div");
-    message.className = `assistant-message assistant-message--${role} ${extraClass}`.trim();
+    message.className =
+      `assistant-message assistant-message--${role} ${extraClass}`.trim();
     message.textContent = content;
     assistantMessages.appendChild(message);
     assistantMessages.scrollTop = assistantMessages.scrollHeight;
@@ -1145,10 +1148,14 @@
 
   const closeAssistant = () => {
     if (!assistantPanel || !assistantLauncher) return;
-    assistantPanel.hidden = true;
+    assistantPanel.classList.add("is-closing");
     assistantLauncher.setAttribute("aria-expanded", "false");
     resetAssistantConversation();
     assistantLauncher.focus();
+    window.setTimeout(() => {
+      assistantPanel.hidden = true;
+      assistantPanel.classList.remove("is-closing");
+    }, 200);
   };
 
   const openAssistant = () => {
@@ -1186,20 +1193,39 @@
     addAssistantMessage(message, "user");
     assistantInput.value = "";
     setAssistantBusy(true);
-    const thinking = addAssistantMessage("Lagi mikir…", "assistant", "is-thinking");
+    const thinking = addAssistantMessage(
+      "Lagi mikir…",
+      "assistant",
+      "is-thinking",
+    );
     try {
       const apiResponse = await fetch("/api/portfolio-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, section: activeSection, project: activeProject || undefined, history: assistantHistory.slice(-6) }),
+        body: JSON.stringify({
+          message,
+          section: activeSection,
+          project: activeProject || undefined,
+          history: assistantHistory.slice(-6),
+        }),
       });
       const data = await apiResponse.json();
-      const providerAnswer = data?.success && typeof data.answer === "string" ? data.answer : assistantFallback;
-      const answer = providerAnswer === assistantOutOfScopeSource ? assistantOutOfScope : providerAnswer;
+      const providerAnswer =
+        data?.success && typeof data.answer === "string"
+          ? data.answer
+          : assistantFallback;
+      const answer =
+        providerAnswer === assistantOutOfScopeSource
+          ? assistantOutOfScope
+          : providerAnswer;
       thinking?.remove();
       addAssistantMessage(answer, "assistant");
-      assistantHistory.push({ role: "user", content: message }, { role: "assistant", content: answer.slice(0, 600) });
-      if (assistantHistory.length > 6) assistantHistory.splice(0, assistantHistory.length - 6);
+      assistantHistory.push(
+        { role: "user", content: message },
+        { role: "assistant", content: answer.slice(0, 600) },
+      );
+      if (assistantHistory.length > 6)
+        assistantHistory.splice(0, assistantHistory.length - 6);
     } catch {
       thinking?.remove();
       addAssistantMessage(assistantFallback, "assistant");
@@ -1209,7 +1235,13 @@
     }
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && assistantPanel && !assistantPanel.hidden && !activeProject) closeAssistant();
+    if (
+      event.key === "Escape" &&
+      assistantPanel &&
+      !assistantPanel.hidden &&
+      !activeProject
+    )
+      closeAssistant();
   });
   document.addEventListener("portfolio:project-open", (event) => {
     activeProject = event.detail?.projectId || "";
@@ -1222,12 +1254,23 @@
     assistantRoot?.removeAttribute("aria-hidden");
   });
 
-  const contextSections = [[".hero", "hero"], ["#work", "projects"], [".process", "experience"], ["#manufacturing", "manufacturing"], ["#certifications", "certifications"], ["#contact", "contact"]];
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) activeSection = entry.target.dataset.assistantSection;
-    });
-  }, { threshold: 0.35 });
+  const contextSections = [
+    [".hero", "hero"],
+    ["#work", "projects"],
+    [".process", "experience"],
+    ["#manufacturing", "manufacturing"],
+    ["#certifications", "certifications"],
+    ["#contact", "contact"],
+  ];
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting)
+          activeSection = entry.target.dataset.assistantSection;
+      });
+    },
+    { threshold: 0.35 },
+  );
   contextSections.forEach(([selector, name]) => {
     const section = document.querySelector(selector);
     if (!section) return;
