@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
     <meta name="theme-color" content="#f5f2eb">
     <meta name="description" content="Dion Pratama Syaputra — Web Designer & Digital Creative">
     <title>Dion Pratama Syaputra — Portfolio</title>
@@ -870,13 +871,33 @@
         </footer>
     </main>
     <div class="portfolio-assistant" data-assistant-root>
-        <section class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false" aria-labelledby="assistantTitle" hidden>
-            <div class="assistant-panel__head"><div><span class="eyebrow">Portfolio guide</span><h2 id="assistantTitle">Tanya Dion AI</h2><p>Kenali background, project, dan skill gue.</p></div><button class="assistant-close" id="assistantClose" type="button" aria-label="Tutup Tanya Dion AI">×</button></div>
-            <div class="assistant-messages" id="assistantMessages" aria-live="polite" aria-label="Percakapan dengan assistant"><div class="assistant-message assistant-message--assistant">Tanya gue soal project, background, skill, atau pengalaman Dion.</div></div>
-            <div class="assistant-suggestions" id="assistantSuggestions" aria-label="Pertanyaan yang bisa ditanyakan"><button type="button">Dion siapa?</button><button type="button">Project apa aja yang pernah dia bikin?</button><button type="button">Pengalaman AI-nya apa aja?</button><button type="button">Kenapa dia punya pengalaman manufacturing?</button></div>
-            <form class="assistant-form" id="assistantForm"><label class="sr-only" for="assistantInput">Tanya soal portfolio Dion</label><textarea id="assistantInput" rows="1" maxlength="600" placeholder="Tanya apa aja tentang Dion..." aria-label="Tanya soal portfolio Dion"></textarea><button type="submit" aria-label="Kirim pertanyaan">↗</button></form>
+        <section class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false"
+            aria-labelledby="assistantTitle" hidden>
+            <div class="assistant-panel__head">
+                <div><span class="eyebrow">Portfolio guide</span>
+                    <h2 id="assistantTitle">Tanya Dion AI</h2>
+                    <p>Kenali background, project, dan skill gue.</p>
+                </div><button class="assistant-close" id="assistantClose" type="button"
+                    aria-label="Tutup Tanya Dion AI">×</button>
+            </div>
+            <div class="assistant-messages" id="assistantMessages" aria-live="polite"
+                aria-label="Percakapan dengan assistant">
+                <div class="assistant-message assistant-message--assistant">Tanya gue soal project, background, skill,
+                    atau pengalaman Dion.</div>
+            </div>
+            <div class="assistant-suggestions" id="assistantSuggestions" aria-label="Pertanyaan yang bisa ditanyakan">
+                <button type="button">Dion siapa?</button><button type="button">Project apa aja yang pernah dia
+                    bikin?</button><button type="button">Pengalaman AI-nya apa aja?</button><button type="button">Kenapa
+                    dia punya pengalaman manufacturing?</button>
+            </div>
+            <form class="assistant-form" id="assistantForm"><label class="sr-only" for="assistantInput">Tanya soal
+                    portfolio Dion</label><textarea id="assistantInput" rows="1" maxlength="600"
+                    placeholder="Tanya apa aja tentang Dion..."
+                    aria-label="Tanya soal portfolio Dion"></textarea><button type="submit"
+                    aria-label="Kirim pertanyaan">↗</button></form>
         </section>
-        <button class="assistant-launcher" id="assistantLauncher" type="button" aria-expanded="false" aria-controls="assistantPanel"><span aria-hidden="true">✦</span> Tanya Dion AI</button>
+        <button class="assistant-launcher" id="assistantLauncher" type="button" aria-expanded="false"
+            aria-controls="assistantPanel"><span aria-hidden="true">✦</span> Tanya Dion AI</button>
     </div>
     <script src="script.js"></script>
 </body>
