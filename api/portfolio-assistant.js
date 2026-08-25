@@ -17,6 +17,18 @@ PORTFOLIO KNOWLEDGE:\n${JSON.stringify(portfolioContext)}`;
 
 function sendJson(response, statusCode, body) { response.status(statusCode).json(body); }
 
+function sanitizeProviderBody(body) {
+  return String(body || "")
+    .replace(/(api[_-]?key|authorization|token|secret)(["']?\s*[:=]\s*["']?)[^,\s"'}]+/gi, "$1$2[redacted]")
+    .replace(/\bBearer\s+\S+/gi, "Bearer [redacted]")
+    .replace(/\bsk-[A-Za-z0-9_-]+\b/g, "[redacted]")
+    .slice(0, 2000);
+}
+
+function logProviderDiagnostic(details) {
+  console.error("[portfolio-assistant] provider diagnostic", details);
+}
+
 function normalizeHistory(history) {
   if (!Array.isArray(history) || history.length > MAX_HISTORY_MESSAGES) return null;
   const cleaned = [];
@@ -55,18 +67,33 @@ module.exports = async (request, response) => {
   const model = process.env.LLM_MODEL;
   if (!baseUrl || !apiKey || !model) return sendJson(response, 503, { success: false, error: "The portfolio assistant is not configured yet. Please try again later." });
   const contextualMessage = [section ? `Current portfolio section: ${section}.` : "", project ? `Current project: ${project}.` : "", message].filter(Boolean).join("\n");
+  const providerUrl = `${baseUrl.replace(/\/$/, "")}/chat/completions`;
   try {
-    const providerResponse = await fetch(`${baseUrl.replace(/\/$/, "")}/chat/completions`, {
+    const providerResponse = await fetch(providerUrl, {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({ model, messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history.slice(-MAX_HISTORY_MESSAGES), { role: "user", content: contextualMessage }], max_tokens: 300, temperature: 0.2 }),
     });
-    if (!providerResponse.ok) return sendJson(response, 502, { success: false, error: "The assistant could not answer right now. Please try again shortly." });
-    const providerData = await providerResponse.json();
+    const providerBody = await providerResponse.text();
+    if (!providerResponse.ok) {
+      logProviderDiagnostic({ status: providerResponse.status, statusText: providerResponse.statusText, url: providerUrl, model, body: sanitizeProviderBody(providerBody) });
+      return sendJson(response, 502, { success: false, error: "The assistant could not answer right now. Please try again shortly." });
+    }
+    let providerData;
+    try {
+      providerData = JSON.parse(providerBody);
+    } catch {
+      logProviderDiagnostic({ status: providerResponse.status, statusText: providerResponse.statusText, url: providerUrl, model, responseFormat: "invalid-json", body: sanitizeProviderBody(providerBody) });
+      return sendJson(response, 502, { success: false, error: "The assistant could not answer right now. Please try again shortly." });
+    }
     const answer = providerData?.choices?.[0]?.message?.content;
-    if (typeof answer !== "string" || !answer.trim()) return sendJson(response, 502, { success: false, error: "The assistant could not answer right now. Please try again shortly." });
+    if (typeof answer !== "string" || !answer.trim()) {
+      logProviderDiagnostic({ status: providerResponse.status, statusText: providerResponse.statusText, url: providerUrl, model, responseFormat: "missing-choices-message-content", body: sanitizeProviderBody(providerBody) });
+      return sendJson(response, 502, { success: false, error: "The assistant could not answer right now. Please try again shortly." });
+    }
     return sendJson(response, 200, { success: true, answer: answer.trim() });
-  } catch {
+  } catch (error) {
+    logProviderDiagnostic({ url: providerUrl, model, networkError: error instanceof Error ? error.message : "unknown" });
     return sendJson(response, 502, { success: false, error: "The assistant could not answer right now. Please try again shortly." });
   }
 };
