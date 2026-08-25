@@ -5,10 +5,17 @@
 module.exports = {
   profile: {
     name: "Dion Pratama Syaputra",
-    role: "Digital Product Builder",
+    role: "Software & AI Builder",
     origin: "Malang, Jawa Timur",
     currentLocation: "Cikarang, Jawa Barat",
-    focus: ["Web Development", "AI", "Data", "Product Experimentation"],
+    focus: [
+      "Web Development",
+      "Software Development",
+      "AI",
+      "Data",
+      "Automation",
+      "Product Experimentation",
+    ],
   },
 
   education: [
