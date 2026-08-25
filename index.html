@@ -869,6 +869,15 @@
 
         </footer>
     </main>
+    <div class="portfolio-assistant" data-assistant-root>
+        <section class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false" aria-labelledby="assistantTitle" hidden>
+            <div class="assistant-panel__head"><div><span class="eyebrow">Portfolio guide</span><h2 id="assistantTitle">Ask Dion AI</h2><p>Explore my background, projects, and skills.</p></div><button class="assistant-close" id="assistantClose" type="button" aria-label="Close Ask Dion AI">×</button></div>
+            <div class="assistant-messages" id="assistantMessages" aria-live="polite" aria-label="Assistant conversation"><div class="assistant-message assistant-message--assistant">Ask me about Dion's projects, background, skills, or experience.</div></div>
+            <div class="assistant-suggestions" id="assistantSuggestions" aria-label="Suggested questions"><button type="button">Who is Dion?</button><button type="button">What projects has he built?</button><button type="button">What is his AI experience?</button><button type="button">Why does he have manufacturing experience?</button></div>
+            <form class="assistant-form" id="assistantForm"><label class="sr-only" for="assistantInput">Ask a question about Dion's portfolio</label><textarea id="assistantInput" rows="1" maxlength="600" placeholder="Ask about Dion's portfolio..." aria-label="Ask a question about Dion's portfolio"></textarea><button type="submit" aria-label="Send question">↗</button></form>
+        </section>
+        <button class="assistant-launcher" id="assistantLauncher" type="button" aria-expanded="false" aria-controls="assistantPanel"><span aria-hidden="true">✦</span> Ask Dion AI</button>
+    </div>
     <script src="script.js"></script>
 </body>
 

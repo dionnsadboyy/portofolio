@@ -17,7 +17,7 @@
   ========================================================== */
 
   const projectDescriptions = {
-    "yonn-gpt":
+    yonngpt:
       "A personal finance product exploring AI-assisted workflows, budgeting, and a cleaner way to understand everyday spending.",
 
     "our-museum":
@@ -899,6 +899,10 @@
 
     projectModal.setAttribute("aria-hidden", "false");
 
+    document.dispatchEvent(
+      new CustomEvent("portfolio:project-open", { detail: { projectId: project.id } }),
+    );
+
     document.body.style.overflow = "hidden";
 
     if (prefersReducedMotion) {
@@ -945,6 +949,8 @@
 
       document.body.style.overflow = "";
 
+      document.dispatchEvent(new CustomEvent("portfolio:project-close"));
+
       lastFocusedElement?.focus?.();
 
       return;
@@ -964,6 +970,8 @@
         projectModal.setAttribute("aria-hidden", "true");
 
         document.body.style.overflow = "";
+
+        document.dispatchEvent(new CustomEvent("portfolio:project-close"));
 
         lastFocusedElement?.focus?.();
       },
@@ -1091,4 +1099,134 @@
       { passive: true },
     );
   }
+
+  /* =========================================================
+     AI PORTFOLIO ASSISTANT
+  ========================================================== */
+
+  const assistantLauncher = document.getElementById("assistantLauncher");
+  const assistantPanel = document.getElementById("assistantPanel");
+  const assistantClose = document.getElementById("assistantClose");
+  const assistantForm = document.getElementById("assistantForm");
+  const assistantInput = document.getElementById("assistantInput");
+  const assistantMessages = document.getElementById("assistantMessages");
+  const assistantSuggestions = document.getElementById("assistantSuggestions");
+  const assistantRoot = document.querySelector("[data-assistant-root]");
+  const assistantHistory = [];
+  const assistantFallback =
+    "I couldn't connect right now. Please try again, or contact Dion directly by email.";
+  let activeSection = "hero";
+  let activeProject = "";
+  let assistantBusy = false;
+
+  const addAssistantMessage = (content, role, extraClass = "") => {
+    if (!assistantMessages) return null;
+    const message = document.createElement("div");
+    message.className = `assistant-message assistant-message--${role} ${extraClass}`.trim();
+    message.textContent = content;
+    assistantMessages.appendChild(message);
+    assistantMessages.scrollTop = assistantMessages.scrollHeight;
+    return message;
+  };
+
+  const resetAssistantConversation = () => {
+    assistantHistory.splice(0, assistantHistory.length);
+    if (!assistantMessages) return;
+    assistantMessages.innerHTML = "";
+    addAssistantMessage(
+      "Ask me about Dion's projects, background, skills, or experience.",
+      "assistant",
+    );
+  };
+
+  const closeAssistant = () => {
+    if (!assistantPanel || !assistantLauncher) return;
+    assistantPanel.hidden = true;
+    assistantLauncher.setAttribute("aria-expanded", "false");
+    resetAssistantConversation();
+    assistantLauncher.focus();
+  };
+
+  const openAssistant = () => {
+    if (!assistantPanel || !assistantLauncher || activeProject) return;
+    assistantPanel.hidden = false;
+    assistantLauncher.setAttribute("aria-expanded", "true");
+    assistantInput?.focus();
+  };
+
+  const setAssistantBusy = (isBusy) => {
+    assistantBusy = isBusy;
+    assistantInput?.toggleAttribute("disabled", isBusy);
+    assistantForm?.querySelector("button")?.toggleAttribute("disabled", isBusy);
+  };
+
+  assistantLauncher?.addEventListener("click", openAssistant);
+  assistantClose?.addEventListener("click", closeAssistant);
+  assistantSuggestions?.addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    if (!button || !assistantInput) return;
+    assistantInput.value = button.textContent.trim();
+    assistantInput.focus();
+  });
+  assistantInput?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      assistantForm?.requestSubmit();
+    }
+  });
+  assistantForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!assistantInput || assistantBusy) return;
+    const message = assistantInput.value.trim();
+    if (!message) return;
+    addAssistantMessage(message, "user");
+    assistantInput.value = "";
+    setAssistantBusy(true);
+    const thinking = addAssistantMessage("Thinking…", "assistant", "is-thinking");
+    try {
+      const apiResponse = await fetch("/api/portfolio-assistant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, section: activeSection, project: activeProject || undefined, history: assistantHistory.slice(-6) }),
+      });
+      const data = await apiResponse.json();
+      const answer = data?.success && typeof data.answer === "string" ? data.answer : assistantFallback;
+      thinking?.remove();
+      addAssistantMessage(answer, "assistant");
+      assistantHistory.push({ role: "user", content: message }, { role: "assistant", content: answer });
+      if (assistantHistory.length > 6) assistantHistory.splice(0, assistantHistory.length - 6);
+    } catch {
+      thinking?.remove();
+      addAssistantMessage(assistantFallback, "assistant");
+    } finally {
+      setAssistantBusy(false);
+      assistantInput.focus();
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && assistantPanel && !assistantPanel.hidden && !activeProject) closeAssistant();
+  });
+  document.addEventListener("portfolio:project-open", (event) => {
+    activeProject = event.detail?.projectId || "";
+    assistantRoot?.setAttribute("aria-hidden", "true");
+    if (assistantPanel) assistantPanel.hidden = true;
+    resetAssistantConversation();
+  });
+  document.addEventListener("portfolio:project-close", () => {
+    activeProject = "";
+    assistantRoot?.removeAttribute("aria-hidden");
+  });
+
+  const contextSections = [[".hero", "hero"], ["#work", "projects"], [".process", "experience"], ["#manufacturing", "manufacturing"], ["#certifications", "certifications"], ["#contact", "contact"]];
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) activeSection = entry.target.dataset.assistantSection;
+    });
+  }, { threshold: 0.35 });
+  contextSections.forEach(([selector, name]) => {
+    const section = document.querySelector(selector);
+    if (!section) return;
+    section.dataset.assistantSection = name;
+    sectionObserver.observe(section);
+  });
 })();
