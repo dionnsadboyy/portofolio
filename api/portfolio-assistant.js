@@ -72,7 +72,7 @@ module.exports = async (request, response) => {
     const providerResponse = await fetch(providerUrl, {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ model, messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history.slice(-MAX_HISTORY_MESSAGES), { role: "user", content: contextualMessage }], max_tokens: 300, temperature: 0.2 }),
+      body: JSON.stringify({ model, messages: [{ role: "system", content: SYSTEM_PROMPT }, ...history.slice(-MAX_HISTORY_MESSAGES), { role: "user", content: contextualMessage }], max_tokens: 900, temperature: 0.2 }),
     });
     const providerBody = await providerResponse.text();
     if (!providerResponse.ok) {
@@ -89,7 +89,7 @@ module.exports = async (request, response) => {
     const answer = providerData?.choices?.[0]?.message?.content;
     if (typeof answer !== "string" || !answer.trim()) {
       logProviderDiagnostic({ status: providerResponse.status, statusText: providerResponse.statusText, url: providerUrl, model, responseFormat: "missing-choices-message-content", body: sanitizeProviderBody(providerBody) });
-      return sendJson(response, 502, { success: false, error: "The assistant could not answer right now. Please try again shortly." });
+      return sendJson(response, 502, { success: false, error: "Maaf, assistant belum berhasil menyusun jawaban. Coba pertanyaan yang lebih singkat." });
     }
     return sendJson(response, 200, { success: true, answer: answer.trim() });
   } catch (error) {
