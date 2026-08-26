@@ -1071,35 +1071,596 @@
   }
 
   /* =========================================================
-     SUBTLE DESKTOP PARALLAX
-  ========================================================== */
+   V2 KINETIC MOTION SYSTEM
+   Body-only motion layer.
+   HERO + AI CHATBOT remain untouched.
+========================================================= */
 
-  if (
-    !prefersReducedMotion &&
-    heroImage &&
-    window.matchMedia("(min-width: 901px)").matches
-  ) {
-    let ticking = false;
+  if (!prefersReducedMotion) {
+    const kineticMotionQuery = window.matchMedia("(min-width: 641px)");
+    const kineticTargets = [];
+    const kineticSections = [];
+    let kineticRaf = 0;
+    let kineticActive = false;
+
+    let kineticLastY = window.scrollY;
+    let kineticLastTime = performance.now();
+    let kineticVelocity = 0;
+    let kineticVelocityTarget = 0;
+
+    const kineticClamp = (value, min, max) =>
+      Math.min(Math.max(value, min), max);
+
+    const registerKinetic = (
+      selector,
+      {
+        depth = 0,
+        velocity = 0,
+        x = 0,
+        scale = 0,
+        rotate = 0,
+        alternate = false,
+      } = {},
+    ) => {
+      document.querySelectorAll(selector).forEach((element, index) => {
+        kineticTargets.push({
+          element,
+          depth,
+          velocity,
+          x,
+          scale,
+          rotate,
+          direction: alternate && index % 2 ? -1 : 1,
+          top: 0,
+          height: 0,
+        });
+      });
+    };
+
+    const registerKineticSection = (
+      selector,
+      { depth = 0, velocity = 0, scale = 0, overlap = 0 } = {},
+    ) => {
+      document.querySelectorAll(selector).forEach((element) => {
+        kineticSections.push({
+          element,
+          depth,
+          velocity,
+          scale,
+          overlap,
+          top: 0,
+          height: 0,
+        });
+      });
+    };
+
+    /*
+     * =========================================================
+     * TYPOGRAPHY
+     * =========================================================
+     */
+
+    registerKinetic(".section-heading h2", {
+      depth: -0.065,
+      velocity: 1.15,
+      x: 2.5,
+    });
+
+    registerKinetic(".factory-heading h2", {
+      depth: -0.08,
+      velocity: 1.4,
+      x: 4,
+    });
+
+    registerKinetic(".factory-bridge p", {
+      depth: 0.12,
+      velocity: 1.8,
+      scale: 0.012,
+    });
+
+    /*
+     * =========================================================
+     * PROJECTS
+     * =========================================================
+     */
+
+    registerKinetic(".project-card", {
+      depth: 0.055,
+      velocity: 1.2,
+      x: 3,
+      rotate: 0.12,
+      alternate: true,
+    });
+
+    registerKinetic(".project-meta", {
+      depth: -0.035,
+      velocity: 0.75,
+      x: 2,
+      alternate: true,
+    });
+
+    /*
+     * =========================================================
+     * PROCESS
+     * =========================================================
+     */
+
+    registerKinetic(".process-step", {
+      depth: -0.055,
+      velocity: 0.9,
+      x: 2.5,
+      rotate: 0.08,
+      alternate: true,
+    });
+
+    /*
+     * =========================================================
+     * SERVICES
+     * =========================================================
+     */
+
+    registerKinetic(".service-item", {
+      depth: 0.045,
+      velocity: 0.85,
+      x: 3.5,
+      alternate: true,
+    });
+
+    /*
+     * =========================================================
+     * MANUFACTURING
+     * =========================================================
+     */
+
+    registerKinetic(".factory-story", {
+      depth: -0.065,
+      velocity: 1,
+      x: 3,
+    });
+
+    registerKinetic(".factory-summary", {
+      depth: 0.075,
+      velocity: 1.15,
+      x: 4,
+      alternate: true,
+    });
+
+    registerKinetic(".factory-stat", {
+      depth: 0.095,
+      velocity: 1.25,
+      x: 2,
+      alternate: true,
+    });
+
+    registerKinetic(".factory-tags span", {
+      depth: 0.05,
+      velocity: 0.65,
+      x: 1.5,
+      alternate: true,
+    });
+
+    /*
+     * =========================================================
+     * CERTIFICATES
+     * =========================================================
+     */
+
+    registerKinetic(".certificate-card", {
+      depth: 0.07,
+      velocity: 1.05,
+      x: 2.5,
+      rotate: 0.08,
+      alternate: true,
+    });
+
+    /*
+     * =========================================================
+     * TESTIMONIALS
+     * =========================================================
+     */
+
+    registerKinetic(".testimonial", {
+      depth: -0.05,
+      velocity: 0.9,
+      x: 2,
+      rotate: 0.06,
+      alternate: true,
+    });
+
+    /*
+     * =========================================================
+     * CTA
+     * =========================================================
+     */
+
+    registerKinetic(".cta h2", {
+      depth: -0.08,
+      velocity: 1.4,
+      x: 3,
+      scale: 0.01,
+    });
+
+    registerKinetic(".cta-action", {
+      depth: 0.075,
+      velocity: 1.1,
+      x: 3,
+    });
+
+    /*
+     * =========================================================
+     * SECTION LAYERS
+     *
+     * These create the "sections are moving through each other"
+     * feeling without altering document flow.
+     * =========================================================
+     */
+
+    registerKineticSection(".stats-strip", {
+      depth: -0.055,
+      velocity: 0.75,
+      overlap: 10,
+    });
+
+    registerKineticSection(".work-layout", {
+      depth: 0.035,
+      velocity: 0.7,
+      overlap: 8,
+    });
+
+    registerKineticSection(".process", {
+      depth: -0.04,
+      velocity: 0.8,
+      overlap: 12,
+    });
+
+    registerKineticSection(".factory-chapter", {
+      depth: 0.045,
+      velocity: 0.85,
+      overlap: 14,
+    });
+
+    registerKineticSection(".certifications", {
+      depth: -0.04,
+      velocity: 0.75,
+      overlap: 10,
+    });
+
+    registerKineticSection(".factory-bridge", {
+      depth: 0.075,
+      velocity: 1,
+      overlap: 18,
+    });
+
+    registerKineticSection(".kind-words", {
+      depth: -0.045,
+      velocity: 0.75,
+      overlap: 12,
+    });
+
+    registerKineticSection(".cta", {
+      depth: 0.06,
+      velocity: 1,
+      overlap: 16,
+    });
+
+    const measureKinetic = () => {
+      kineticTargets.forEach((target) => {
+        const rect = target.element.getBoundingClientRect();
+
+        target.top = rect.top + window.scrollY;
+        target.height = rect.height;
+      });
+
+      kineticSections.forEach((section) => {
+        const rect = section.element.getBoundingClientRect();
+
+        section.top = rect.top + window.scrollY;
+        section.height = rect.height;
+      });
+    };
+
+    const resetKineticTarget = (target) => {
+      target.element.style.setProperty("--kinetic-x", "0px");
+      target.element.style.setProperty("--kinetic-y", "0px");
+      target.element.style.setProperty("--kinetic-scale", "1");
+      target.element.style.setProperty("--kinetic-rotate", "0deg");
+    };
+
+    const resetKineticSection = (section) => {
+      section.element.style.setProperty("--section-y", "0px");
+      section.element.style.setProperty("--section-scale", "1");
+    };
+
+    const updateKinetic = (now) => {
+      kineticRaf = 0;
+
+      const deltaTime = Math.max(8, now - kineticLastTime);
+
+      const currentY = window.scrollY;
+      const deltaY = currentY - kineticLastY;
+
+      kineticVelocityTarget = kineticClamp((deltaY / deltaTime) * 22, -34, 34);
+
+      kineticVelocity += (kineticVelocityTarget - kineticVelocity) * 0.22;
+
+      kineticVelocityTarget *= 0.78;
+
+      const viewportHeight = window.innerHeight;
+      const mobileIntensity = kineticMotionQuery.matches ? 1 : 0.38;
+
+      const viewportCenter = currentY + viewportHeight * 0.5;
+
+      kineticTargets.forEach((target) => {
+        const center = target.top + target.height * 0.5;
+
+        const progress = kineticClamp(
+          (viewportCenter - center) / (viewportHeight * 1.15),
+          -1.35,
+          1.35,
+        );
+
+        /*
+         * Depth is deliberately stronger than the previous V1.
+         * This is the visible "alive" part.
+         */
+        const depthOffset =
+          progress * target.depth * viewportHeight * 1.35 * mobileIntensity;
+
+        const velocityOffset =
+          kineticVelocity * target.velocity * mobileIntensity * 0.32;
+
+        const xOffset =
+          target.direction * progress * target.x * 12 * mobileIntensity;
+
+        const rotateOffset = target.direction * progress * target.rotate * 12;
+
+        const scaleOffset = kineticClamp(
+          1 + progress * target.scale * 3 * mobileIntensity,
+          0.97,
+          1.03,
+        );
+
+        const yOffset = kineticClamp(depthOffset + velocityOffset, -42, 42);
+
+        target.element.style.setProperty(
+          "--kinetic-x",
+          `${xOffset.toFixed(2)}px`,
+        );
+
+        target.element.style.setProperty(
+          "--kinetic-y",
+          `${yOffset.toFixed(2)}px`,
+        );
+
+        target.element.style.setProperty(
+          "--kinetic-scale",
+          scaleOffset.toFixed(4),
+        );
+
+        target.element.style.setProperty(
+          "--kinetic-rotate",
+          `${rotateOffset.toFixed(3)}deg`,
+        );
+      });
+
+      kineticSections.forEach((section) => {
+        const center = section.top + section.height * 0.5;
+
+        const progress = kineticClamp(
+          (viewportCenter - center) / (viewportHeight * 1.3),
+          -1,
+          1,
+        );
+
+        const y =
+          progress * section.depth * viewportHeight * 0.9 * mobileIntensity;
+
+        const velocityBoost =
+          kineticVelocity * section.velocity * mobileIntensity * 0.22;
+
+        const totalY = kineticClamp(y + velocityBoost, -32, 32);
+
+        const scale = kineticClamp(
+          1 + progress * section.overlap * 0.00022,
+          0.985,
+          1.015,
+        );
+
+        section.element.style.setProperty(
+          "--section-y",
+          `${totalY.toFixed(2)}px`,
+        );
+
+        section.element.style.setProperty("--section-scale", scale.toFixed(4));
+      });
+
+      kineticLastY = currentY;
+      kineticLastTime = now;
+
+      const stillMoving =
+        Math.abs(kineticVelocity) > 0.012 ||
+        Math.abs(kineticVelocityTarget) > 0.012;
+
+      if (stillMoving) {
+        kineticRaf = requestAnimationFrame(updateKinetic);
+      } else {
+        kineticVelocity *= 0.72;
+        kineticVelocityTarget *= 0.72;
+
+        kineticTargets.forEach((target) => {
+          const currentY =
+            parseFloat(
+              getComputedStyle(target.element).getPropertyValue("--kinetic-y"),
+            ) || 0;
+
+          const currentX =
+            parseFloat(
+              getComputedStyle(target.element).getPropertyValue("--kinetic-x"),
+            ) || 0;
+
+          const currentScale =
+            parseFloat(
+              getComputedStyle(target.element).getPropertyValue(
+                "--kinetic-scale",
+              ),
+            ) || 1;
+
+          const currentRotate =
+            parseFloat(
+              getComputedStyle(target.element).getPropertyValue(
+                "--kinetic-rotate",
+              ),
+            ) || 0;
+
+          const nextY = currentY * 0.86;
+          const nextX = currentX * 0.86;
+          const nextScale = 1 + (currentScale - 1) * 0.86;
+          const nextRotate = currentRotate * 0.86;
+
+          target.element.style.setProperty(
+            "--kinetic-y",
+            `${nextY.toFixed(3)}px`,
+          );
+
+          target.element.style.setProperty(
+            "--kinetic-x",
+            `${nextX.toFixed(3)}px`,
+          );
+
+          target.element.style.setProperty(
+            "--kinetic-scale",
+            nextScale.toFixed(4),
+          );
+
+          target.element.style.setProperty(
+            "--kinetic-rotate",
+            `${nextRotate.toFixed(3)}deg`,
+          );
+        });
+
+        kineticSections.forEach((section) => {
+          const currentY =
+            parseFloat(
+              getComputedStyle(section.element).getPropertyValue("--section-y"),
+            ) || 0;
+
+          const currentScale =
+            parseFloat(
+              getComputedStyle(section.element).getPropertyValue(
+                "--section-scale",
+              ),
+            ) || 1;
+
+          section.element.style.setProperty(
+            "--section-y",
+            `${(currentY * 0.86).toFixed(3)}px`,
+          );
+
+          section.element.style.setProperty(
+            "--section-scale",
+            `${(1 + (currentScale - 1) * 0.86).toFixed(4)}`,
+          );
+        });
+
+        const stillSettling = kineticTargets.some((target) => {
+          const y =
+            parseFloat(
+              getComputedStyle(target.element).getPropertyValue("--kinetic-y"),
+            ) || 0;
+
+          return Math.abs(y) > 0.03;
+        });
+
+        if (stillSettling) {
+          kineticRaf = requestAnimationFrame(updateKinetic);
+        } else {
+          kineticActive = false;
+          kineticTargets.forEach(resetKineticTarget);
+          kineticSections.forEach(resetKineticSection);
+        }
+      }
+    };
+
+    const startKineticMotion = () => {
+      if (kineticActive) return;
+
+      kineticActive = true;
+
+      if (!kineticRaf) {
+        kineticRaf = requestAnimationFrame(updateKinetic);
+      }
+    };
+
+    measureKinetic();
+
+    window.addEventListener("scroll", startKineticMotion, { passive: true });
 
     window.addEventListener(
-      "scroll",
+      "resize",
       () => {
-        if (ticking) return;
-
-        ticking = true;
-
-        requestAnimationFrame(() => {
-          const scrollY = Math.min(window.scrollY, 420);
-
-          const offset = scrollY * 0.045;
-
-          heroImage.style.translate = `0 ${offset}px`;
-
-          ticking = false;
-        });
+        measureKinetic();
+        startKineticMotion();
       },
       { passive: true },
     );
+
+    window.addEventListener(
+      "load",
+      () => {
+        measureKinetic();
+      },
+      { once: true },
+    );
+
+    /*
+     * =========================================================
+     * CURSOR DEPTH — PROJECTS
+     * =========================================================
+     */
+
+    document.querySelectorAll(".project-card").forEach((card) => {
+      card.addEventListener(
+        "pointermove",
+        (event) => {
+          if (event.pointerType !== "mouse") return;
+
+          const rect = card.getBoundingClientRect();
+
+          const nx = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+
+          const ny = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+
+          const image = card.querySelector(".project-image img");
+
+          if (image) {
+            image.style.setProperty("--cursor-x", `${(nx * 8).toFixed(2)}px`);
+
+            image.style.setProperty("--cursor-y", `${(ny * 8).toFixed(2)}px`);
+
+            image.style.setProperty(
+              "--cursor-r",
+              `${(-ny * 0.45).toFixed(3)}deg`,
+            );
+          }
+
+          card.style.setProperty("--card-x", `${(nx * 2.5).toFixed(2)}px`);
+
+          card.style.setProperty("--card-y", `${(ny * 2.5).toFixed(2)}px`);
+        },
+        { passive: true },
+      );
+
+      card.addEventListener("pointerleave", () => {
+        card.style.setProperty("--card-x", "0px");
+        card.style.setProperty("--card-y", "0px");
+
+        const image = card.querySelector(".project-image img");
+
+        image?.style.setProperty("--cursor-x", "0px");
+        image?.style.setProperty("--cursor-y", "0px");
+        image?.style.setProperty("--cursor-r", "0deg");
+      });
+    });
   }
 
   /* =========================================================
