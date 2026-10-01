@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#f5f2eb">
-    <meta name="description" content="Dion Pratama Syaputra — Web Designer & Digital Creative">
-    <title>Dion Pratama Syaputra — Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3eafc">
+    <meta name="description"
+        content="Dion Pratama Syahputra — Creative Developer dari Malang yang suka bikin project web dan digital.">
+    <title>Dion Pratama Syahputra — Creative Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -17,927 +18,448 @@
 
 <body>
     <main class="site-shell">
-        <div aria-hidden="true" class="grain"></div>
+        <div class="grain" aria-hidden="true"></div>
 
-        <!-- =========================================================
-             HEADER / NAVIGATION
-        ========================================================== -->
-        <header class="topbar"><button aria-label="Back to top" class="monogram">D<span>/</span>P</button>
-            <nav class="nav-links">
-                <button>work</button><button>about</button><button>services</button><button>contact</button>
+        <header class="topbar">
+            <a class="monogram" href="#top" aria-label="Dion Pratama Syahputra, back to top">D<span>/</span>P</a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#work">Work</a>
+                <a href="#archive">Archive</a>
+                <a href="#about">About</a>
+                <a href="#process">Process</a>
+                <a href="#now">Now</a>
+                <a href="#contact">Contact</a>
             </nav>
-            <button aria-label="Open menu" class="menu-toggle"><svg aria-hidden="true" class="lucide lucide-menu"
-                    fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2" viewbox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 12h16"></path>
-                    <path d="M4 18h16"></path>
-                    <path d="M4 6h16"></path>
-                </svg></button><a class="top-contact" href="mailto:dionpratamaart@gmail.com">Let's talk <svg
-                    aria-hidden="true" class="lucide lucide-arrow-up-right" fill="none" height="15"
-                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    viewbox="0 0 24 24" width="15" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 7h10v10"></path>
-                    <path d="M7 17 17 7"></path>
-                </svg></a>
+            <button aria-label="Open menu" aria-expanded="false" class="menu-toggle" type="button">
+                <svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="1.7" viewBox="0 0 24 24" width="22">
+                    <path d="M4 7h16M4 12h16M4 17h16"></path>
+                </svg>
+            </button>
+            <a class="top-contact" href="mailto:dionpratamaart@gmail.com">Say hello <span
+                    aria-hidden="true">↗</span></a>
         </header>
 
-        <!-- =========================================================
-             HERO
-        ========================================================== -->
-        <section class="hero" id="top">
-            <div class="hero-kicker reveal is-visible"><span>DIGITAL PRODUCT BUILDER</span><span class="line"></span>
+        <section class="hero" id="top" aria-labelledby="heroTitle">
+            <div class="hero-kicker reveal">
+                <span>DION PRATAMA SYAHPUTRA</span>
+                <span class="hero-kicker-rule" aria-hidden="true"></span>
+                <span class="hero-meta">INDONESIA <i>·</i> WEB <i>·</i> AI</span>
             </div>
             <div class="hero-stage">
-
-                <h1 class="hero-title reveal is-visible">P o r t o f o<span> l i o</span></h1>
-
-                <div class="hero-image-wrap reveal is-visible"><img alt="Editorial portrait for Dion Pratama Syaputra"
-                        src="assets/profile.png" />
-
+                <h1 class="hero-title" id="heroTitle"><span>Creative</span><span>Developer</span></h1>
+                <div class="hero-image-wrap">
+                    <span class="portrait-disc" aria-hidden="true"></span>
+                    <img src="assets/profile.png" alt="Dion Pratama Syahputra" fetchpriority="high">
                 </div>
-                <div class="hero-copy reveal is-visible" id="about">
-                    <p class="display-copy">Gue suka bikin <em>sesuatu</em> dari ide yang awalnya cuma
-                        di <em>kepala</em> .</p>
-                    <div class="short-rule"></div>
+                <div class="hero-copy">
+                    <p class="display-copy">Gue suka bikin sesuatu dari ide yang awalnya cuma di kepala.</p>
+                    <div class="hero-bottom">
+                        <p class="body-copy">Tapi beberapa ide justru datang dari tempat yang nggak gue duga — lantai
+                            produksi.</p>
+                        <div class="hero-actions">
+                            <a class="button button--dark" href="#work">View selected work <span
+                                    aria-hidden="true">↘</span></a>
+                            <a class="button button--line" href="#about">Who I am <span aria-hidden="true">↘</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-footnote"><span>RPL → MANUFACTURING → WEB → BUILDING</span><span>SCROLL TO EXPLORE <b
+                        aria-hidden="true">↓</b></span></div>
+        </section>
 
-                    <div class="hero-lower">
+        <section class="selected-work section-pad" id="work" aria-labelledby="workTitle">
+            <div class="section-heading reveal">
+                <div>
+                    <span class="eyebrow">02 / Selected work</span>
+                    <h2 id="workTitle">Beberapa project yang<br><em>gue pengen tunjukin.</em></h2>
+                </div>
+                <p class="section-note">Tiga project, masing-masing berangkat dari kebutuhan yang beda.</p>
+            </div>
 
-                        <div class="hero-info">
-                            <p class="body-copy">
-                                Tapi beberapa ide justru datang dari tempat yang nggak gue duga
-                                <em>—lantai produksi.</em>
-                            </p>
-
-                            <div class="location">
-                                <svg aria-hidden="true" class="lucide lucide-compass" fill="none" height="16"
-                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z">
-                                    </path>
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                </svg>
-
-                                <span>
-                                    <b>From Malang, Jawa Timur.</b>
-                                    <small>Stay Cikarang, Jawa Barat</small>
-                                </span>
+            <article class="project-story project-story--teamcut project-card reveal" data-project="teamcut">
+                <div class="project-heading">
+                    <div class="project-title-row">
+                        <span class="project-index">01</span>
+                        <h3>TEAMCUT<span class="project-period">.</span></h3>
+                    </div>
+                    <p class="project-category">REAL CLIENT <i>·</i> BARBERSHOP</p>
+                </div>
+                <div class="project-layout project-layout--teamcut">
+                    <div class="project-story-copy">
+                        <p class="project-lead">Pengalaman booking dan antrean barbershop yang dirancang mobile-first.
+                        </p>
+                        <div class="project-facts">
+                            <div><span>THE APPROACH</span>
+                                <p>Dari lihat antrean, pilih cabang dan hairstylist, sampai mengirim booking lewat admin
+                                    TEAMCUT.</p>
+                            </div>
+                            <div><span>THE BUILD</span>
+                                <p>UI/UX · Frontend · Database · Deployment</p>
                             </div>
                         </div>
-
-                        <div class="hero-actions" aria-label="External profiles">
-                            <a href="https://www.linkedin.com/in/dionnnprtma" target="_blank" rel="noopener noreferrer">
-                                <span>LinkedIn</span>
-                                <b><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                        <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                    </svg></b>
-                            </a>
-
-                            <a href="https://www.credly.com/users/dion-pratama/badges/credly" target="_blank"
-                                rel="noopener noreferrer">
-                                <span>Credly</span>
-                                <b><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                        <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                    </svg></b>
-                            </a>
-
-                            <a href="https://github.com/dionnsadboyy" target="_blank" rel="noopener noreferrer">
-                                <span>GitHub</span>
-                                <b><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                        <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                    </svg></b>
-                            </a>
-                        </div>
-
+                        <a class="project-link" href="https://teamcut.pages.dev/" target="_blank"
+                            rel="noopener noreferrer">Visit TEAMcut <span aria-hidden="true">↗</span></a>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- =========================================================
-             STATS
-        ========================================================== -->
-        <section class="stats-strip reveal is-visible">
-            <div class="stat">
-                <svg ...></svg>
-                <strong>2024</strong>
-                <span>Lulus RPL</span>
-            </div>
-            <div class="stat">
-                <svg ...></svg>
-                <strong>7+</strong>
-                <span>Project Completed.</span>
-            </div>
-            <div class="stat">
-                <svg ...></svg>
-                <strong>20+</strong>
-                <span>Project Receh</span>
-            </div>
-            <div class="stat">
-                <svg ...></svg>
-                <strong>2Th</strong>
-                <span>Denso Manufacturing Ind</span>
-            </div>
-        </section>
-
-        <!-- =========================================================
-             SELECTED WORKS
-        ========================================================== -->
-        <section class="work-layout section-pad" id="work">
-            <div class="work-main">
-
-                <!-- =========================
-                 MAIN PROJECTS
-            ========================== -->
-                <div class="section-heading reveal is-visible">
-                    <div>
-                        <span class="eyebrow">Selected works</span>
-                        <h2>
-                            Beberapa hal yang pernah <em>gue bikin.</em>
-                        </h2>
-                    </div>
-
-                    <span class="view-all">
-                        Selected projects
-                        <svg aria-hidden="true" fill="none" height="16" stroke="currentColor" stroke-linecap="round"
-                            stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </span>
-                </div>
-
-                <div class="project-grid">
-
-                    <!-- YonnGPT -->
-                    <button class="project-card reveal project-1 is-visible" data-project="yonngpt" type="button">
-                        <span class="project-image">
-                            <img src="/assets/yonngpt.jpeg" alt="YonnGPT financial tracker" loading="lazy">
-                            <span class="project-arrow" aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg></span>
-                        </span>
-
-                        <span class="project-meta">
-                            <span>
-                                <b>YonnGPT</b>
-                                <small>Personal Finance · AI Product</small>
-                            </span>
-                            <span class="project-year">2026</span>
-                        </span>
-                    </button>
-
-                    <!-- Our Museum -->
-                    <button class="project-card reveal project-2 is-visible" data-project="our-museum" type="button">
-                        <span class="project-image">
-                            <img src="/assets/ourmuseum.jpeg" alt="Our Museum project" loading="lazy">
-                            <span class="project-arrow" aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg></span>
-                        </span>
-
-                        <span class="project-meta">
-                            <span>
-                                <b>Our Museum</b>
-                                <small>Personal Web Experience</small>
-                            </span>
-                            <span class="project-year">2026</span>
-                        </span>
-                    </button>
-
-                    <!-- QuraniBot -->
-                    <button class="project-card reveal project-3 is-visible" data-project="quranibot" type="button">
-                        <span class="project-image">
-                            <img src="/assets/quranibot.png" alt="QuraniBot project" loading="lazy">
-                            <span class="project-arrow" aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg></span>
-                        </span>
-
-                        <span class="project-meta">
-                            <span>
-                                <b>QuraniBot</b>
-                                <small>WhatsApp Bot · NLP · Database</small>
-                            </span>
-                            <span class="project-year">2023</span>
-                        </span>
-                    </button>
-
-                    <!-- Yonn Apotek -->
-                    <button class="project-card reveal project-4 is-visible" data-project="yonn-apotek" type="button">
-                        <span class="project-image">
-                            <img src="/assets/yonn-apotek.png" alt="Yonn Apotek pharmacy management system"
+                    <div class="teamcut-gallery" aria-label="TEAMcut mobile project screens">
+                        <figure class="project-shot project-shot--mobile">
+                            <img src="assets/teamcut/01-home-mobile.jpeg"
+                                alt="TEAMcut mobile home screen with branch and queue information" loading="lazy">
+                            <figcaption>01 / HOME</figcaption>
+                        </figure>
+                        <figure class="project-shot project-shot--mobile project-shot--offset">
+                            <img src="assets/teamcut/02-branches-hairstylist-mobile.jpeg"
+                                alt="TEAMcut mobile branch and hairstylist selection" loading="lazy">
+                            <figcaption>02 / BRANCH + STYLIST</figcaption>
+                        </figure>
+                        <figure class="project-shot project-shot--mobile">
+                            <img src="assets/teamcut/05-services-mobile.jpeg" alt="TEAMcut mobile services screen"
                                 loading="lazy">
-                            <span class="project-arrow" aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg></span>
-                        </span>
-
-                        <span class="project-meta">
-                            <span>
-                                <b>Yonn Apotek</b>
-                                <small>School Project · Laravel · MySQL</small>
-                            </span>
-                            <span class="project-year">2024</span>
-                        </span>
-                    </button>
-
-                </div>
-
-                <!-- =========================
-             PROJECT ARCHIVE
-        ========================== -->
-                <div class="project-archive reveal is-visible">
-                    <button class="archive-trigger" id="archiveToggle" type="button" aria-controls="archiveList"
-                        aria-expanded="false">
-                        <span class="archive-label">Archive</span>
-
-                        <span class="archive-copy">
-                            <strong>
-                                Project lama, eksperimen, dan hal-hal yang pernah gue coba bangun.
-                            </strong>
-
-                            <small>
-                                Nggak semuanya masih aktif, tapi semuanya pernah jadi bagian dari perjalanan gue.
-                            </small>
-                        </span>
-
-                        <span class="archive-action" aria-hidden="true">
-                            <span>Lihat arsip</span>
-                            <span class="archive-arrow"><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg></span>
-                        </span>
-                    </button>
-
-                    <div class="archive-list" id="archiveList" hidden>
-                        <button class="archive-item" type="button">
-                            <span class="archive-number">01</span>
-
-                            <span class="archive-main">
-                                <b>WhatsApp Bot</b>
-                                <small>Automation · JSON-based Bot</small>
-                            </span>
-
-                            <span class="archive-year">2023</span>
-                            <span class="archive-status">Archived</span>
-                            <span class="archive-arrow"><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg></span>
-                        </button>
-
-                        <button class="archive-item" type="button">
-                            <span class="archive-number">02</span>
-
-                            <span class="archive-main">
-                                <b>TextToSpeech</b>
-                                <small>AI / Voice Experiment</small>
-                            </span>
-
-                            <span class="archive-year">—</span>
-                            <span class="archive-status">Archived</span>
-                            <span class="archive-arrow"><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg></span>
-                        </button>
-
-                        <button class="archive-item" type="button">
-                            <span class="archive-number">03</span>
-
-                            <span class="archive-main">
-                                <b>Multi-user System</b>
-                                <small>PHP Native · MySQL</small>
-                            </span>
-
-                            <span class="archive-year">—</span>
-                            <span class="archive-status">Archived</span>
-                            <span class="archive-arrow"><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg></span>
-                        </button>
+                            <figcaption>03 / SERVICES</figcaption>
+                        </figure>
+                        <figure class="project-shot project-shot--mobile project-shot--offset">
+                            <img src="assets/teamcut/06-booking-mobile.jpeg" alt="TEAMcut mobile booking form"
+                                loading="lazy">
+                            <figcaption>04 / BOOKING</figcaption>
+                        </figure>
                     </div>
                 </div>
-            </div>
+                <div class="project-bottomline"><span>UI/UX <i>·</i> FRONTEND <i>·</i> DATABASE <i>·</i>
+                        DEPLOYMENT</span><span>MOBILE ONLY</span></div>
+            </article>
 
-            <!-- =========================
-                 WHAT I BUILD
-            ========================== -->
-            <aside class="services-panel reveal is-visible" id="services">
-                <span class="eyebrow">Yang gue kerjain</span>
-
-                <h2>
-                    Gue suka bikin dan <em>nyoba hal baru.</em>
-                </h2>
-
-                <div class="service-item">
-                    <span class="service-icon">01</span>
-
-                    <div>
-                        <b>Website &amp; Aplikasi</b>
-                        <p>
-                            Mulai dari tampilan sampai bagian yang bikin semuanya bisa jalan.
-                        </p>
+            <article class="project-story project-story--dua project-card reveal" data-project="dua-saudara">
+                <div class="project-heading">
+                    <div class="project-title-row">
+                        <span class="project-index">02</span>
+                        <h3>Dua Saudara<span class="project-period">.</span></h3>
                     </div>
+                    <p class="project-category">BUSINESS WEBSITE <i>·</i> FURNITURE</p>
                 </div>
-
-                <div class="service-item">
-                    <span class="service-icon">02</span>
-
-                    <div>
-                        <b>AI dalam Workflow</b>
-                        <p>
-                            Gue sering pakai AI buat cari ide, bantu coding, debugging,
-                            dan nyoba kemungkinan baru.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <span class="service-icon">03</span>
-
-                    <div>
-                        <b>Bangun Produk</b>
-                        <p>
-                            Kalau ada ide yang menarik, gue biasanya coba bikin
-                            sampai bentuknya bisa dipakai.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="service-item">
-                    <span class="service-icon">04</span>
-
-                    <div>
-                        <b>Eksperimen</b>
-                        <p>
-                            Bot, automation, atau project kecil yang gue bikin
-                            cuma karena penasaran.
-                        </p>
-                    </div>
-                </div>
-
-                <button class="text-link" id="archiveShortcut" type="button">
-                    Lihat project lainnya
-                    <span aria-hidden="true">→</span>
-                </button>
-            </aside>
-        </section>
-
-        <!-- ==================================================================================== -->
-        <section class="process section-pad reveal is-visible">
-            <div class="section-heading">
-                <div>
-                    <span class="eyebrow">Cara gue kerja</span>
-                    <h2>
-                        Cara gue <em>ngebangun.</em>
-                    </h2>
-                </div>
-
-                <p class="section-note">
-                    Biasanya gue nggak punya semuanya dari awal.
-                    Gue mulai dari ide, coba-coba, terus bikin sampai
-                    ketemu bentuk yang paling masuk akal.
-                </p>
-            </div>
-
-            <div class="process-grid">
-                <div class="process-step">
-                    <div class="step-top">
-                        <span>01</span>
-                        <svg aria-hidden="true" class="step-arrow" fill="none" height="21" stroke="currentColor"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
-                            width="21" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </div>
-
-                    <h3>Ide</h3>
-                    <p>
-                        Semua biasanya dimulai dari ide, rasa penasaran,
-                        atau sekadar kepikiran sesuatu.
-                    </p>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-top">
-                        <span>02</span>
-                        <svg aria-hidden="true" class="step-arrow" fill="none" height="21" stroke="currentColor"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
-                            width="21" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </div>
-
-                    <h3>Eksplor</h3>
-                    <p>
-                        Cari tahu, bongkar referensi, coba pendekatan,
-                        dan pakai AI buat bantu nyari kemungkinan.
-                    </p>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-top">
-                        <span>03</span>
-                        <svg aria-hidden="true" class="step-arrow" fill="none" height="21" stroke="currentColor"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
-                            width="21" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </div>
-
-                    <h3>Bikin</h3>
-                    <p>
-                        Mulai dari desain, kode, sampai fungsi utama.
-                        Yang penting idenya mulai jadi sesuatu.
-                    </p>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-top">
-                        <span>04</span>
-                        <svg aria-hidden="true" class="step-arrow" fill="none" height="21" stroke="currentColor"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
-                            width="21" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 12h14"></path>
-                            <path d="m12 5 7 7-7 7"></path>
-                        </svg>
-                    </div>
-
-                    <h3>Test</h3>
-                    <p>
-                        Dicoba sendiri, dicari bug-nya, dilihat bagian
-                        yang nggak enak, lalu dibenerin.
-                    </p>
-                </div>
-
-                <div class="process-step">
-                    <div class="step-top">
-                        <span>05</span>
-                    </div>
-
-                    <h3>Iterasi</h3>
-                    <p>
-                        Revisi, ubah, dan kembangin sampai hasilnya
-                        terasa pas.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- =========================================================
-             MANUFACTURING CHAPTER
-        ========================================================== -->
-        <section class="factory-chapter section-pad reveal" id="manufacturing">
-            <div class="factory-heading">
-                <div>
-                    <span class="eyebrow">A different kind of work</span>
-                    <h2>
-                        Beberapa hal gue pelajari bukan dari <em>layar.</em>
-                    </h2>
-                </div>
-
-                <p class="factory-note">
-                    Selama lebih dari dua tahun, gue bekerja langsung di lingkungan manufacturing—
-                    dari material flow sampai proses produksi di line.
-                </p>
-            </div>
-
-            <div class="factory-grid">
-                <div class="factory-story">
-                    <p class="factory-lead">
-                        Selama bekerja di PT Denso Manufacturing Indonesia,
-                        gue belajar melihat sebuah proses dari sisi orang yang benar-benar
-                        menjalankannya—bukan cuma dari hasil akhirnya.
-                    </p>
-
-                    <p class="factory-copy">
-                        Ketepatan, alur kerja, konsistensi, kualitas, dan hal-hal kecil
-                        yang sering kelihatan sepele ternyata punya dampak besar
-                        terhadap bagaimana sebuah proses tetap berjalan.
-                    </p>
-                </div>
-
-                <div class="factory-summary">
-                    <div class="factory-stat">
-                        <strong>02+</strong>
-                        <span>Years in manufacturing</span>
-                    </div>
-
-                    <div class="factory-stat">
-                        <strong>05</strong>
-                        <span>Stations &amp; assignments</span>
-                    </div>
-
-                    <div class="factory-tags" aria-label="Manufacturing stations and assignments">
-                        <span>Mizusumashi</span>
-                        <span>Armature Bearing Press </span>
-                        <span>Holder Press & Tokusei </span>
-                        <span>Stamping & Screw Tightening</span>
-                    </div>
-
-                    <small class="factory-company">
-                        PT Denso Manufacturing Indonesia · Blower Motor Assy
-                    </small>
-                </div>
-        </section>
-
-
-        <!-- =========================================================
-     THINGS I LEARNED / CERTIFICATIONS
-========================================================== -->
-        <!-- =========================================================
-     CERTIFICATES
-========================================================== -->
-        <section class="certifications section-pad reveal" id="certifications">
-
-            <div class="section-heading">
-                <div>
-                    <span class="eyebrow">Credentials</span>
-
-                    <h2>
-                        Hal-hal yang pernah gue <em>pelajari.</em>
-                    </h2>
-                </div>
-
-                <p class="section-note">
-                    Beberapa datang dari sekolah, beberapa dari pengalaman,
-                    dan beberapa gue selesaikan karena penasaran.
-                </p>
-            </div>
-
-
-            <div class="certificate-grid">
-
-                <!-- =================================================
-             IBM — AI FUNDAMENTALS
-        ================================================== -->
-                <article class="certificate-card reveal">
-                    <a href="https://www.credly.com/users/dion-pratama/badges/credly" target="_blank"
-                        rel="noopener noreferrer" class="certificate-image"
-                        aria-label="Open IBM AI Fundamentals credentials">
-                        <img src="assets/sertifikat/ai-fundamentals-foundations-certificate.jpg"
-                            alt="IBM SkillsBuild AI Fundamentals certificate" loading="lazy">
-
-                        <span class="certificate-arrow" aria-hidden="true">
-                            <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <div class="certificate-meta">
-                        <h3>AI Fundamentals</h3>
-                        <span>IBM SkillsBuild · 2026</span>
-                    </div>
-                </article>
-
-
-                <!-- =================================================
-             IBM — DATA FUNDAMENTALS
-        ================================================== -->
-                <article class="certificate-card reveal">
-                    <a href="https://www.credly.com/badges/5e6effb0-c898-47f9-a383-ba257aec7e2c" target="_blank"
-                        rel="noopener noreferrer" class="certificate-image"
-                        aria-label="Open IBM Data Fundamentals credential">
-                        <img src="assets/sertifikat/data-fundamentals-certificate.jpg"
-                            alt="IBM SkillsBuild Data Fundamentals certificate" loading="lazy">
-
-                        <span class="certificate-arrow" aria-hidden="true">
-                            <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <div class="certificate-meta">
-                        <h3>Data Fundamentals</h3>
-                        <span>IBM SkillsBuild · 2026</span>
-                    </div>
-                </article>
-
-
-                <!-- =================================================
-             IBM — AI LITERACY
-        ================================================== -->
-                <article class="certificate-card reveal">
-                    <a href="https://www.credly.com/go/8HoG8gUy" target="_blank" rel="noopener noreferrer"
-                        class="certificate-image" aria-label="Open IBM AI Literacy credential">
-                        <img src="assets/sertifikat/ai-literacy-certificate.jpg"
-                            alt="IBM SkillsBuild AI Literacy certificate" loading="lazy">
-
-                        <span class="certificate-arrow" aria-hidden="true">
-                            <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <div class="certificate-meta">
-                        <h3>AI Literacy</h3>
-                        <span>IBM SkillsBuild · 2026</span>
-                    </div>
-                </article>
-
-
-                <!-- =================================================
-             ORACLE — JAVA FUNDAMENTALS
-        ================================================== -->
-                <article class="certificate-card reveal">
-                    <a href="assets/sertifikat/oracle-java-fundamentals-2024.pdf" target="_blank"
-                        rel="noopener noreferrer" class="certificate-image"
-                        aria-label="Open Oracle Java Fundamentals certificate">
-                        <img src="assets/sertifikat/oracle-java-fundamentals-2024_page-0001.jpg"
-                            alt="Oracle Java Fundamentals certificate" loading="lazy">
-
-                        <span class="certificate-arrow" aria-hidden="true">
-                            <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <div class="certificate-meta">
-                        <h3>Java Fundamentals</h3>
-                        <span>Oracle Academy · 2024</span>
-                    </div>
-                </article>
-
-
-                <!-- =================================================
-             ORACLE — JAVA FOUNDATIONS
-        ================================================== -->
-                <article class="certificate-card reveal">
-                    <a href="assets/sertifikat/oracle-java-foundations-2024.pdf" target="_blank"
-                        rel="noopener noreferrer" class="certificate-image"
-                        aria-label="Open Oracle Java Foundations certificate">
-                        <img src="assets/sertifikat/oracle-java-foundations-2024_page-0001.jpg"
-                            alt="Oracle Java Foundations certificate" loading="lazy">
-
-                        <span class="certificate-arrow" aria-hidden="true">
-                            <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <div class="certificate-meta">
-                        <h3>Java Foundations</h3>
-                        <span>Oracle Academy · 2024</span>
-                    </div>
-                </article>
-
-
-                <!-- =================================================
-             ORACLE — DATABASE FOUNDATIONS
-        ================================================== -->
-                <article class="certificate-card reveal">
-                    <a href="assets/sertifikat/oracle-database-foundations-2024.pdf" target="_blank"
-                        rel="noopener noreferrer" class="certificate-image"
-                        aria-label="Open Oracle Database Foundations certificate">
-                        <img src="assets/sertifikat/oracle-database-foundations-2024_page-0001.jpg"
-                            alt="Oracle Database Foundations certificate" loading="lazy">
-
-                        <span class="certificate-arrow" aria-hidden="true">
-                            <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <div class="certificate-meta">
-                        <h3>Database Foundations</h3>
-                        <span>Oracle Academy · 2024</span>
-                    </div>
-                </article>
-
-
-                <!-- =================================================
-             UBIG — INTERNSHIP
-        ================================================== -->
-                <article class="certificate-card reveal">
-                    <a href="assets/sertifikat/ubig-internship.jpg" target="_blank" rel="noopener noreferrer"
-                        class="certificate-image" aria-label="Open UBIG internship certificate">
-                        <img src="assets/sertifikat/ubig-internship.jpg" alt="UBIG internship certificate"
+                <div class="dua-feature">
+                    <figure class="project-shot project-shot--desktop project-shot--dua">
+                        <img src="assets/dua-saudara/01-home-desktop.png" alt="Dua Saudara furniture website home page"
                             loading="lazy">
-
-                        <span class="certificate-arrow" aria-hidden="true">
-                            <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24">
-                                <path d="M5 12h14M13 6l6 6-6 6"></path>
-                            </svg>
-                        </span>
-                    </a>
-
-                    <div class="certificate-meta">
-                        <h3>Internship</h3>
-                        <span>UBIG · Malang</span>
+                        <figcaption>01 / BERANDA</figcaption>
+                    </figure>
+                    <div class="dua-caption">
+                        <p class="project-lead">Website bisnis furnitur untuk lihat produk, buka katalog, lalu
+                            konsultasi langsung dengan workshop.</p>
+                        <p class="project-quiet">Rotan sintetis · HPL · Custom furniture</p>
+                        <a class="project-link" href="https://dua-saudara.pages.dev/" target="_blank"
+                            rel="noopener noreferrer">Visit Dua Saudara <span aria-hidden="true">↗</span></a>
                     </div>
-                </article>
-
-            </div>
-
-        </section>
-
-        <!-- =========================
-        FACTORY → FEEDBACK BRIDGE
-        ========================== -->
-        <section class="factory-bridge section-pad reveal">
-            <p>
-                Mungkin gue memang cuma begitu:
-                <em>penasaran, terus coba bikin.</em>
-            </p>
-        </section>
-
-        <!-- =========================================================
-             FEEDBACK
-        ========================================================== -->
-        <section class="kind-words section-pad reveal">
-            <div class="section-heading">
-                <div>
-                    <span class="eyebrow">Feedback</span>
-
-                    <h2>
-                        Kata orang yang pernah <em>nyoba.</em>
-                    </h2>
                 </div>
+                <div class="dua-gallery" aria-label="Dua Saudara desktop project screens">
+                    <figure class="project-shot project-shot--desktop">
+                        <img src="assets/dua-saudara/02-products-desktop.png" alt="Dua Saudara product page"
+                            loading="lazy">
+                        <figcaption>02 / PRODUCTS</figcaption>
+                    </figure>
+                    <figure class="project-shot project-shot--desktop">
+                        <img src="assets/dua-saudara/03-catalog-desktop.png" alt="Dua Saudara product catalog"
+                            loading="lazy">
+                        <figcaption>03 / CATALOG</figcaption>
+                    </figure>
+                    <figure class="project-shot project-shot--desktop">
+                        <img src="assets/dua-saudara/04-detail-desktop.png" alt="Dua Saudara furniture detail page"
+                            loading="lazy">
+                        <figcaption>04 / DETAIL</figcaption>
+                    </figure>
+                </div>
+                <div class="project-bottomline"><span>WEB DESIGN <i>·</i> FRONTEND <i>·</i> CONTENT STRUCTURE <i>·</i>
+                        DEPLOYMENT</span><span>MALANG—BALI</span></div>
+            </article>
 
-                <p class="section-note">
-                    Beberapa project gue memang gue bikin buat dipakai orang lain.
-                    Jadi gue pengen bagian ini datang dari pengalaman mereka,
-                    bukan dari klaim gue sendiri.
-                </p>
-            </div>
-
-            <div class="testimonial-grid">
-
-                <article class="testimonial testimonial-placeholder">
-                    <span class="quote-mark">“</span>
-
-                    <p>
-                        Bagian ini lagi gue kumpulin dari orang-orang
-                        yang benar-benar pernah pakai atau nyoba project gue.
-                    </p>
-
-                    <div class="person">
-                        <span class="person-avatar">?</span>
-
-                        <span>
-                            <b>Coming soon</b>
-                            <small>Real user feedback</small>
-                        </span>
+            <article class="project-story project-story--bagong project-card reveal" data-project="bagong-lapar">
+                <div class="project-heading">
+                    <div class="project-title-row">
+                        <span class="project-index">03</span>
+                        <h3>Bagong Lapar<span class="project-period">.</span></h3>
                     </div>
-                </article>
+                    <p class="project-category">REAL PROJECT <i>·</i> OUTDOOR</p>
+                </div>
+                <div class="bagong-feature">
+                    <figure class="project-shot project-shot--desktop project-shot--bagong">
+                        <img src="assets/bagong-lapar/01-home-desktop.png"
+                            alt="Bagong Lapar outdoor equipment rental website on desktop" loading="lazy">
+                        <figcaption>DESKTOP / HOME</figcaption>
+                    </figure>
+                    <div class="bagong-intro">
+                        <p class="project-lead">Website penyewaan perlengkapan outdoor buat rencana naik, camping, dan
+                            jalan-jalan.</p>
+                        <p class="project-quiet">Visual direction · Web design · Frontend · Deployment</p>
+                    </div>
+                    <figure class="project-shot project-shot--mobile project-shot--bagong-mobile">
+                        <img src="assets/bagong-lapar/01-home-mobile.jpeg"
+                            alt="Bagong Lapar outdoor rental home page on mobile" loading="lazy">
+                        <figcaption>MOBILE / HOME</figcaption>
+                    </figure>
+                </div>
+                <div class="bagong-gallery" aria-label="Bagong Lapar desktop and mobile project screens">
+                    <figure class="project-shot project-shot--desktop">
+                        <img src="assets/bagong-lapar/02-popular-desktop.png"
+                            alt="Bagong Lapar popular outdoor gear on desktop" loading="lazy">
+                        <figcaption>DESKTOP / POPULAR GEAR</figcaption>
+                    </figure>
+                </div>
+                <div class="project-bottomline"><span>VISUAL DIRECTION <i>·</i> WEB DESIGN <i>·</i> FRONTEND <i>·</i>
+                        DEPLOYMENT</span><span>DESKTOP + MOBILE</span></div>
+            </article>
+        </section>
 
+        <section class="archive-section section-pad" id="archive" aria-labelledby="archiveTitle">
+            <div class="section-heading reveal">
+                <div>
+                    <span class="eyebrow">03 / Archive</span>
+                    <h2 id="archiveTitle">Yang pernah gue <em>coba bikin.</em></h2>
+                </div>
+                <p class="section-note">07 PROJECTS · ARCHIVE</p>
+            </div>
+            <div class="archive-layout">
+                <ol class="archive-list">
+                    <li><button class="archive-entry reveal is-active" type="button" aria-pressed="true"
+                            data-project-id="our-museum" data-preview-image="assets/ourmuseum.jpeg"
+                            data-preview-alt="Our Museum project preview" data-preview-title="Our Museum"><span
+                                class="archive-number">01</span><span class="archive-name">Our Museum</span><span
+                                class="archive-arrow" aria-hidden="true">↗</span></button></li>
+                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
+                            data-project-id="yonngpt" data-preview-image="assets/yonngpt.jpeg"
+                            data-preview-alt="Yonn Assistant / YonnGPT project preview"
+                            data-preview-title="Yonn Assistant / YonnGPT"><span class="archive-number">02</span><span
+                                class="archive-name">Yonn Assistant / YonnGPT</span><span class="archive-arrow"
+                                aria-hidden="true">↗</span></button></li>
+                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
+                            data-project-id="yonn-apotek" data-preview-image="assets/yonn-apotek.png"
+                            data-preview-alt="Yonn Apotek project preview" data-preview-title="Yonn Apotek"><span
+                                class="archive-number">03</span><span class="archive-name">Yonn Apotek</span><span
+                                class="archive-arrow" aria-hidden="true">↗</span></button></li>
+                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
+                            data-project-id="quranibot" data-preview-image="assets/quranibot.png"
+                            data-preview-alt="QuraniBotWithNLP project preview"
+                            data-preview-title="QuraniBotWithNLP"><span class="archive-number">04</span><span
+                                class="archive-name">QuraniBotWithNLP</span><span class="archive-arrow"
+                                aria-hidden="true">↗</span></button></li>
+                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
+                            data-project-id="whatsapp-bot" data-preview-title="Bot WhatsApp"><span
+                                class="archive-number">05</span><span class="archive-name">Bot WhatsApp</span><span
+                                class="archive-arrow" aria-hidden="true">↗</span></button></li>
+                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
+                            data-project-id="multiuser-php-native" data-preview-title="MultiUser PHP Native"><span
+                                class="archive-number">06</span><span class="archive-name">MultiUser PHP
+                                Native</span><span class="archive-arrow" aria-hidden="true">↗</span></button></li>
+                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
+                            data-project-id="text-to-speech" data-preview-title="TextToSpeech"><span
+                                class="archive-number">07</span><span class="archive-name">TextToSpeech</span><span
+                                class="archive-arrow" aria-hidden="true">↗</span></button></li>
+                </ol>
+                <aside class="archive-preview" id="archivePreview" aria-live="polite">
+                    <img id="archivePreviewImage" src="assets/ourmuseum.jpeg" alt="Our Museum project preview"
+                        loading="lazy">
+                    <div class="archive-preview-caption"><span>ARCHIVE PREVIEW</span>
+                        <h3 id="archivePreviewTitle">Our Museum</h3>
+                    </div>
+                </aside>
             </div>
         </section>
 
-
-        <!-- =========================================================
-             CONTACT / CTA
-        ========================================================== -->
-        <section class="cta section-pad reveal" id="contact">
-            <div class="cta-icon">
-                <svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z">
-                    </path>
-                    <path d="M20 3v4"></path>
-                    <path d="M22 5h-4"></path>
-                    <path d="M4 17v2"></path>
-                    <path d="M5 18H3"></path>
-                </svg>
-            </div>
-
-            <div>
-                <span class="eyebrow">Punya ide?</span>
-
-                <h2>
-                    Ceritain aja. <em>Siapa tahu bisa gue bikin.</em>
-                </h2>
-            </div>
-
-            <div class="cta-action">
-                <p>
-                    Hal aneh apa aja yang ada di pikiran lo, Kasih tau gue.
-                    siapa tau bisa gua wujudin, haha.
+        <section class="about-section section-pad" id="about" aria-labelledby="aboutTitle">
+            <div class="section-heading reveal">
+                <div>
+                    <span class="eyebrow">04 / Who I am</span>
+                    <h2 id="aboutTitle">Sedikit tentang jalan<br>yang gue tempuh <em>sampai sekarang.</em></h2>
+                </div>
+                <p class="section-note">Dari belajar software, kerja di lantai produksi, sampai tetap bikin project web.
                 </p>
+            </div>
+            <div class="timeline">
+                <article class="timeline-item reveal">
+                    <span class="timeline-index">01</span><span class="timeline-label">RPL</span>
+                    <div>
+                        <h3>Mulainya dari belajar bikin software.</h3>
+                        <p>Gue sekolah Rekayasa Perangkat Lunak di SMKN 8 Malang. Sebelum lulus, gue juga sempat magang
+                            Software Development &amp; AI di UBIG.</p><small>SMKN 8 MALANG <i>·</i> 2021—2023 <i>·</i>
+                            UBIG, FEB—MEI 2023</small>
+                    </div>
+                </article>
+                <article class="timeline-item reveal">
+                    <span class="timeline-index">02</span><span class="timeline-label">MANUFACTURING</span>
+                    <div>
+                        <h3>Habis itu, gue kerja di lantai produksi.</h3>
+                        <p>Di PT Denso Manufacturing Indonesia, gue belajar soal alur material, proses di line,
+                            ketepatan, dan konsistensi.</p><small>PT DENSO MANUFACTURING INDONESIA <i>·</i> JUL
+                            2024—SEKARANG</small>
+                    </div>
+                </article>
+                <article class="timeline-item reveal">
+                    <span class="timeline-index">03</span><span class="timeline-label">WEB</span>
+                    <div>
+                        <h3>Di luar kerja, gue tetap bikin website.</h3>
+                        <p>Sekarang yang gue tampilkan di sini: TEAMcut, Dua Saudara, dan Bagong Lapar.</p>
+                        <small>TEAMcut <i>·</i> DUA SAUDARA <i>·</i> BAGONG LAPAR</small>
+                    </div>
+                </article>
+                <article class="timeline-item reveal">
+                    <span class="timeline-index">04</span><span class="timeline-label">BUILDING</span>
+                    <div>
+                        <h3>Biasanya gue mulai dari ide yang kepikiran.</h3>
+                        <p>Gue cari bentuk yang bisa dicoba, terus lihat sejauh mana ide itu bisa jalan.</p>
+                        <small>PERSONAL PROJECTS</small>
+                    </div>
+                </article>
+            </div>
+            <div class="credentials reveal" aria-labelledby="credentialTitle">
+                <div class="credentials-heading"><span class="eyebrow" id="credentialTitle">SELECTED CREDENTIALS</span>
+                </div>
+                <div class="credential-list">
+                    <a href="https://www.credly.com/users/dion-pratama/badges/credly" target="_blank"
+                        rel="noopener noreferrer"><img
+                            src="assets/sertifikat/ai-fundamentals-foundations-certificate.jpg" alt=""
+                            loading="lazy"><span>AI Fundamentals<small>IBM SkillsBuild · 2026</small></span></a>
+                    <a href="https://www.credly.com/go/8HoG8gUy" target="_blank" rel="noopener noreferrer"><img
+                            src="assets/sertifikat/ai-literacy-certificate.jpg" alt="" loading="lazy"><span>AI
+                            Literacy<small>IBM SkillsBuild · 2026</small></span></a>
+                    <a href="https://www.credly.com/badges/5e6effb0-c898-47f9-a383-ba257aec7e2c" target="_blank"
+                        rel="noopener noreferrer"><img src="assets/sertifikat/data-fundamentals-certificate.jpg" alt=""
+                            loading="lazy"><span>Data Fundamentals<small>IBM SkillsBuild · 2026</small></span></a>
+                    <a href="assets/sertifikat/oracle-java-foundations-2024.pdf" target="_blank"
+                        rel="noopener noreferrer"><img
+                            src="assets/sertifikat/oracle-java-foundations-2024_page-0001.jpg" alt=""
+                            loading="lazy"><span>Java Foundations<small>Oracle Academy · 2024</small></span></a>
+                    <a href="assets/sertifikat/oracle-database-foundations-2024.pdf" target="_blank"
+                        rel="noopener noreferrer"><img
+                            src="assets/sertifikat/oracle-database-foundations-2024_page-0001.jpg" alt=""
+                            loading="lazy"><span>Database Foundations<small>Oracle Academy · 2024</small></span></a>
+                    <a href="assets/sertifikat/ubig-internship.jpg" target="_blank" rel="noopener noreferrer"><img
+                            src="assets/sertifikat/ubig-internship.jpg" alt="" loading="lazy"><span>Software Development
+                            &amp; AI Internship<small>UBIG · Malang</small></span></a>
+                </div>
+            </div>
+        </section>
 
-                <a href="mailto:dionpratamaart@gmail.com">
-                    Hubungi gue
-                    <svg aria-hidden="true" fill="none" height="17" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="17"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 7h10v10"></path>
-                        <path d="M7 17 17 7"></path>
-                    </svg>
-                </a>
+        <section class="process-section section-pad" id="process" aria-labelledby="processTitle">
+            <div class="section-heading reveal">
+                <div>
+                    <span class="eyebrow">05 / How I build</span>
+                    <h2 id="processTitle">Cara gue biasanya <em>ngerjain sesuatu.</em></h2>
+                </div>
+            </div>
+            <ol class="process-sequence">
+                <li class="process-step reveal"><span>01</span>
+                    <h3>FIND THE WHY</h3>
+                    <p>Kenapa ini perlu dibikin?</p>
+                </li>
+                <li class="process-step reveal"><span>02</span>
+                    <h3>SHAPE THE EXPERIENCE</h3>
+                    <p>Bikin alurnya kebayang dulu.</p>
+                </li>
+                <li class="process-step reveal"><span>03</span>
+                    <h3>BUILD THE SYSTEM</h3>
+                    <p>Sambungin tampilan dengan bagian yang bikin semuanya jalan.</p>
+                </li>
+                <li class="process-step reveal"><span>04</span>
+                    <h3>MAKE IT FEEL RIGHT</h3>
+                    <p>Coba dipakai, rapihin yang terasa janggal.</p>
+                </li>
+                <li class="process-step reveal"><span>05</span>
+                    <h3>SHIP IT</h3>
+                    <p>Kalau siap, deploy.</p>
+                </li>
+            </ol>
+        </section>
+
+        <section class="now-section section-pad" id="now" aria-labelledby="nowTitle">
+            <div class="section-heading reveal">
+                <div>
+                    <span class="eyebrow">06 / Now</span>
+                    <h2 id="nowTitle">Yang lagi gue <em>bangun dan pelajari.</em></h2>
+                </div>
+                <p class="section-note">Hal-hal yang sekarang masih sering gue kerjain dan utak-atik.</p>
+            </div>
+            <div class="now-list">
+                <div class="now-item reveal"><span>BUILDING</span>
+                    <p>Project web seperti TEAMcut, Dua Saudara, dan Bagong Lapar.</p>
+                </div>
+                <div class="now-item reveal"><span>LEARNING</span>
+                    <p>Software development, AI, dan data lewat praktik langsung.</p>
+                </div>
+                <div class="now-item reveal"><span>EXPLORING</span>
+                    <p>Automation dan cara pakai AI sebagai alat bantu waktu bikin sesuatu.</p>
+                </div>
+                <div class="now-item reveal"><span>LOOKING FOR</span>
+                    <p>Ide berikutnya yang bikin gue penasaran cukup lama untuk mulai dicoba.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section section-pad" id="contact" aria-labelledby="contactTitle">
+            <div class="contact-mark" aria-hidden="true">✳</div>
+            <div class="contact-copy reveal">
+                <span class="eyebrow">07 / Contact</span>
+                <h2 id="contactTitle">Punya ide?<br><em>Ceritain aja.</em></h2>
+            </div>
+            <div class="contact-action reveal">
+                <a class="button button--light" href="mailto:dionpratamaart@gmail.com">Email Dion <span
+                        aria-hidden="true">↗</span></a>
+                <p>Gue baca lewat email.</p>
             </div>
         </section>
 
         <footer class="footer section-pad">
-
-            <div class="footer-brand">
-                <div class="footer-mark">
-                    D<span>/</span>P
-                </div>
-
-                <b>Dion Pratama Syaputra</b>
-
-                <span>
-                    Digital product builder
-                </span>
-            </div>
-
-
-            <div class="footer-column">
-                <span class="eyebrow">
-                    Contact
-                </span>
-
-                <a href="mailto:dionpratamaart@gmail.com">
-                    dionpratamaart@gmail.com
-                </a>
-
-                <a href="https://wa.me/6287773058338" target="_blank" rel="noreferrer">
-                    087773058338
-                </a>
-
-                <span>
-                    Cikarang, Indonesia
-                </span>
-            </div>
-
-
-            <div class="footer-column">
-                <span class="eyebrow">
-                    Let's connect
-                </span>
-
-                <div class="socials">
-
-                    <a href="https://instagram.com/dionnnprtma_" target="_blank" rel="noreferrer">
-                        Instagram
-                    </a>
-
-                    <a href="https://github.com/dionnsadboyy" target="_blank" rel="noreferrer">
-                        GitHub
-                    </a>
-
-                </div>
-            </div>
-
-
-            <div class="footer-bottom">
-                <span>
-                    © <span id="year"></span>
-                    Dion Pratama Syaputra
-                </span>
-
-                <span>
-                    dibuat sambil terus nyoba dan evaluasi.
-                </span>
-            </div>
-
+            <div class="footer-brand"><a class="footer-mark" href="#top">D<span>/</span>P</a><span>Dion Pratama
+                    Syahputra</span><small>Creative Developer · Indonesia</small></div>
+            <div class="footer-links"><span class="eyebrow">SAY HELLO</span><a
+                    href="mailto:dionpratamaart@gmail.com">dionpratamaart@gmail.com</a><a
+                    href="https://wa.me/6287773058338" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+            <div class="footer-links"><span class="eyebrow">ELSEWHERE</span><a href="https://github.com/dionnsadboyy"
+                    target="_blank" rel="noopener noreferrer">GitHub</a><a
+                    href="https://www.linkedin.com/in/dionnnprtma" target="_blank"
+                    rel="noopener noreferrer">LinkedIn</a><a href="https://instagram.com/dionnnprtma_" target="_blank"
+                    rel="noopener noreferrer">Instagram</a></div>
+            <div class="footer-bottom"><span>© <span id="year"></span> Dion Pratama Syahputra</span><a href="#top">BACK
+                    TO TOP ↑</a></div>
         </footer>
     </main>
+
     <div class="portfolio-assistant" data-assistant-root>
         <section class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false"
             aria-labelledby="assistantTitle" hidden>
             <div class="assistant-panel__head">
                 <div><span class="eyebrow">Portfolio guide</span>
-                    <h2 id="assistantTitle">Tanya Yonn AI</h2>
-                    <p>Kenali background, project, dan skill gue.</p>
-                </div><button class="assistant-close" id="assistantClose" type="button"
-                    aria-label="Tutup Tanya Yonn AI">×</button>
+                    <h2 id="assistantTitle">Tanya soal portfolio</h2>
+                    <p>Project, cerita, skill, atau cara gue bikin sesuatu.</p>
+                </div>
+                <button class="assistant-close" id="assistantClose" type="button"
+                    aria-label="Close assistant">×</button>
             </div>
             <div class="assistant-messages" id="assistantMessages" aria-live="polite"
-                aria-label="Percakapan dengan assistant">
-                <div class="assistant-message assistant-message--assistant">Tanya gue soal project, background, skill,
-                    atau pengalaman Dion.</div>
+                aria-label="Conversation with the portfolio assistant">
+                <div class="assistant-message assistant-message--assistant">Hai. Mau tahu soal project atau cerita di
+                    balik portfolio ini?</div>
             </div>
-            <div class="assistant-suggestions" id="assistantSuggestions" aria-label="Pertanyaan yang bisa ditanyakan">
-                <button type="button">Dion siapa?</button><button type="button">Project apa aja yang pernah dia
-                    bikin?</button><button type="button">Pengalaman AI-nya apa aja?</button><button type="button">Kenapa
-                    dia punya pengalaman manufacturing?</button>
+            <div class="assistant-suggestions" id="assistantSuggestions" aria-label="Suggested questions">
+                <button type="button">Dion sekarang lagi bikin apa?</button>
+                <button type="button">Ceritain soal TEAMcut</button>
+                <button type="button">Project apa saja di Archive?</button>
+                <button type="button">Gimana ceritanya dari RPL ke manufacturing?</button>
             </div>
-            <form class="assistant-form" id="assistantForm"><label class="sr-only" for="assistantInput">Tanya soal
-                    portfolio Dion</label><textarea id="assistantInput" rows="1" maxlength="600"
-                    placeholder="Tanya apa aja tentang Dion..."
-                    aria-label="Tanya soal portfolio Dion"></textarea><button type="submit"
-                    aria-label="Kirim pertanyaan"><svg class="assistant-send-icon" aria-hidden="true"
+            <form class="assistant-form" id="assistantForm">
+                <label class="sr-only" for="assistantInput">Tanya soal portfolio Dion</label>
+                <textarea id="assistantInput" rows="1" maxlength="600"
+                    placeholder="Tanya soal project atau cerita Dion..."
+                    aria-label="Tanya soal portfolio Dion"></textarea>
+                <button type="submit" aria-label="Send question"><svg class="assistant-send-icon" aria-hidden="true"
                         viewBox="0 0 24 24">
                         <path d="M21 3 14 21l-4-7-7-4L21 3Z"></path>
                         <path d="m10 14 11-11"></path>
-                    </svg></button></form>
+                    </svg></button>
+            </form>
         </section>
         <button class="assistant-launcher" id="assistantLauncher" type="button" aria-expanded="false"
-            aria-controls="assistantPanel"><span aria-hidden="true">✦</span> Tanya Yonn AI</button>
+            aria-controls="assistantPanel"><span aria-hidden="true">✳</span> Tanya soal portfolio</button>
     </div>
+
     <script src="script.js"></script>
 </body>
 

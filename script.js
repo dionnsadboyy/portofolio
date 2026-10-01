@@ -1,160 +1,71 @@
 (() => {
   "use strict";
 
-  /* =========================================================
-     SETTINGS
-  ========================================================== */
-
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const motionEase = "cubic-bezier(.2,.7,.2,1)";
-  const smoothBehavior = prefersReducedMotion ? "auto" : "smooth";
+  const smoothBehavior = reducedMotion ? "auto" : "smooth";
 
-  /* =========================================================
-     PROJECT DESCRIPTIONS
-  ========================================================== */
+  if (!reducedMotion) document.documentElement.classList.add("js-motion");
 
-  const projectDescriptions = {
-    yonngpt:
-      "A personal finance product exploring AI-assisted workflows, budgeting, and a cleaner way to understand everyday spending.",
-
-    "our-museum":
-      "A personal web experience built around storytelling, visual presentation, and a more immersive way to browse content.",
-
-    quranibot:
-      "A WhatsApp chatbot project combining NLP, database-backed responses, and conversational interaction.",
-
-    "yonn-apotek":
-      "A pharmacy management project built around practical application development and database workflows.",
-  };
-
-  /* =========================================================
-     HELPERS
-  ========================================================== */
-
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-  const scrollTo = (selector) => {
-    document.querySelector(selector)?.scrollIntoView({
-      behavior: smoothBehavior,
-      block: "start",
-    });
-  };
-
-  const makeVisible = (el) => {
-    if (!el) return;
-
-    el.style.opacity = "1";
-    el.style.visibility = "visible";
-    el.style.filter = "none";
-    el.style.transform = "none";
-  };
-
-  /* =========================================================
-     NAVIGATION
-  ========================================================== */
-
+  /* Navigation */
   const nav = document.querySelector(".nav-links");
   const menuToggle = document.querySelector(".menu-toggle");
 
-  document.querySelectorAll(".nav-links button").forEach((button) => {
-    button.addEventListener("click", () => {
-      const targetId = button.textContent.trim();
-
-      if (targetId) {
-        scrollTo(`#${targetId}`);
-      }
-
-      nav?.classList.remove("nav-open");
-      menuToggle?.setAttribute("aria-expanded", "false");
-    });
-  });
-
-  document
-    .querySelector(".services-panel .text-link")
-    ?.addEventListener("click", () => {
-      scrollTo("#contact");
-    });
-
   menuToggle?.addEventListener("click", () => {
-    if (!nav) return;
-
-    const isOpen = nav.classList.toggle("nav-open");
-
+    const isOpen = nav?.classList.toggle("nav-open") || false;
     menuToggle.setAttribute("aria-expanded", String(isOpen));
   });
 
-  document.querySelector(".monogram")?.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: smoothBehavior,
-    });
+  nav?.addEventListener("click", (event) => {
+    if (!event.target.closest("a")) return;
+    nav.classList.remove("nav-open");
+    menuToggle?.setAttribute("aria-expanded", "false");
   });
 
-  /* =========================================================
-     HERO REFERENCES
-  ========================================================== */
+  const year = document.getElementById("year");
+  if (year) year.textContent = String(new Date().getFullYear());
 
+  /* Hero text and image reveal */
   const heroTitle = document.querySelector(".hero-title");
-  const headline = document.querySelector(".display-copy");
-  const bodyCopy = document.querySelector(".body-copy");
-
   const heroImage = document.querySelector(".hero-image-wrap");
   const heroKicker = document.querySelector(".hero-kicker");
-  const heroInfo = document.querySelector(".hero-info");
-
-  const locationMain = document.querySelector(".location b");
-
-  const locationSub = document.querySelector(".location small");
-
+  const heroLead = document.querySelector(".display-copy");
+  const heroNote = document.querySelector(".body-copy");
   const heroActions = [...document.querySelectorAll(".hero-actions a")];
 
-  /* =========================================================
-     SPLIT TEXT WITHOUT BREAKING LAYOUT
-     
-     IMPORTANT:
-     spans remain INLINE.
-     Do NOT use inline-block here.
-  ========================================================== */
+  function makeVisible(element) {
+    if (!element) return;
+    element.style.opacity = "1";
+    element.style.visibility = "visible";
+    element.style.filter = "none";
+  }
 
-  function createCharacterSpans(element, className) {
+  function splitCharacters(element, className) {
     if (!element) return [];
-
     const source = element.cloneNode(true);
     const characters = [];
-
-    element.innerHTML = "";
-    element.style.visibility = "visible";
+    element.replaceChildren();
 
     const walk = (node, parent) => {
       [...node.childNodes].forEach((child) => {
         if (child.nodeType === Node.TEXT_NODE) {
           [...child.textContent].forEach((character) => {
-            if (character === " ") {
-              parent.appendChild(document.createTextNode(" "));
+            if (/\s/.test(character)) {
+              parent.appendChild(document.createTextNode(character));
               return;
             }
-
             const span = document.createElement("span");
-
             span.className = className;
             span.textContent = character;
-
             span.style.opacity = "0";
             span.style.filter = "blur(2px)";
-
             parent.appendChild(span);
             characters.push(span);
           });
-
           return;
         }
-
         if (child.nodeType === Node.ELEMENT_NODE) {
           const clone = child.cloneNode(false);
-
           parent.appendChild(clone);
           walk(child, clone);
         }
@@ -162,1511 +73,189 @@
     };
 
     walk(source, element);
-
     return characters;
   }
 
-  /* =========================================================
-     CHARACTER TYPING / REVEAL
-  ========================================================== */
-
-  async function typeReveal(
-    element,
-    {
-      startDelay = 0,
-      charDelay = 48,
-      duration = 170,
-      className = "typing-char",
-    } = {},
-  ) {
-    if (!element) return 0;
-
-    if (prefersReducedMotion) {
-      makeVisible(element);
-      return 0;
-    }
-
-    const characters = createCharacterSpans(element, className);
-
+  function revealCharacters(element, delay, duration, className) {
+    const characters = splitCharacters(element, className);
     if (!characters.length) {
       makeVisible(element);
       return 0;
     }
-
     element.style.opacity = "1";
-
-    await wait(startDelay);
-
     characters.forEach((character, index) => {
       character.animate(
         [
-          {
-            opacity: 0,
-            filter: "blur(2px)",
-          },
-          {
-            opacity: 1,
-            filter: "blur(0)",
-          },
+          { opacity: 0, filter: "blur(2px)", transform: "translateY(.22em)" },
+          { opacity: 1, filter: "blur(0)", transform: "translateY(0)" },
         ],
         {
           duration,
-          delay: index * charDelay,
-          easing: "ease-out",
-          fill: "forwards",
-        },
-      );
-    });
-
-    const totalDuration = (characters.length - 1) * charDelay + duration;
-
-    await wait(totalDuration);
-
-    return totalDuration;
-  }
-
-  async function typePlainText(
-    element,
-    { startDelay = 0, charDelay = 38 } = {},
-  ) {
-    if (!element) return 0;
-
-    if (prefersReducedMotion) {
-      element.style.visibility = "visible";
-      element.style.opacity = "1";
-      return 0;
-    }
-
-    const fullText = element.textContent;
-
-    element.textContent = "";
-    element.style.visibility = "visible";
-    element.style.opacity = "1";
-
-    await wait(startDelay);
-
-    for (const character of fullText) {
-      element.textContent += character;
-      await wait(charDelay);
-    }
-
-    return fullText.length * charDelay;
-  }
-
-  /* =========================================================
-     HERO TITLE
-  ========================================================== */
-
-  function animateHeroTitle() {
-    if (!heroTitle) return;
-
-    if (prefersReducedMotion) {
-      makeVisible(heroTitle);
-      return;
-    }
-
-    const characters = createCharacterSpans(heroTitle, "hero-title-char");
-
-    heroTitle.style.opacity = "1";
-
-    characters.forEach((character, index) => {
-      character.animate(
-        [
-          {
-            opacity: 0,
-            transform: "translateY(.35em)",
-            filter: "blur(3px)",
-          },
-          {
-            opacity: 1,
-            transform: "translateY(0)",
-            filter: "blur(0)",
-          },
-        ],
-        {
-          duration: 430,
-          delay: 120 + index * 28,
+          delay: delay + index * 24,
           easing: motionEase,
           fill: "forwards",
         },
       );
     });
+    return delay + characters.length * 24 + duration;
   }
 
-  /* =========================================================
-     HERO IMAGE
-  ========================================================== */
-
-  function animateHeroImage() {
-    if (!heroImage) return;
-
-    if (prefersReducedMotion) {
-      makeVisible(heroImage);
+  function animateHero() {
+    if (reducedMotion) {
+      [heroTitle, heroImage, heroKicker, heroLead, heroNote, ...heroActions].forEach(makeVisible);
       return;
     }
 
-    heroImage.animate(
-      [
-        {
-          opacity: 0,
-          transform: "translate3d(28px, 18px, 0) scale(.975)",
-          filter: "blur(6px)",
-        },
-        {
-          opacity: 1,
-          transform: "translate3d(0, 0, 0) scale(1)",
-          filter: "blur(0)",
-        },
-      ],
-      {
-        duration: 1000,
-        delay: 360,
-        easing: "cubic-bezier(.16,1,.3,1)",
-        fill: "forwards",
-      },
-    );
-  }
-
-  /* =========================================================
-     HERO KICKER
-  ========================================================== */
-
-  function animateKicker() {
-    if (!heroKicker) return;
-
-    if (prefersReducedMotion) {
-      makeVisible(heroKicker);
-      return;
-    }
-
-    heroKicker.animate(
-      [
-        {
-          opacity: 0,
-          transform: "translateY(-8px)",
-          filter: "blur(3px)",
-        },
-        {
-          opacity: 1,
-          transform: "translateY(0)",
-          filter: "blur(0)",
-        },
-      ],
-      {
-        duration: 500,
-        delay: 60,
-        easing: motionEase,
-        fill: "forwards",
-      },
-    );
-  }
-
-  /* =========================================================
-     HERO SEQUENCE
-
-     ORDER:
-     kicker
-     portfolio title
-     photo
-     headline typing
-     body typing
-     location typing
-     buttons
-  ========================================================== */
-
-  async function runHeroSequence() {
-    if (prefersReducedMotion) {
-      [
-        heroKicker,
-        heroTitle,
-        headline,
-        bodyCopy,
-        locationMain,
-        locationSub,
-        heroImage,
-        heroInfo,
-        ...heroActions,
-      ].forEach(makeVisible);
-
-      return;
-    }
-
-    animateKicker();
-    animateHeroTitle();
-    animateHeroImage();
-
-    /* ---------------------------------------------------------
-       HEADLINE
-    ---------------------------------------------------------- */
-
-    await typeReveal(headline, {
-      startDelay: 950,
-      charDelay: 48,
-      duration: 165,
-      className: "typing-char",
-    });
-
-    await wait(140);
-
-    /* ---------------------------------------------------------
-       BODY COPY
-    ---------------------------------------------------------- */
-
-    await typeReveal(bodyCopy, {
-      startDelay: 0,
-      charDelay: 34,
-      duration: 125,
-      className: "typing-char",
-    });
-
-    await wait(110);
-
-    /* ---------------------------------------------------------
-       LOCATION — SEPARATE ELEMENTS
-       
-       Do NOT target .location span because it is a flex
-       container containing <b> and <small>.
-    ---------------------------------------------------------- */
-
-    await typePlainText(locationMain, {
-      startDelay: 0,
-      charDelay: 38,
-    });
-
-    await wait(80);
-
-    await typePlainText(locationSub, {
-      startDelay: 0,
-      charDelay: 30,
-    });
-
-    await wait(230);
-
-    /* ---------------------------------------------------------
-       BUTTONS LAST
-    ---------------------------------------------------------- */
-
-    heroActions.forEach((button, index) => {
-      button.animate(
-        [
-          {
-            opacity: 0,
-            transform: "translateY(10px) scale(.985)",
-            filter: "blur(2px)",
-          },
-          {
-            opacity: 1,
-            transform: "translateY(0) scale(1)",
-            filter: "blur(0)",
-          },
-        ],
-        {
-          duration: 500,
-          delay: index * 90,
-          easing: motionEase,
-          fill: "forwards",
-        },
-      );
-    });
-  }
-
-  /* =========================================================
-     INITIAL HERO STATE
-  ========================================================== */
-
-  if (!prefersReducedMotion) {
-    [heroKicker, heroImage].filter(Boolean).forEach((element) => {
+    [heroTitle, heroImage, heroKicker, heroLead, heroNote].filter(Boolean).forEach((element) => {
       element.style.opacity = "0";
     });
-
-    [heroTitle, headline, bodyCopy, locationMain, locationSub]
-      .filter(Boolean)
-      .forEach((element) => {
-        element.style.opacity = "1";
-        element.style.visibility = "hidden";
-      });
-
-    heroActions.forEach((button) => {
-      button.style.opacity = "0";
+    heroActions.forEach((action) => {
+      action.style.opacity = "0";
     });
-  }
 
-  runHeroSequence();
-
-  /* =========================================================
-     SCROLL REVEAL
-  ========================================================== */
-
-  const revealItems = [
-    ...document.querySelectorAll(
+    heroKicker?.animate(
       [
-        ".reveal",
-        ".process-step",
-        ".service-item",
-        ".factory-story",
-        ".factory-summary",
-        ".stat",
-        ".certificate-card",
-        ".project-card",
-      ].join(", "),
-    ),
-  ];
-
-  function getRevealDirection(element) {
-    if (
-      element.classList.contains("service-item") ||
-      element.classList.contains("factory-summary") ||
-      element.closest(".services-panel")
-    ) {
-      return "right";
-    }
-
-    if (element.classList.contains("factory-story")) {
-      return "left";
-    }
-
-    if (element.classList.contains("stat")) {
-      return "left";
-    }
-
-    return "up";
-  }
-
-  function revealElement(element, index = 0) {
-    if (!element) return;
-
-    if (element.dataset.motionShown === "true") {
-      return;
-    }
-
-    element.dataset.motionShown = "true";
-
-    if (prefersReducedMotion) {
-      makeVisible(element);
-      return;
-    }
-
-    const direction = getRevealDirection(element);
-
-    let initial;
-
-    if (direction === "left") {
-      initial = {
-        opacity: 0,
-        transform: "translateX(-30px)",
-        filter: "blur(4px)",
-      };
-    } else if (direction === "right") {
-      initial = {
-        opacity: 0,
-        transform: "translateX(30px)",
-        filter: "blur(4px)",
-      };
-    } else {
-      initial = {
-        opacity: 0,
-        transform: "translateY(28px)",
-        filter: "blur(4px)",
-      };
-    }
-
-    element.animate(
-      [
-        initial,
-        {
-          opacity: 1,
-          transform: "translate(0, 0)",
-          filter: "blur(0)",
-        },
+        { opacity: 0, transform: "translateY(-8px)" },
+        { opacity: 1, transform: "translateY(0)" },
       ],
-      {
-        duration: 740,
-        delay: Math.min(index, 5) * 75,
-        easing: motionEase,
-        fill: "forwards",
-      },
-    );
-  }
-
-  if (revealItems.length) {
-    const observer = new IntersectionObserver(
-      (entries, observerInstance) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const group = entry.target.closest(
-            ".project-grid, .process-grid, .certificate-grid, .stats-strip",
-          );
-
-          const siblings = group
-            ? [...group.querySelectorAll(":scope > *")]
-            : [entry.target];
-
-          const index = Math.max(0, siblings.indexOf(entry.target));
-
-          revealElement(entry.target, index);
-
-          observerInstance.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.14,
-        rootMargin: "0px 0px -8% 0px",
-      },
+      { duration: 480, delay: 70, easing: motionEase, fill: "forwards" },
     );
 
-    revealItems.forEach((element) => {
-      if (!prefersReducedMotion) {
-        element.style.opacity = "0";
-      }
-
-      observer.observe(element);
-    });
-  }
-
-  /* =========================================================
-     PROJECT MODAL
-  ========================================================== */
-
-  const projectCards = [...document.querySelectorAll(".project-card")];
-
-  const createModalStyles = () => {
-    if (document.getElementById("project-modal-motion-styles")) {
-      return;
-    }
-
-    const style = document.createElement("style");
-
-    style.id = "project-modal-motion-styles";
-
-    style.textContent = `
-      .js-project-modal {
-        position: fixed;
-        inset: 0;
-        z-index: 999;
-        display: grid;
-        place-items: center;
-        padding: 22px;
-        background: rgba(24, 22, 30, .48);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-      }
-
-      .js-project-modal[hidden] {
-        display: none;
-      }
-
-      .js-project-modal__panel {
-        position: relative;
-        width: min(980px, 100%);
-        max-height: 92vh;
-        overflow: auto;
-
-        display: grid;
-        grid-template-columns:
-          minmax(0, 1.05fr)
-          minmax(300px, .95fr);
-
-        background: var(--cream);
-        border: 1px solid var(--line);
-        box-shadow:
-          0 28px 90px rgba(24, 22, 30, .22);
-      }
-
-      .js-project-modal__image {
-        display: block;
-        width: 100%;
-        height: 100%;
-        min-height: 440px;
-        object-fit: cover;
-      }
-
-      .js-project-modal__content {
-        align-self: center;
-        padding: 48px 42px;
-      }
-
-      .js-project-modal__title {
-        margin: 0 0 18px;
-        font:
-          500 clamp(34px, 4vw, 54px) / 1
-          "Playfair Display", serif;
-        letter-spacing: -1.5px;
-      }
-
-      .js-project-modal__desc {
-        margin: 0;
-        max-width: 420px;
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.75;
-      }
-
-      .js-project-modal__meta {
-        margin-top: 24px;
-        color: var(--purple-deep);
-        font-size: 9px;
-        letter-spacing: 1.2px;
-        text-transform: uppercase;
-      }
-
-      .js-project-modal__close {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        z-index: 2;
-
-        width: 40px;
-        height: 40px;
-
-        display: grid;
-        place-items: center;
-
-        border: 0;
-        border-radius: 50%;
-
-        background: var(--cream);
-        color: var(--ink);
-
-        cursor: pointer;
-        font-size: 20px;
-      }
-
-      @media (max-width: 760px) {
-        .js-project-modal__panel {
-          grid-template-columns: 1fr;
-        }
-
-        .js-project-modal__image {
-          min-height: 250px;
-          max-height: 42vh;
-        }
-
-        .js-project-modal__content {
-          padding: 28px 24px 34px;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .js-project-modal {
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-        }
-      }
-    `;
-
-    document.head.appendChild(style);
-  };
-
-  createModalStyles();
-
-  const createProjectModal = () => {
-    const modal = document.createElement("div");
-
-    modal.className = "js-project-modal";
-
-    modal.hidden = true;
-
-    modal.setAttribute("aria-hidden", "true");
-
-    modal.innerHTML = `
-      <div
-        class="js-project-modal__panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="jsProjectModalTitle"
-      >
-        <button
-          class="js-project-modal__close"
-          type="button"
-          aria-label="Close project preview"
-        >
-          ×
-        </button>
-
-        <img
-          class="js-project-modal__image"
-          alt=""
-        />
-
-        <div class="js-project-modal__content">
-          <span
-            class="eyebrow"
-            id="jsProjectModalCategory"
-          ></span>
-
-          <h2
-            class="js-project-modal__title"
-            id="jsProjectModalTitle"
-          ></h2>
-
-          <p
-            class="js-project-modal__desc"
-          ></p>
-
-          <div
-            class="js-project-modal__meta"
-          ></div>
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(modal);
-
-    return modal;
-  };
-
-  let projectModal = document.querySelector(".js-project-modal");
-
-  if (!projectModal) {
-    projectModal = createProjectModal();
-  }
-
-  const modalPanel = projectModal.querySelector(".js-project-modal__panel");
-
-  const modalImage = projectModal.querySelector(".js-project-modal__image");
-
-  const modalTitle = projectModal.querySelector("#jsProjectModalTitle");
-
-  const modalCategory = projectModal.querySelector("#jsProjectModalCategory");
-
-  const modalDescription = projectModal.querySelector(
-    ".js-project-modal__desc",
-  );
-
-  const modalMeta = projectModal.querySelector(".js-project-modal__meta");
-
-  const modalClose = projectModal.querySelector(".js-project-modal__close");
-
-  let lastFocusedElement = null;
-
-  const normalizeProjectId = (value) =>
-    value
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
-
-  const getProjectData = (card) => {
-    const image = card.querySelector(".project-image img");
-
-    const title =
-      card.querySelector(".project-meta b")?.textContent.trim() || "Project";
-
-    const category =
-      card.querySelector(".project-meta small")?.textContent.trim() ||
-      "Project";
-
-    const year = card.querySelector(".project-year")?.textContent.trim() || "";
-
-    const datasetId = card.dataset.project?.trim();
-
-    const projectId = datasetId || normalizeProjectId(title);
-
-    return {
-      id: projectId,
-      title,
-      category,
-      year,
-      image: image?.getAttribute("src") || "",
-      alt: image?.getAttribute("alt") || title,
-      description:
-        projectDescriptions[projectId] ||
-        "A personal project exploring design, development, and practical problem-solving.",
-    };
-  };
-
-  const openProject = (card) => {
-    if (!projectModal) return;
-
-    const project = getProjectData(card);
-
-    lastFocusedElement = document.activeElement;
-
-    modalImage.src = project.image;
-
-    modalImage.alt = `${project.title} project preview`;
-
-    modalTitle.textContent = project.title;
-
-    modalCategory.textContent = project.category;
-
-    modalDescription.textContent = project.description;
-
-    modalMeta.textContent = project.year;
-
-    projectModal.hidden = false;
-
-    projectModal.setAttribute("aria-hidden", "false");
-
-    document.dispatchEvent(
-      new CustomEvent("portfolio:project-open", {
-        detail: { projectId: project.id },
-      }),
+    revealCharacters(heroTitle, 120, 420, "hero-title-char");
+
+    heroImage?.animate(
+      [
+        { opacity: 0, transform: "translate3d(25px, 18px, 0) scale(.975)", filter: "blur(5px)" },
+        { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)", filter: "blur(0)" },
+      ],
+      { duration: 950, delay: 330, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" },
     );
 
-    document.body.style.overflow = "hidden";
+    const leadEnd = revealCharacters(heroLead, 540, 130, "typing-char");
+    revealCharacters(heroNote, leadEnd + 90, 110, "typing-char");
 
-    if (prefersReducedMotion) {
-      makeVisible(projectModal);
-      makeVisible(modalPanel);
-    } else {
-      projectModal.animate([{ opacity: 0 }, { opacity: 1 }], {
-        duration: 220,
-        easing: "ease-out",
-        fill: "forwards",
-      });
-
-      modalPanel.animate(
+    heroActions.forEach((action, index) => {
+      action.animate(
         [
-          {
-            opacity: 0,
-            transform: "translateY(16px) scale(.985)",
-          },
-          {
-            opacity: 1,
-            transform: "translateY(0) scale(1)",
-          },
+          { opacity: 0, transform: "translateY(9px)" },
+          { opacity: 1, transform: "translateY(0)" },
         ],
-        {
-          duration: 500,
-          easing: "cubic-bezier(.16,1,.3,1)",
-          fill: "forwards",
-        },
+        { duration: 440, delay: leadEnd + 330 + index * 95, easing: motionEase, fill: "forwards" },
       );
-    }
-
-    modalClose?.focus();
-  };
-
-  const closeProject = () => {
-    if (!projectModal || projectModal.hidden) {
-      return;
-    }
-
-    if (prefersReducedMotion) {
-      projectModal.hidden = true;
-
-      projectModal.setAttribute("aria-hidden", "true");
-
-      document.body.style.overflow = "";
-
-      document.dispatchEvent(new CustomEvent("portfolio:project-close"));
-
-      lastFocusedElement?.focus?.();
-
-      return;
-    }
-
-    const animation = projectModal.animate([{ opacity: 1 }, { opacity: 0 }], {
-      duration: 180,
-      easing: "ease-in",
-      fill: "forwards",
-    });
-
-    animation.addEventListener(
-      "finish",
-      () => {
-        projectModal.hidden = true;
-
-        projectModal.setAttribute("aria-hidden", "true");
-
-        document.body.style.overflow = "";
-
-        document.dispatchEvent(new CustomEvent("portfolio:project-close"));
-
-        lastFocusedElement?.focus?.();
-      },
-      { once: true },
-    );
-  };
-
-  projectCards.forEach((card) => {
-    card.addEventListener("click", () => openProject(card));
-  });
-
-  modalClose?.addEventListener("click", closeProject);
-
-  projectModal?.addEventListener("click", (event) => {
-    if (event.target === projectModal) {
-      closeProject();
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && projectModal && !projectModal.hidden) {
-      closeProject();
-    }
-  });
-
-  /* =========================================================
-     ARCHIVE
-  ========================================================== */
-
-  const archiveToggle = document.getElementById("archiveToggle");
-
-  const archiveList = document.getElementById("archiveList");
-
-  const archiveShortcut = document.getElementById("archiveShortcut");
-
-  if (archiveToggle && archiveList) {
-    archiveToggle.addEventListener("click", () => {
-      const isOpen = archiveToggle.getAttribute("aria-expanded") === "true";
-
-      archiveToggle.setAttribute("aria-expanded", String(!isOpen));
-
-      archiveList.hidden = isOpen;
-
-      archiveToggle.classList.toggle("is-open", !isOpen);
-
-      if (!isOpen && !prefersReducedMotion) {
-        const archiveItems = [...archiveList.querySelectorAll(".archive-item")];
-
-        archiveItems.forEach((item, index) => {
-          item.animate(
-            [
-              {
-                opacity: 0,
-                transform: "translateY(12px)",
-              },
-              {
-                opacity: 1,
-                transform: "translateY(0)",
-              },
-            ],
-            {
-              duration: 420,
-              delay: index * 70,
-              easing: motionEase,
-              fill: "forwards",
-            },
-          );
-        });
-      }
     });
   }
 
-  if (archiveShortcut && archiveToggle) {
-    archiveShortcut.addEventListener("click", () => {
-      document.querySelector(".project-archive")?.scrollIntoView({
-        behavior: smoothBehavior,
-        block: "center",
-      });
+  animateHero();
 
-      setTimeout(() => archiveToggle.click(), prefersReducedMotion ? 0 : 450);
-    });
+  /* Scroll reveal with a small stagger inside each editorial group */
+  document.querySelectorAll(".project-shot, .project-heading, .project-bottomline, .project-facts").forEach((element) => {
+    element.classList.add("reveal");
+  });
+
+  const revealTargets = [...document.querySelectorAll(".reveal")];
+  if (!reducedMotion && "IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const group = entry.target.closest(
+          ".teamcut-gallery, .dua-gallery, .bagong-gallery, .archive-list, .timeline, .process-sequence, .now-list",
+        );
+        const siblings = group ? [...group.querySelectorAll(":scope > .reveal")] : [entry.target];
+        const index = Math.max(0, siblings.indexOf(entry.target));
+        entry.target.classList.add("is-visible");
+        entry.target.animate(
+          [
+            { opacity: 0, transform: "translate3d(0, 21px, 0)", filter: "blur(2px)" },
+            { opacity: 1, transform: "translate3d(0, 0, 0)", filter: "blur(0)" },
+          ],
+          { duration: 620, delay: Math.min(index, 4) * 65, easing: motionEase, fill: "forwards" },
+        );
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -7% 0px" });
+
+    revealTargets.forEach((element) => revealObserver.observe(element));
+  } else {
+    revealTargets.forEach((element) => element.classList.add("is-visible"));
   }
 
-  /* =========================================================
-     FOOTER YEAR
-  ========================================================== */
+  /* Subtle scroll-linked drift and pointer depth keep the existing kinetic feel. */
+  const driftTargets = [
+    ...document.querySelectorAll(".project-card, .archive-entry, .timeline-item, .process-step, .now-item"),
+  ];
+  let driftFrame = 0;
+  let lastScrollY = window.scrollY;
+  let velocity = 0;
+  let targetVelocity = 0;
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-  const footerYear = document.querySelector(".footer-bottom span");
-
-  if (footerYear) {
-    footerYear.textContent = footerYear.textContent.replace(
-      /2026/,
-      String(new Date().getFullYear()),
-    );
+  function updateDrift() {
+    const currentY = window.scrollY;
+    targetVelocity = clamp(currentY - lastScrollY, -32, 32);
+    lastScrollY = currentY;
+    if (!driftFrame && !reducedMotion) driftFrame = requestAnimationFrame(animateDrift);
   }
 
-  /* =========================================================
-   V2 KINETIC MOTION SYSTEM
-   Body-only motion layer.
-   HERO + AI CHATBOT remain untouched.
-========================================================= */
-
-  if (!prefersReducedMotion) {
-    const kineticMotionQuery = window.matchMedia("(min-width: 641px)");
-    const kineticTargets = [];
-    const kineticSections = [];
-    let kineticRaf = 0;
-    let kineticActive = false;
-
-    let kineticLastY = window.scrollY;
-    let kineticLastTime = performance.now();
-    let kineticVelocity = 0;
-    let kineticVelocityTarget = 0;
-
-    const kineticClamp = (value, min, max) =>
-      Math.min(Math.max(value, min), max);
-
-    const registerKinetic = (
-      selector,
-      {
-        depth = 0,
-        velocity = 0,
-        x = 0,
-        scale = 0,
-        rotate = 0,
-        alternate = false,
-      } = {},
-    ) => {
-      document.querySelectorAll(selector).forEach((element, index) => {
-        kineticTargets.push({
-          element,
-          depth,
-          velocity,
-          x,
-          scale,
-          rotate,
-          direction: alternate && index % 2 ? -1 : 1,
-          top: 0,
-          height: 0,
-        });
-      });
-    };
-
-    const registerKineticSection = (
-      selector,
-      { depth = 0, velocity = 0, scale = 0, overlap = 0 } = {},
-    ) => {
-      document.querySelectorAll(selector).forEach((element) => {
-        kineticSections.push({
-          element,
-          depth,
-          velocity,
-          scale,
-          overlap,
-          top: 0,
-          height: 0,
-        });
-      });
-    };
-
-    /*
-     * =========================================================
-     * TYPOGRAPHY
-     * =========================================================
-     */
-
-    registerKinetic(".section-heading h2", {
-      depth: -0.065,
-      velocity: 1.15,
-      x: 2.5,
+  function animateDrift() {
+    velocity += (targetVelocity - velocity) * 0.2;
+    targetVelocity *= 0.84;
+    driftTargets.forEach((element) => {
+      const rect = element.getBoundingClientRect();
+      const position = (rect.top + rect.height * 0.5 - window.innerHeight * 0.5) / window.innerHeight;
+      const offset = clamp(position * 2.2 + velocity * 0.12, -4.5, 4.5);
+      element.style.setProperty("--scroll-drift", offset.toFixed(2) + "px");
     });
+    if (Math.abs(velocity) > 0.12 || Math.abs(targetVelocity) > 0.12) {
+      driftFrame = requestAnimationFrame(animateDrift);
+    } else {
+      driftFrame = 0;
+      driftTargets.forEach((element) => element.style.setProperty("--scroll-drift", "0px"));
+    }
+  }
 
-    registerKinetic(".factory-heading h2", {
-      depth: -0.08,
-      velocity: 1.4,
-      x: 4,
+  if (!reducedMotion) window.addEventListener("scroll", updateDrift, { passive: true });
+
+  /* Archive preview: Selected Work stays visible; previews live in the archive index. */
+  const archivePreview = document.getElementById("archivePreview");
+  const archivePreviewImage = document.getElementById("archivePreviewImage");
+  const archivePreviewTitle = document.getElementById("archivePreviewTitle");
+  const archiveEntries = [...document.querySelectorAll(".archive-entry[data-project-id]")];
+  let activeProject = "";
+  let previewTimer = 0;
+
+  function selectArchiveEntry(entry) {
+    if (!entry || !archivePreviewImage) return;
+    archiveEntries.forEach((item) => {
+      const active = item === entry;
+      item.classList.toggle("is-active", active);
+      item.setAttribute("aria-pressed", String(active));
     });
-
-    registerKinetic(".factory-bridge p", {
-      depth: 0.12,
-      velocity: 1.8,
-      scale: 0.012,
-    });
-
-    /*
-     * =========================================================
-     * PROJECTS
-     * =========================================================
-     */
-
-    registerKinetic(".project-card", {
-      depth: 0.055,
-      velocity: 1.2,
-      x: 3,
-      rotate: 0.12,
-      alternate: true,
-    });
-
-    registerKinetic(".project-meta", {
-      depth: -0.035,
-      velocity: 0.75,
-      x: 2,
-      alternate: true,
-    });
-
-    /*
-     * =========================================================
-     * PROCESS
-     * =========================================================
-     */
-
-    registerKinetic(".process-step", {
-      depth: -0.055,
-      velocity: 0.9,
-      x: 2.5,
-      rotate: 0.08,
-      alternate: true,
-    });
-
-    /*
-     * =========================================================
-     * SERVICES
-     * =========================================================
-     */
-
-    registerKinetic(".service-item", {
-      depth: 0.045,
-      velocity: 0.85,
-      x: 3.5,
-      alternate: true,
-    });
-
-    /*
-     * =========================================================
-     * MANUFACTURING
-     * =========================================================
-     */
-
-    registerKinetic(".factory-story", {
-      depth: -0.065,
-      velocity: 1,
-      x: 3,
-    });
-
-    registerKinetic(".factory-summary", {
-      depth: 0.075,
-      velocity: 1.15,
-      x: 4,
-      alternate: true,
-    });
-
-    registerKinetic(".factory-stat", {
-      depth: 0.095,
-      velocity: 1.25,
-      x: 2,
-      alternate: true,
-    });
-
-    registerKinetic(".factory-tags span", {
-      depth: 0.05,
-      velocity: 0.65,
-      x: 1.5,
-      alternate: true,
-    });
-
-    /*
-     * =========================================================
-     * CERTIFICATES
-     * =========================================================
-     */
-
-    registerKinetic(".certificate-card", {
-      depth: 0.07,
-      velocity: 1.05,
-      x: 2.5,
-      rotate: 0.08,
-      alternate: true,
-    });
-
-    /*
-     * =========================================================
-     * TESTIMONIALS
-     * =========================================================
-     */
-
-    registerKinetic(".testimonial", {
-      depth: -0.05,
-      velocity: 0.9,
-      x: 2,
-      rotate: 0.06,
-      alternate: true,
-    });
-
-    /*
-     * =========================================================
-     * CTA
-     * =========================================================
-     */
-
-    registerKinetic(".cta h2", {
-      depth: -0.08,
-      velocity: 1.4,
-      x: 3,
-      scale: 0.01,
-    });
-
-    registerKinetic(".cta-action", {
-      depth: 0.075,
-      velocity: 1.1,
-      x: 3,
-    });
-
-    /*
-     * =========================================================
-     * SECTION LAYERS
-     *
-     * These create the "sections are moving through each other"
-     * feeling without altering document flow.
-     * =========================================================
-     */
-
-    registerKineticSection(".stats-strip", {
-      depth: -0.055,
-      velocity: 0.75,
-      overlap: 10,
-    });
-
-    registerKineticSection(".work-layout", {
-      depth: 0.035,
-      velocity: 0.7,
-      overlap: 8,
-    });
-
-    registerKineticSection(".process", {
-      depth: -0.04,
-      velocity: 0.8,
-      overlap: 12,
-    });
-
-    registerKineticSection(".factory-chapter", {
-      depth: 0.045,
-      velocity: 0.85,
-      overlap: 14,
-    });
-
-    registerKineticSection(".certifications", {
-      depth: -0.04,
-      velocity: 0.75,
-      overlap: 10,
-    });
-
-    registerKineticSection(".factory-bridge", {
-      depth: 0.075,
-      velocity: 1,
-      overlap: 18,
-    });
-
-    registerKineticSection(".kind-words", {
-      depth: -0.045,
-      velocity: 0.75,
-      overlap: 12,
-    });
-
-    registerKineticSection(".cta", {
-      depth: 0.06,
-      velocity: 1,
-      overlap: 16,
-    });
-
-    const measureKinetic = () => {
-      kineticTargets.forEach((target) => {
-        const rect = target.element.getBoundingClientRect();
-
-        target.top = rect.top + window.scrollY;
-        target.height = rect.height;
-      });
-
-      kineticSections.forEach((section) => {
-        const rect = section.element.getBoundingClientRect();
-
-        section.top = rect.top + window.scrollY;
-        section.height = rect.height;
-      });
-    };
-
-    const resetKineticTarget = (target) => {
-      target.element.style.setProperty("--kinetic-x", "0px");
-      target.element.style.setProperty("--kinetic-y", "0px");
-      target.element.style.setProperty("--kinetic-scale", "1");
-      target.element.style.setProperty("--kinetic-rotate", "0deg");
-    };
-
-    const resetKineticSection = (section) => {
-      section.element.style.setProperty("--section-y", "0px");
-      section.element.style.setProperty("--section-scale", "1");
-    };
-
-    const updateKinetic = (now) => {
-      kineticRaf = 0;
-
-      const deltaTime = Math.max(8, now - kineticLastTime);
-
-      const currentY = window.scrollY;
-      const deltaY = currentY - kineticLastY;
-
-      kineticVelocityTarget = kineticClamp((deltaY / deltaTime) * 22, -34, 34);
-
-      kineticVelocity += (kineticVelocityTarget - kineticVelocity) * 0.22;
-
-      kineticVelocityTarget *= 0.78;
-
-      const viewportHeight = window.innerHeight;
-      const mobileIntensity = kineticMotionQuery.matches ? 1 : 0.38;
-
-      const viewportCenter = currentY + viewportHeight * 0.5;
-
-      kineticTargets.forEach((target) => {
-        const center = target.top + target.height * 0.5;
-
-        const progress = kineticClamp(
-          (viewportCenter - center) / (viewportHeight * 1.15),
-          -1.35,
-          1.35,
-        );
-
-        /*
-         * Depth is deliberately stronger than the previous V1.
-         * This is the visible "alive" part.
-         */
-        const depthOffset =
-          progress * target.depth * viewportHeight * 1.35 * mobileIntensity;
-
-        const velocityOffset =
-          kineticVelocity * target.velocity * mobileIntensity * 0.32;
-
-        const xOffset =
-          target.direction * progress * target.x * 12 * mobileIntensity;
-
-        const rotateOffset = target.direction * progress * target.rotate * 12;
-
-        const scaleOffset = kineticClamp(
-          1 + progress * target.scale * 3 * mobileIntensity,
-          0.97,
-          1.03,
-        );
-
-        const yOffset = kineticClamp(depthOffset + velocityOffset, -42, 42);
-
-        target.element.style.setProperty(
-          "--kinetic-x",
-          `${xOffset.toFixed(2)}px`,
-        );
-
-        target.element.style.setProperty(
-          "--kinetic-y",
-          `${yOffset.toFixed(2)}px`,
-        );
-
-        target.element.style.setProperty(
-          "--kinetic-scale",
-          scaleOffset.toFixed(4),
-        );
-
-        target.element.style.setProperty(
-          "--kinetic-rotate",
-          `${rotateOffset.toFixed(3)}deg`,
-        );
-      });
-
-      kineticSections.forEach((section) => {
-        const center = section.top + section.height * 0.5;
-
-        const progress = kineticClamp(
-          (viewportCenter - center) / (viewportHeight * 1.3),
-          -1,
-          1,
-        );
-
-        const y =
-          progress * section.depth * viewportHeight * 0.9 * mobileIntensity;
-
-        const velocityBoost =
-          kineticVelocity * section.velocity * mobileIntensity * 0.22;
-
-        const totalY = kineticClamp(y + velocityBoost, -32, 32);
-
-        const scale = kineticClamp(
-          1 + progress * section.overlap * 0.00022,
-          0.985,
-          1.015,
-        );
-
-        section.element.style.setProperty(
-          "--section-y",
-          `${totalY.toFixed(2)}px`,
-        );
-
-        section.element.style.setProperty("--section-scale", scale.toFixed(4));
-      });
-
-      kineticLastY = currentY;
-      kineticLastTime = now;
-
-      const stillMoving =
-        Math.abs(kineticVelocity) > 0.012 ||
-        Math.abs(kineticVelocityTarget) > 0.012;
-
-      if (stillMoving) {
-        kineticRaf = requestAnimationFrame(updateKinetic);
+    activeProject = entry.dataset.projectId || "";
+    archivePreview?.classList.toggle("is-text-only", !entry.dataset.previewImage);
+    archivePreview?.classList.add("is-changing");
+    window.clearTimeout(previewTimer);
+    previewTimer = window.setTimeout(() => {
+      if (entry.dataset.previewImage) {
+        archivePreviewImage.src = entry.dataset.previewImage;
+        archivePreviewImage.alt = entry.dataset.previewAlt || entry.dataset.previewTitle || "Archive project";
+        archivePreviewImage.hidden = false;
       } else {
-        kineticVelocity *= 0.72;
-        kineticVelocityTarget *= 0.72;
-
-        kineticTargets.forEach((target) => {
-          const currentY =
-            parseFloat(
-              getComputedStyle(target.element).getPropertyValue("--kinetic-y"),
-            ) || 0;
-
-          const currentX =
-            parseFloat(
-              getComputedStyle(target.element).getPropertyValue("--kinetic-x"),
-            ) || 0;
-
-          const currentScale =
-            parseFloat(
-              getComputedStyle(target.element).getPropertyValue(
-                "--kinetic-scale",
-              ),
-            ) || 1;
-
-          const currentRotate =
-            parseFloat(
-              getComputedStyle(target.element).getPropertyValue(
-                "--kinetic-rotate",
-              ),
-            ) || 0;
-
-          const nextY = currentY * 0.86;
-          const nextX = currentX * 0.86;
-          const nextScale = 1 + (currentScale - 1) * 0.86;
-          const nextRotate = currentRotate * 0.86;
-
-          target.element.style.setProperty(
-            "--kinetic-y",
-            `${nextY.toFixed(3)}px`,
-          );
-
-          target.element.style.setProperty(
-            "--kinetic-x",
-            `${nextX.toFixed(3)}px`,
-          );
-
-          target.element.style.setProperty(
-            "--kinetic-scale",
-            nextScale.toFixed(4),
-          );
-
-          target.element.style.setProperty(
-            "--kinetic-rotate",
-            `${nextRotate.toFixed(3)}deg`,
-          );
-        });
-
-        kineticSections.forEach((section) => {
-          const currentY =
-            parseFloat(
-              getComputedStyle(section.element).getPropertyValue("--section-y"),
-            ) || 0;
-
-          const currentScale =
-            parseFloat(
-              getComputedStyle(section.element).getPropertyValue(
-                "--section-scale",
-              ),
-            ) || 1;
-
-          section.element.style.setProperty(
-            "--section-y",
-            `${(currentY * 0.86).toFixed(3)}px`,
-          );
-
-          section.element.style.setProperty(
-            "--section-scale",
-            `${(1 + (currentScale - 1) * 0.86).toFixed(4)}`,
-          );
-        });
-
-        const stillSettling = kineticTargets.some((target) => {
-          const y =
-            parseFloat(
-              getComputedStyle(target.element).getPropertyValue("--kinetic-y"),
-            ) || 0;
-
-          return Math.abs(y) > 0.03;
-        });
-
-        if (stillSettling) {
-          kineticRaf = requestAnimationFrame(updateKinetic);
-        } else {
-          kineticActive = false;
-          kineticTargets.forEach(resetKineticTarget);
-          kineticSections.forEach(resetKineticSection);
-        }
+        archivePreviewImage.hidden = true;
       }
-    };
-
-    const startKineticMotion = () => {
-      if (kineticActive) return;
-
-      kineticActive = true;
-
-      if (!kineticRaf) {
-        kineticRaf = requestAnimationFrame(updateKinetic);
-      }
-    };
-
-    measureKinetic();
-
-    window.addEventListener("scroll", startKineticMotion, { passive: true });
-
-    window.addEventListener(
-      "resize",
-      () => {
-        measureKinetic();
-        startKineticMotion();
-      },
-      { passive: true },
-    );
-
-    window.addEventListener(
-      "load",
-      () => {
-        measureKinetic();
-      },
-      { once: true },
-    );
-
-    /*
-     * =========================================================
-     * CURSOR DEPTH — PROJECTS
-     * =========================================================
-     */
-
-    document.querySelectorAll(".project-card").forEach((card) => {
-      card.addEventListener(
-        "pointermove",
-        (event) => {
-          if (event.pointerType !== "mouse") return;
-
-          const rect = card.getBoundingClientRect();
-
-          const nx = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-
-          const ny = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-
-          const image = card.querySelector(".project-image img");
-
-          if (image) {
-            image.style.setProperty("--cursor-x", `${(nx * 8).toFixed(2)}px`);
-
-            image.style.setProperty("--cursor-y", `${(ny * 8).toFixed(2)}px`);
-
-            image.style.setProperty(
-              "--cursor-r",
-              `${(-ny * 0.45).toFixed(3)}deg`,
-            );
-          }
-
-          card.style.setProperty("--card-x", `${(nx * 2.5).toFixed(2)}px`);
-
-          card.style.setProperty("--card-y", `${(ny * 2.5).toFixed(2)}px`);
-        },
-        { passive: true },
-      );
-
-      card.addEventListener("pointerleave", () => {
-        card.style.setProperty("--card-x", "0px");
-        card.style.setProperty("--card-y", "0px");
-
-        const image = card.querySelector(".project-image img");
-
-        image?.style.setProperty("--cursor-x", "0px");
-        image?.style.setProperty("--cursor-y", "0px");
-        image?.style.setProperty("--cursor-r", "0deg");
-      });
-    });
+      if (archivePreviewTitle) archivePreviewTitle.textContent = entry.dataset.previewTitle || "";
+      archivePreview?.classList.remove("is-changing");
+    }, reducedMotion ? 0 : 110);
   }
 
-  /* =========================================================
-     AI PORTFOLIO ASSISTANT
-  ========================================================== */
+  archiveEntries.forEach((entry) => {
+    entry.addEventListener("mouseenter", () => selectArchiveEntry(entry));
+    entry.addEventListener("focus", () => selectArchiveEntry(entry));
+    entry.addEventListener("click", () => selectArchiveEntry(entry));
+  });
+  const initialArchiveEntry = archiveEntries.find((entry) => entry.classList.contains("is-active"));
+  if (initialArchiveEntry) activeProject = initialArchiveEntry.dataset.projectId || "";
 
+  /* Assistant launcher and conversation history */
   const assistantLauncher = document.getElementById("assistantLauncher");
   const assistantPanel = document.getElementById("assistantPanel");
   const assistantClose = document.getElementById("assistantClose");
@@ -1674,40 +263,33 @@
   const assistantInput = document.getElementById("assistantInput");
   const assistantMessages = document.getElementById("assistantMessages");
   const assistantSuggestions = document.getElementById("assistantSuggestions");
-  const assistantRoot = document.querySelector("[data-assistant-root]");
   const assistantHistory = [];
-  const assistantFallback =
-    "Maaf, assistant lagi bermasalah. Coba lagi sebentar atau hubungi Dion lewat email.";
+  const assistantFallback = "Maaf, assistant lagi bermasalah. Coba lagi sebentar atau hubungi Dion lewat email.";
   const assistantOutOfScopeSource =
     "I'm here to help you explore Dion's portfolio. Try asking about his background, projects, skills, or experience.";
   const assistantOutOfScope =
-    "Gue khusus bantu jelasin tentang Dion dan portfolio ini. Coba tanya soal background, project, skill, atau pengalaman dia.";
+    "Aku khusus membantu menjelaskan Dion dan portfolio ini. Coba tanya soal background, project, skill, atau pengalaman.";
   let activeSection = "hero";
-  let activeProject = "";
   let assistantBusy = false;
 
-  const addAssistantMessage = (content, role, extraClass = "") => {
+  function addAssistantMessage(content, role, extraClass) {
     if (!assistantMessages) return null;
     const message = document.createElement("div");
-    message.className =
-      `assistant-message assistant-message--${role} ${extraClass}`.trim();
+    message.className = ("assistant-message assistant-message--" + role + " " + (extraClass || "")).trim();
     message.textContent = content;
     assistantMessages.appendChild(message);
     assistantMessages.scrollTop = assistantMessages.scrollHeight;
     return message;
-  };
+  }
 
-  const resetAssistantConversation = () => {
+  function resetAssistantConversation() {
     assistantHistory.splice(0, assistantHistory.length);
     if (!assistantMessages) return;
-    assistantMessages.innerHTML = "";
-    addAssistantMessage(
-      "Tanya gue soal project, background, skill, atau pengalaman Dion.",
-      "assistant",
-    );
-  };
+    assistantMessages.replaceChildren();
+    addAssistantMessage("Tanya soal project, cerita, atau hal yang lagi Dion pelajari.", "assistant");
+  }
 
-  const closeAssistant = () => {
+  function closeAssistant() {
     if (!assistantPanel || !assistantLauncher) return;
     assistantPanel.classList.add("is-closing");
     assistantLauncher.setAttribute("aria-expanded", "false");
@@ -1716,21 +298,21 @@
     window.setTimeout(() => {
       assistantPanel.hidden = true;
       assistantPanel.classList.remove("is-closing");
-    }, 200);
-  };
+    }, reducedMotion ? 0 : 190);
+  }
 
-  const openAssistant = () => {
-    if (!assistantPanel || !assistantLauncher || activeProject) return;
+  function openAssistant() {
+    if (!assistantPanel || !assistantLauncher) return;
     assistantPanel.hidden = false;
     assistantLauncher.setAttribute("aria-expanded", "true");
     assistantInput?.focus();
-  };
+  }
 
-  const setAssistantBusy = (isBusy) => {
+  function setAssistantBusy(isBusy) {
     assistantBusy = isBusy;
     assistantInput?.toggleAttribute("disabled", isBusy);
     assistantForm?.querySelector("button")?.toggleAttribute("disabled", isBusy);
-  };
+  }
 
   assistantLauncher?.addEventListener("click", openAssistant);
   assistantClose?.addEventListener("click", closeAssistant);
@@ -1746,6 +328,7 @@
       assistantForm?.requestSubmit();
     }
   });
+
   assistantForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (!assistantInput || assistantBusy) return;
@@ -1754,13 +337,9 @@
     addAssistantMessage(message, "user");
     assistantInput.value = "";
     setAssistantBusy(true);
-    const thinking = addAssistantMessage(
-      "Lagi mikir…",
-      "assistant",
-      "is-thinking",
-    );
+    const thinking = addAssistantMessage("Lagi mikir…", "assistant", "is-thinking");
     try {
-      const apiResponse = await fetch("/api/portfolio-assistant", {
+      const response = await fetch("/api/portfolio-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -1770,72 +349,55 @@
           history: assistantHistory.slice(-6),
         }),
       });
-      const data = await apiResponse.json();
-      const providerAnswer =
-        data?.success && typeof data.answer === "string"
-          ? data.answer
-          : assistantFallback;
-      const answer =
-        providerAnswer === assistantOutOfScopeSource
-          ? assistantOutOfScope
-          : providerAnswer;
+      const data = await response.json();
+      const providerAnswer = response.ok && data?.success && typeof data.answer === "string"
+        ? data.answer
+        : assistantFallback;
+      const answer = providerAnswer === assistantOutOfScopeSource ? assistantOutOfScope : providerAnswer;
       thinking?.remove();
       addAssistantMessage(answer, "assistant");
       assistantHistory.push(
         { role: "user", content: message },
         { role: "assistant", content: answer.slice(0, 600) },
       );
-      if (assistantHistory.length > 6)
-        assistantHistory.splice(0, assistantHistory.length - 6);
+      if (assistantHistory.length > 6) assistantHistory.splice(0, assistantHistory.length - 6);
     } catch {
       thinking?.remove();
       addAssistantMessage(assistantFallback, "assistant");
     } finally {
       setAssistantBusy(false);
-      assistantInput.focus();
+      assistantInput?.focus();
     }
   });
+
   document.addEventListener("keydown", (event) => {
-    if (
-      event.key === "Escape" &&
-      assistantPanel &&
-      !assistantPanel.hidden &&
-      !activeProject
-    )
+    if (event.key === "Escape" && assistantPanel && !assistantPanel.hidden) {
       closeAssistant();
-  });
-  document.addEventListener("portfolio:project-open", (event) => {
-    activeProject = event.detail?.projectId || "";
-    assistantRoot?.setAttribute("aria-hidden", "true");
-    if (assistantPanel) assistantPanel.hidden = true;
-    resetAssistantConversation();
-  });
-  document.addEventListener("portfolio:project-close", () => {
-    activeProject = "";
-    assistantRoot?.removeAttribute("aria-hidden");
+    }
   });
 
   const contextSections = [
     [".hero", "hero"],
-    ["#work", "projects"],
-    [".process", "experience"],
-    ["#manufacturing", "manufacturing"],
-    ["#certifications", "certifications"],
+    ["#work", "selected work"],
+    ["#archive", "archive"],
+    ["#about", "about"],
+    ["#process", "how I build"],
+    ["#now", "now"],
     ["#contact", "contact"],
   ];
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
+
+  if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting)
-          activeSection = entry.target.dataset.assistantSection;
+        if (entry.isIntersecting) activeSection = entry.target.dataset.assistantSection;
       });
-    },
-    { threshold: 0.35 },
-  );
-  contextSections.forEach(([selector, name]) => {
-    const section = document.querySelector(selector);
-    if (!section) return;
-    section.dataset.assistantSection = name;
-    sectionObserver.observe(section);
-  });
+    }, { threshold: 0.32 });
+
+    contextSections.forEach(([selector, name]) => {
+      const section = document.querySelector(selector);
+      if (!section) return;
+      section.dataset.assistantSection = name;
+      sectionObserver.observe(section);
+    });
+  }
 })();

@@ -1,20 +1,21 @@
 "use strict";
 
-// This is the single source of portfolio knowledge sent to the model. Every
-// item below is represented by information already displayed in index.html.
+// Portfolio facts used by the assistant. Keep this aligned with the public page.
 module.exports = {
   profile: {
-    name: "Dion Pratama Syaputra",
-    role: "Software & AI Builder",
+    name: "Dion Pratama Syahputra",
+    role: "Creative Developer",
+    location: "Indonesia",
     origin: "Malang, Jawa Timur",
     currentLocation: "Cikarang, Jawa Barat",
     focus: [
-      "Web Development",
-      "Software Development",
+      "Websites",
+      "Interfaces",
+      "Digital experiences",
+      "Software development",
       "AI",
       "Data",
       "Automation",
-      "Product Experimentation",
     ],
   },
 
@@ -24,12 +25,7 @@ module.exports = {
       program: "Rekayasa Perangkat Lunak (RPL)",
       period: "Juli 2021 – Mei 2023",
       status: "Lulus",
-      focus: [
-        "Programming",
-        "Web Development",
-        "Databases",
-        "Software Fundamentals",
-      ],
+      focus: ["Programming", "Web development", "Databases", "Software fundamentals"],
     },
   ],
 
@@ -49,7 +45,7 @@ module.exports = {
         "Stamping & Screw Tightening",
       ],
       perspective:
-        "Pengalaman manufacturing memberi pemahaman tentang proses, quality, consistency, accuracy, dan operational challenges.",
+        "Pengalaman manufacturing memberi perspektif tentang proses, kualitas, konsistensi, akurasi, dan tantangan operasional.",
     },
   ],
 
@@ -66,45 +62,83 @@ module.exports = {
 
   working_style: [
     "Mulai dari ide atau rasa penasaran lalu mengeksplorasi kemungkinan.",
-    "Suka belajar melalui praktik langsung dan eksperimen.",
+    "Belajar melalui praktik langsung dan eksperimen.",
     "Menggunakan AI sebagai alat bantu untuk ideation, coding, debugging, dan eksplorasi.",
     "Lebih suka membangun sesuatu yang bisa diuji daripada berhenti di teori.",
-    "Terbiasa melakukan iterasi: mencoba, menemukan masalah, memperbaiki, lalu mengevaluasi.",
-    "Tertarik mencoba teknologi atau pendekatan baru ketika ada alasan praktis untuk menggunakannya.",
+    "Melakukan iterasi: mencoba, menemukan masalah, memperbaiki, lalu mengevaluasi.",
   ],
 
   projects: [
     {
-      id: "yonngpt",
-      name: "YonnGPT",
-      year: "2026",
-      category: "Personal Finance · AI Product",
+      id: "teamcut",
+      name: "TEAMcut",
+      status: "selected",
+      category: "Real client · Barbershop",
       description:
-        "Produk personal finance yang mengeksplorasi AI-assisted workflows, budgeting, dan cara yang lebih sederhana untuk memahami pengeluaran sehari-hari.",
+        "Presentasi mobile-only untuk pengalaman booking dan antrean barbershop. Screenshot memperlihatkan informasi antrean, pemilihan cabang dan hairstylist, layanan, serta form booking.",
+      capabilities: ["UI/UX", "Frontend", "Database", "Deployment"],
+      live_url: "https://teamcut.pages.dev/",
+    },
+    {
+      id: "dua-saudara",
+      name: "Dua Saudara",
+      status: "selected",
+      category: "Business website · Furniture",
+      description:
+        "Website bisnis furnitur yang menampilkan halaman beranda, produk, katalog, dan detail produk. Screenshot desktop tersedia sebagai tampilan utama.",
+      capabilities: ["Web design", "Frontend", "Content structure", "Deployment"],
+      live_url: "https://dua-saudara.pages.dev/",
+    },
+    {
+      id: "bagong-lapar",
+      name: "Bagong Lapar",
+      status: "selected",
+      category: "Real project · Outdoor",
+      description:
+        "Website penyewaan perlengkapan outdoor dengan screenshot desktop dan mobile. Keduanya ditampilkan sebagai bagian dari project.",
+      capabilities: ["Visual direction", "Web design", "Frontend", "Deployment"],
     },
     {
       id: "our-museum",
       name: "Our Museum",
-      year: "2026",
-      category: "Personal Web Experience",
-      description:
-        "Pengalaman web personal yang berfokus pada storytelling, visual presentation, dan cara yang lebih imersif untuk menjelajahi konten.",
+      status: "archive",
+      category: "Project archive",
     },
     {
-      id: "quranibot",
-      name: "QuraniBot",
-      year: "2023",
-      category: "WhatsApp Bot · NLP · Database",
-      description:
-        "Project chatbot WhatsApp yang menggabungkan NLP, database-backed responses, dan conversational interaction.",
+      id: "yonngpt",
+      name: "Yonn Assistant / YonnGPT",
+      status: "archive",
+      category: "AI assistant project",
     },
     {
       id: "yonn-apotek",
       name: "Yonn Apotek",
-      year: "2024",
-      category: "School Project · Laravel · MySQL",
-      description:
-        "Project sistem manajemen apotek yang berfokus pada pengembangan aplikasi dan workflow database.",
+      status: "archive",
+      category: "Project archive",
+    },
+    {
+      id: "quranibot",
+      name: "QuraniBotWithNLP",
+      status: "archive",
+      category: "Project archive",
+    },
+    {
+      id: "whatsapp-bot",
+      name: "Bot WhatsApp",
+      status: "archive",
+      category: "Project archive",
+    },
+    {
+      id: "multiuser-php-native",
+      name: "MultiUser PHP Native",
+      status: "archive",
+      category: "Project archive",
+    },
+    {
+      id: "text-to-speech",
+      name: "TextToSpeech",
+      status: "archive",
+      category: "Project archive",
     },
   ],
 
@@ -128,43 +162,22 @@ module.exports = {
   tools: ["VS Code", "GitHub", "XAMPP", "ChatGPT", "Claude"],
 
   certifications: [
-    {
-      name: "AI Fundamentals: Foundations for Understanding AI",
-      issuer: "IBM SkillsBuild",
-      year: "2026",
-    },
-    {
-      name: "AI Literacy",
-      issuer: "IBM SkillsBuild",
-      year: "2026",
-    },
-    {
-      name: "Data Fundamentals",
-      issuer: "IBM SkillsBuild",
-      year: "2026",
-    },
-    {
-      name: "Java Fundamentals",
-      issuer: "Oracle Academy",
-      year: "2024",
-    },
-    {
-      name: "Java Foundations",
-      issuer: "Oracle Academy",
-      year: "2024",
-    },
-    {
-      name: "Database Foundations",
-      issuer: "Oracle Academy",
-      year: "2024",
-    },
+    { name: "AI Fundamentals", issuer: "IBM SkillsBuild", year: "2026" },
+    { name: "AI Literacy", issuer: "IBM SkillsBuild", year: "2026" },
+    { name: "Data Fundamentals", issuer: "IBM SkillsBuild", year: "2026" },
+    { name: "Java Foundations", issuer: "Oracle Academy", year: "2024" },
+    { name: "Database Foundations", issuer: "Oracle Academy", year: "2024" },
+    { name: "Software Development & AI Internship", issuer: "UBIG", location: "Malang" },
   ],
 
   links: {
     email: "dionpratamaart@gmail.com",
+    whatsapp: "https://wa.me/6287773058338",
     github: "https://github.com/dionnsadboyy",
     linkedin: "https://www.linkedin.com/in/dionnnprtma",
-    portfolio: "https://yonnportof.vercel.app",
+    instagram: "https://instagram.com/dionnnprtma_",
     credly: "https://www.credly.com/users/dion-pratama/badges/credly",
+    teamcut: "https://teamcut.pages.dev/",
+    dua_saudara: "https://dua-saudara.pages.dev/",
   },
 };
