@@ -33,7 +33,7 @@ node scripts/render-pages.js
 node scripts/check.js
 ```
 
-Edit sumber di scripts/, lalu render ulang; jangan mengedit HTML hasil build secara terpisah. check.js memeriksa build deterministik, referensi lokal, metadata aset, sintaks, dan kontrak API tanpa memanggil provider.
+Edit sumber di scripts/, lalu render ulang; jangan mengedit HTML hasil build secara terpisah. Setelah mengubah CSS atau JavaScript, jalankan build juga untuk memperbarui versi aset dan mencegah cache kode lama. check.js memeriksa build deterministik, referensi lokal, metadata aset, sintaks, dan kontrak API tanpa memanggil provider.
 
 Pemeriksaan browser opsional: node scripts/check-browser.cjs saat server aktif dan Playwright tersedia. DION_QA_MODULES dapat menunjuk instalasi tooling, DION_BROWSER memilih Chromium, dan DION_PREVIEW_URL mengubah URL pengujian. Pengujian tidak menghasilkan folder laporan atau screenshot. Skenario error assistant hanya menguji kegagalan endpoint nyata; tidak menyediakan jawaban AI palsu.
 
@@ -51,4 +51,8 @@ Pemeriksaan browser opsional: node scripts/check-browser.cjs saat server aktif d
 
 Salin .env.example menjadi .env bila ingin mengaktifkan provider. Isi LLM_BASE_URL, LLM_API_KEY, dan LLM_MODEL dengan konfigurasi server yang benar, lalu restart development server. Secret tetap di environment/server dan diabaikan Git; jangan memasukkannya ke frontend.
 
-GET /api/portfolio-assistant memeriksa ketersediaan tanpa mengirim pesan. POST baru dilakukan sesudah interaksi pengguna. Tanpa credential, bantuan navigasi tetap berfungsi; jawaban provider live belum dapat diverifikasi. Static hosting saja tidak menjalankan API ini: hosting yang digunakan harus mendukung handler Node di api/. Tidak ada deployment yang dilakukan dalam konsolidasi ini.
+Konfigurasi lokal menggunakan KoboiLLM dengan model `openai/gpt-4.1-mini`. Key hanya disimpan di .env yang diabaikan Git; .env.example tetap tanpa key. Yon menjawab tentang Dion dan portfolio berdasarkan api/portfolio-context.js, termasuk sapaan serta pertanyaan lanjutan. Jawaban singkat dan histori terbatas menjaga penggunaan token. Request provider dibatasi 20 detik; kegagalan ditampilkan dengan opsi coba lagi.
+
+Pertanyaan calon klien soal sistem, fitur, jasa, harga, jadwal, dan kerja sama dipahami bersama histori, tanpa filter kata kunci yang memblokir pertanyaan sebelum sampai ke model. Yon dapat membantu memperjelas kebutuhan dan mengaitkannya dengan karya terverifikasi. Kemampuan menyelesaikan pesanan, penawaran harga, serta ketersediaan tetap perlu dikonfirmasi langsung ke Dion; Yon tidak menerima pesanan atau menjanjikan pengerjaan.
+
+GET /api/portfolio-assistant memeriksa ketersediaan konfigurasi tanpa mengirim pesan. POST baru dilakukan sesudah interaksi pengguna. Koneksi dan jawaban provider asli telah diuji secara lokal. Tanpa credential, bantuan navigasi tetap berfungsi. Static hosting saja tidak menjalankan API ini: hosting yang digunakan harus mendukung handler Node di api/. Tidak ada deployment yang dilakukan.

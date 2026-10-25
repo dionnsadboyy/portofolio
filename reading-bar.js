@@ -7,7 +7,7 @@
     if (!bar) return;
     const controller = new AbortController(), signal = controller.signal;
     const chapter = document.getElementById('readerChapter'), progress = bar.querySelector('.reading-bar__progress');
-    const sections = [...document.querySelectorAll('#main > section[id]')];
+    const sections = [...document.querySelectorAll('#main > section[id], #main [data-reader-section][id]')];
     const labels = {cover:'cover',hero:'cover',intro:'kenalan',profile:'kenalan',perspectives:'dua sisi',work:'potongan karya',about:'perjalanan',learning:'arsip belajar',tools:'tools',experience:'pengalaman produksi',teamcut:'TEAMcut','bagong-lapar':'Bagong Lapar',armature:'Armature Monitoring','jidan-quest':'Jidan Quest','project-index':'indeks proyek',certificates:'sertifikat',contact:'sampai ketemu'};
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     let context, buffers, preparing, lastSound = -1000;
@@ -70,13 +70,26 @@
     function update() {
       frame = 0;
       if (!alive || document.hidden) return;
+      const scrollingElement = document.scrollingElement || document.documentElement;
+      const extent = Math.max(0,scrollingElement.scrollHeight - scrollingElement.clientHeight);
+      const position = Math.max(0,scrollingElement.scrollTop);
+      const atEnd = extent > 0 && position >= extent - 2;
       let active = sections[0], index = 0;
       const edge = bar.getBoundingClientRect().bottom + 2;
-      sections.forEach((section,i) => {if (section.getBoundingClientRect().top <= edge) {active = section;index = i;}});
+      // Follow the visible reading area, not only the few pixels under the bar.
+      // Mobile fonts/layout can settle with an anchor heading lower in the viewport.
+      const readingLine = edge + Math.max(0,scrollingElement.clientHeight - edge) * .4 + 4;
+      const padding = parseFloat(getComputedStyle(scrollingElement).scrollPaddingTop) || 0;
+      sections.forEach((section,i) => {
+        const anchorOffset = (parseFloat(getComputedStyle(section).scrollMarginTop) || 0) + padding + 2;
+        if (position > 2 && section.getBoundingClientRect().top <= Math.max(readingLine,anchorOffset)) {active = section;index = i;}
+      });
+      // A short final section may never reach the sticky bar's edge.
+      if (atEnd && sections.length) {index = sections.length - 1;active = sections[index];}
       if (active && current !== active.id) {
         const previous = current; current = active.id;
         const register = active.querySelector('.mode-register > span')?.textContent.match(/^(\d+)\s*\//)?.[1];
-        chapter.textContent = (register || String(index).padStart(2,'0')) + ' / ' + (labels[active.id] || 'cerita');
+        chapter.textContent = (active.dataset.readerNumber || register || String(index).padStart(2,'0')) + ' / ' + (active.dataset.readerLabel || labels[active.id] || 'cerita');
         chapter.href = '#' + active.id;
         if (previous) sound('swipe');
       }
@@ -91,14 +104,15 @@
         bar.style.setProperty('--reader-accent',dark ? '#CEB9E9' : '#7850a7');
         bar.style.setProperty('--reader-line',dark ? '#CEB9E940' : '#30233926');
       }
-      const extent = document.documentElement.scrollHeight - innerHeight;
-      const value = extent > 0 ? Math.max(0,Math.min(1,scrollY / extent)) : 0;
+      const value = extent > 0 ? atEnd ? 1 : Math.min(1,position / extent) : 0;
       progress.style.transform = `scaleX(${value})`;
       bar.dataset.progress = value.toFixed(3);
       bar.dataset.chapter = active?.id || 'welcome';
     }
     function schedule() {if (!frame && alive) frame = requestAnimationFrame(update);}
     addEventListener('scroll',schedule,{passive:true,signal});
+    // Capture document scroll as well: root-scroll dispatch differs between engines.
+    document.addEventListener('scroll',schedule,{capture:true,passive:true,signal});
     addEventListener('resize',schedule,{passive:true,signal});
     addEventListener('hashchange',schedule,{signal});
     document.addEventListener('visibilitychange',() => {

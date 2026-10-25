@@ -6,6 +6,7 @@
 .theme-manufacturing.mode-story{--mode-paper:#25232B;--mode-ink:#F4EADD;--mode-muted:#c9c1cf;--mode-line:#70617e;color-scheme:dark}
 .theme-developer.mode-story{color-scheme:light;--mode-purple:#76518f;--muted:#746078}
 .mode-story .site-header{background:var(--mode-paper);border-color:var(--mode-line)}
+.mode-story #main{overflow-x:clip}
 .mode-story .header-inner{min-height:78px}
 .mode-story .brand{font-family:Georgia,serif}
 .mode-story .perspective-nav a{font-size:11px}

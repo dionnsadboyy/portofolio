@@ -9,16 +9,16 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/assets/mode-scenes/fonts/Outfit-Bold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preload" href="/assets/mode-scenes/hero.webp" as="image" fetchpriority="high">
-<link rel="stylesheet" href="/welcome.css">
-<link rel="stylesheet" href="/reading-bar.css">
-<script src="/reading-bar.js" defer>
+<link rel="stylesheet" href="/welcome.css?v=d4e1df1038">
+<link rel="stylesheet" href="/reading-bar.css?v=16471d795d">
+<script src="/reading-bar.js?v=37162015ae" defer>
 </script>
-<link rel="stylesheet" href="/assistant.css">
-<script src="/assistant.js" defer>
+<link rel="stylesheet" href="/assistant.css?v=dd69f18e50">
+<script src="/assistant.js?v=b9419574a3" defer>
 </script>
-<script src="/perspectives.js" defer>
+<script src="/perspectives.js?v=fc2d5c4777" defer>
 </script>
-<script src="/welcome.js" defer>
+<script src="/welcome.js?v=d6e135be3c" defer>
 </script>
 </head>
 <body class="theme-welcome">
@@ -37,13 +37,13 @@
 </span>
 </nav>
 <main id="main">
-<div class="welcome-intro">
+<div class="welcome-intro" id="welcomeIntro" data-reader-section data-reader-number="00" data-reader-label="welcome">
 <h1>
 <span>mau kenal gue</span> <span>dari sisi mana?</span>
 </h1>
 <p>satu orang, beberapa cerita.</p>
 </div>
-<nav class="welcome-spread" id="perspectives" aria-label="Pilih perspektif portfolio">
+<nav class="welcome-spread" id="perspectives" data-reader-section data-reader-number="01" data-reader-label="pilih perspektif" aria-label="Pilih perspektif portfolio">
 <div class="welcome-panel welcome-developer" data-welcome-enter="left">
 <a class="welcome-choice" href="/developer/" data-perspective="developer" aria-labelledby="welcomeDeveloper welcomeDeveloperCta" aria-describedby="welcomeDeveloperCopy">
 <span class="welcome-register" aria-hidden="true">01 / ide jadi karya</span>
@@ -94,16 +94,16 @@
 </a>
 </div>
 </nav>
-<details class="welcome-help" id="yonHelp">
+<details class="welcome-help" id="yonHelp" data-reader-section data-reader-number="02" data-reader-label="tanya Yon">
 <summary id="yonOpen" data-assistant-open>belum tahu mulai dari mana? <span>tanya Yon Assistant. <span aria-hidden="true">↗</span>
 </span>
 </summary>
 <div class="welcome-help-content">
 <p>chat AI belum tersedia tanpa JavaScript. Pilih tujuan untuk kenalan sama Dion.</p>
 <nav class="welcome-quick-links" aria-label="Bantuan navigasi">
-<a href="/developer/#work" data-perspective="developer">lihat karya ?</a>
-<a href="/manufacturing/#experience" data-perspective="manufacturing">pengalaman manufaktur ?</a>
-<a href="/?view=both#contact" data-perspective="both">hubungi Dion ?</a>
+<a href="/developer/#work" data-perspective="developer">lihat karya ↗</a>
+<a href="/manufacturing/#experience" data-perspective="manufacturing">pengalaman manufaktur ↗</a>
+<a href="/?view=both#contact" data-perspective="both">hubungi Dion ↗</a>
 </nav>
 </div>
 </details>

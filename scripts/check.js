@@ -32,7 +32,21 @@ async function main(){
   assert.equal((await request('POST',{message:''})).code,400);
   assert.equal((await request('POST',{message:'Dion',history:[{role:'system',content:'invalid'}]})).code,400);
   assert.equal((await request('PUT')).code,405);assert.equal(providerCalls,0);
+  // Valid conversation turns must reach the backend, including client inquiries
+  // with no portfolio keywords. Scope is interpreted by the model with history.
+  assert.equal((await request('POST',{message:'Halo Yon!'})).code,503);
+  assert.equal((await request('POST',{message:'Siapa kamu?'})).code,503);
+  assert.equal((await request('POST',{message:'Berapa lama?',history:[{role:'user',content:'Pengalaman Dion di Denso'}]})).code,503);
+  assert.equal((await request('POST',{message:'Berapa lama?'})).code,503);
+  for(const message of [
+   'gua mau bkin sistem order realtime, bisa ga dia kira"?',
+   'gua mau bkin sistem order realtime, bisa ga dia kira"? gua mau joki ke dia?',
+   'berapa duit?',
+   'bisa kelar kapan?',
+   'Can I hire him to make a live ordering system?',
+  ])assert.equal((await request('POST',{message})).code,503,`Client inquiry must not be keyword-blocked: ${message}`);
+  assert.equal(providerCalls,0);
  }finally{global.fetch=previous;for(const key of keys)if(env[key]===undefined)delete process.env[key];else process.env[key]=env[key];}
- console.log(`PASS: four deterministic pages, ${references.size} local references, dynamic audio, asset metadata, JavaScript syntax and five API contracts. No provider request sent.`);
+ console.log(`PASS: four deterministic pages, ${references.size} local references, dynamic audio, asset metadata, JavaScript syntax and fourteen API contracts. No provider request sent.`);
 }
 main().catch(error=>{console.error(error.message);process.exitCode=1;});

@@ -2,7 +2,12 @@
 // Authoring helpers only. The delivered pages are ordinary static HTML.
 const fs = require('node:fs');
 const path = require('node:path');
+const {createHash} = require('node:crypto');
 const root = path.resolve(__dirname, '..');
+const readingAssets = () => ['reading-bar.css','reading-bar.js'].map(file => {
+  const version = createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex').slice(0,10);
+  return file.endsWith('.css') ? `<link rel="stylesheet" href="/${file}?v=${version}">` : `<script src="/${file}?v=${version}" defer></script>`;
+}).join('');
 const fonts = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">';
 const perspectives = [{ id: 'both', label: 'Both Worlds', href: '/?view=both' }, { id: 'manufacturing', label: 'Manufacturing', href: '/manufacturing/' }, { id: 'developer', label: 'Web Developer', href: '/developer/' }];
 const switcher = active => `<nav class="perspective-nav" aria-label="Pilih perspektif">${perspectives.map(p => `<a href="${p.href}" data-perspective="${p.id}"${p.id === active ? ' aria-current="page"' : ''}>${p.label}</a>`).join('')}</nav>`;
@@ -11,6 +16,15 @@ const reader = active => `<nav class="reading-bar" data-reading-bar aria-label="
 const footer = () => `<footer class="site-footer wrap"><div class="footer-top"><div><a class="brand" href="/?view=both" aria-label="Dion, Both Worlds">D<span>/</span>P</a><p class="footer-name">Dion Pratama Syahputra</p><span class="eyebrow muted">Ketelitian bertemu kreativitas.</span></div><nav class="footer-perspectives" aria-label="Perspektif lainnya">${perspectives.map(p => `<a href="${p.href}" data-perspective="${p.id}">${p.label} ↗</a>`).join('')}</nav></div><div class="footer-bottom"><span>© <span data-year id="year">2026</span> Dion Pratama Syahputra · Indonesia</span><a href="#top">Kembali ke atas ↑</a></div></footer>`;
 const contact = (title = 'Ada hal baik<br>yang bisa <em>kita mulai?</em>', copy = 'Untuk peluang kerja, pengembangan website, atau bertukar ide. Mari mulai dari percakapan yang sederhana.') => `<section class="contact-band" id="contact"><div class="wrap contact-layout"><div><span class="eyebrow">Selanjutnya / Mari terhubung</span><h2 id="contactTitle">${title}</h2><p>${copy}</p></div><div class="contact-links"><a class="button button-light" href="mailto:dionpratamaart@gmail.com">Email Dion <span aria-hidden="true">↗</span></a><a href="mailto:dionpratamaart@gmail.com">dionpratamaart@gmail.com</a><a href="https://www.linkedin.com/in/dionnnprtma" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://github.com/dionnsadboyy" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></section>`;
 const assistant = () => fs.readFileSync(path.join(__dirname, 'assistant-markup.html'), 'utf8');
-const page = ({ active, title, description, links, content, extra = '', assistantEnabled = false, headExtra = '', footerMarkup = footer() }) => `<!doctype html>\n<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="${active === 'manufacturing' ? '#25232b' : active === 'developer' ? '#6d28d9' : '#f3eafc'}"><meta name="description" content="${description}"><title>${title}</title><script src="/perspectives.js"></script>${fonts}<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/perspectives.css"><link rel="stylesheet" href="/reading-bar.css"><script src="/reading-bar.js" defer></script>${assistantEnabled ? '<link rel="stylesheet" href="/assistant.css">' : ''}${headExtra}${assistantEnabled ? '<script src="/script.js" defer></script><script src="/assistant.js" defer></script>' : ''}</head><body class="theme-${active}">${header(active)}${reader(active)}<main id="main" tabindex="-1">${content}</main>${footerMarkup}${extra}${assistantEnabled ? assistant() : ''}</body></html>\n`;
-const write = (file, html) => { const dest = path.join(root, file); fs.mkdirSync(path.dirname(dest), { recursive: true }); fs.writeFileSync(dest, html.replaceAll('><', '>\n<')); };
-module.exports = { page, write, contact, root, assistant, reader };
+const page = ({ active, title, description, links, content, extra = '', assistantEnabled = false, headExtra = '', footerMarkup = footer() }) => `<!doctype html>\n<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="${active === 'manufacturing' ? '#25232b' : active === 'developer' ? '#6d28d9' : '#f3eafc'}"><meta name="description" content="${description}"><title>${title}</title><script src="/perspectives.js"></script>${fonts}<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/perspectives.css">${readingAssets()}${assistantEnabled ? '<link rel="stylesheet" href="/assistant.css">' : ''}${headExtra}${assistantEnabled ? '<script src="/script.js" defer></script><script src="/assistant.js" defer></script>' : ''}</head><body class="theme-${active}">${header(active)}${reader(active)}<main id="main" tabindex="-1">${content}</main>${footerMarkup}${extra}${assistantEnabled ? assistant() : ''}</body></html>\n`;
+const write = (file, html) => {
+  const dest = path.join(root,file);
+  // Keep every mode's CSS/controller in sync with its generated HTML, including cached visits.
+  const versioned = html.replace(/\b(src|href)="\/([^"?#]+\.(?:css|js))(?:\?[^"#]*)?"/g,(match,attribute,asset) => {
+    const version = createHash('sha256').update(fs.readFileSync(path.join(root,asset))).digest('hex').slice(0,10);
+    return `${attribute}="/${asset}?v=${version}"`;
+  });
+  fs.mkdirSync(path.dirname(dest),{recursive:true});
+  fs.writeFileSync(dest,versioned.replaceAll('><', '>\n<'));
+};
+module.exports = { page, write, contact, root, assistant, reader, readingAssets };
