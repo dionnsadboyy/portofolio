@@ -1,0 +1,73 @@
+@font-face{font-family:'Yon Outfit';src:url('/assets/mode-scenes/fonts/Outfit-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Yon Outfit';src:url('/assets/mode-scenes/fonts/Outfit-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Yon Caveat';src:url('/assets/mode-scenes/fonts/Caveat-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+.portfolio-assistant{--yon-cream:#F4EADD;--yon-lilac:#CEB9E9;--yon-ink:#302339;--yon-purple:#9175BE;--yon-muted:#69586f;--yon-line:#30233930;--yon-edge:max(22px,env(safe-area-inset-right));display:none;position:fixed;z-index:70;right:var(--yon-edge);bottom:max(52px,env(safe-area-inset-bottom));font:400 16px/1.55 'Yon Outfit',Arial,sans-serif;color:var(--yon-ink);color-scheme:light;text-align:left;letter-spacing:normal;-webkit-font-smoothing:antialiased}
+.js-assistant-ready .portfolio-assistant{display:block}
+.portfolio-assistant *,.portfolio-assistant *::before,.portfolio-assistant *::after{box-sizing:border-box}
+.portfolio-assistant [hidden]{display:none!important}
+.portfolio-assistant :is(h2,h3,p){margin:0}
+.portfolio-assistant :is(button,textarea,a){font:inherit;letter-spacing:normal}
+.portfolio-assistant button{cursor:pointer;touch-action:manipulation}
+.portfolio-assistant button:disabled{cursor:wait}
+.portfolio-assistant a{color:inherit;text-decoration:none}
+.portfolio-assistant :focus-visible{outline:2px solid var(--yon-ink);outline-offset:4px}
+.portfolio-assistant svg{display:block;width:24px;height:24px;flex:none;pointer-events:none}
+.portfolio-assistant .assistant-launcher{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;min-width:150px;min-height:50px;width:auto;height:auto;padding:11px 20px;border:1px solid var(--yon-ink);border-radius:40px;background:var(--yon-ink);color:var(--yon-cream);font-size:16px;font-weight:400;line-height:1.4;isolation:isolate;box-shadow:0 5px 0 -1px #f4eadd,0 7px 0 -1px #d9cbbb,0 11px 17px #30233920;transition:transform 180ms ease,box-shadow 180ms ease;animation:none}
+.portfolio-assistant .assistant-launcher::before,.portfolio-assistant .assistant-launcher::after{display:none}
+.portfolio-assistant .assistant-launcher span{font-size:inherit}
+.portfolio-assistant .assistant-launcher:focus-visible{outline-color:var(--yon-cream);box-shadow:0 0 0 6px var(--yon-ink),0 8px 0 1px var(--yon-cream)}
+.portfolio-assistant[data-open] .assistant-launcher{visibility:hidden}
+.assistant-curiosity{position:absolute;right:28px;bottom:65px;white-space:nowrap;font:25px/1 'Yon Caveat',cursive;rotate:-9deg;background:var(--yon-cream);padding:4px 9px;color:var(--yon-ink);border-radius:4px;pointer-events:none}
+.assistant-curiosity span{display:inline-block;rotate:12deg;margin-left:3px}
+.portfolio-assistant .assistant-panel{position:fixed;inset:auto var(--yon-edge) max(24px,env(safe-area-inset-bottom)) auto;margin:0;width:min(410px,calc(100% - 44px));max-width:none;height:min(660px,calc(100dvh - 48px));max-height:calc(var(--yon-vh,100dvh) - 32px);padding:0;border:1px solid #30233915;border-radius:22px;background:var(--yon-cream);color:var(--yon-ink);box-shadow:0 14px 45px #30233924,0 2px 8px #30233912;overflow:hidden;overscroll-behavior:contain;transform-origin:bottom right}
+.portfolio-assistant .assistant-panel:not([open]){display:none}
+.assistant-panel::backdrop{background:transparent}
+.assistant-panel::after{content:'';position:absolute;top:0;right:0;width:26px;height:26px;background:#e5d8c8;clip-path:polygon(0 0,100% 100%,0 100%);border-bottom-left-radius:4px;filter:drop-shadow(-2px 3px 2px #30233920);pointer-events:none}
+.assistant-shell{display:flex;flex-direction:column;height:100%;min-height:0;padding:17px 24px 18px}
+.assistant-panel__head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex:none;min-height:52px;padding-bottom:10px;border-bottom:1px solid var(--yon-line)}
+.portfolio-assistant .assistant-panel__head h2{font:700 11px/1.5 'Yon Outfit',sans-serif;letter-spacing:.24em;color:var(--yon-muted)}
+.portfolio-assistant .assistant-close{display:grid;place-items:center;background:transparent;color:var(--yon-ink);border:0;border-radius:50%;padding:10px;width:44px;height:44px;flex:none}
+.assistant-close:hover{background:#30233908}
+.assistant-messages{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#9175be70 transparent;scroll-padding:18px;padding:25px 2px 16px;overflow-wrap:anywhere}
+.assistant-messages:focus-visible{outline-offset:-2px;border-radius:4px}
+.assistant-intro{position:relative}
+.portfolio-assistant .assistant-intro h3{font:700 clamp(34px,4vw,42px)/1.04 'Yon Outfit',sans-serif;letter-spacing:-.05em;max-width:15ch}
+.portfolio-assistant .assistant-intro>p{font-size:16px;line-height:1.6;color:var(--yon-muted);max-width:31ch;margin-top:20px}
+.assistant-handnote{display:block;text-align:right;font:25px/1 'Yon Caveat',cursive;color:#795795;rotate:-9deg;position:relative;margin:8px 6px 13px 0}
+.assistant-handnote::after{content:'';position:absolute;right:0;bottom:-5px;width:53px;height:5px;border-top:1px solid #9175be;border-radius:50%;rotate:-6deg}
+.assistant-suggestions{display:flex;flex-direction:column;margin-top:19px}
+.assistant-suggestions a{display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:65px;border-bottom:1px solid var(--yon-line);padding:16px 0;font-size:15px;line-height:1.4;font-weight:700;transition:padding 180ms ease}
+.assistant-suggestions a:last-child{border-bottom:0}
+.assistant-suggestions a>span{font-size:23px;font-weight:400;flex:none}
+.assistant-thread{display:flex;flex-direction:column;gap:20px}
+.assistant-thread:empty{display:none}
+.portfolio-assistant .assistant-message{font:400 15px/1.6 'Yon Outfit',sans-serif;color:var(--yon-ink);white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal;min-width:0;max-width:100%}
+.assistant-message-label{display:block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--yon-muted);margin-bottom:5px}
+.portfolio-assistant .assistant-message--user{padding:12px 15px;background:#CEB9E978;border-radius:14px 14px 3px 14px;margin:0 0 12px 22px}
+.portfolio-assistant .assistant-message--assistant{padding:0 4px}
+.assistant-message a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.assistant-message a:hover{color:#76568f}
+.assistant-turn{min-width:0}
+.assistant-error{padding:11px 12px;border-left:2px solid var(--yon-purple);background:#30233905;font-size:14px;line-height:1.5}
+.assistant-error button,.assistant-notice button{border:0;border-bottom:1px solid currentColor;background:none;color:var(--yon-ink);padding:8px 0;min-height:44px;display:inline-block;font-size:13px}
+.assistant-bottom{position:relative;flex:none;padding-top:6px}
+.assistant-notice{font-size:12px;line-height:1.5;color:var(--yon-muted);margin-bottom:10px}
+.assistant-notice:has(p:empty):not(:has(button:not([hidden]))){display:none}
+.assistant-local-links{display:flex;flex-wrap:wrap;gap:0 17px;margin-block:0 8px}
+.assistant-local-links a{font-size:12px;min-height:44px;display:flex;align-items:center;text-decoration:underline;text-underline-offset:4px}
+.assistant-composer{display:flex;gap:8px;align-items:flex-end;padding:8px;background:#CEB9E980;border-radius:17px}
+.portfolio-assistant .assistant-composer textarea{display:block;width:100%;min-width:0;min-height:44px;max-height:112px;resize:none;overflow-y:auto;background:transparent;border:0;border-radius:6px;color:var(--yon-ink);font-size:16px;line-height:24px;padding:10px 8px;box-shadow:none}
+.assistant-composer textarea::placeholder{color:#69586f;opacity:1}
+.assistant-composer textarea:focus-visible{outline-offset:0}
+.portfolio-assistant .assistant-composer button{display:grid;place-items:center;flex:none;width:44px;min-height:44px;border-radius:50%;border:0;background:var(--yon-ink);color:var(--yon-cream)}
+.assistant-composer button:disabled{opacity:.5}
+.portfolio-assistant .assistant-footnote{font-size:10px;letter-spacing:.09em;line-height:1.5;color:var(--yon-muted);margin-top:12px}
+.assistant-latest{position:absolute;right:5px;bottom:calc(100% + 8px);min-height:44px;padding:7px 15px;border:1px solid var(--yon-line);border-radius:30px;background:var(--yon-cream);color:var(--yon-ink);font-size:12px!important;box-shadow:0 3px 12px #30233912}
+.assistant-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.assistant-panel[data-conversation] .assistant-intro{display:none}
+.assistant-panel[data-conversation] .assistant-messages{padding-top:20px}
+.assistant-panel[data-conversation] .assistant-notice{margin-bottom:9px}
+@media(hover:hover){.portfolio-assistant .assistant-launcher:hover{transform:translateY(-3px);box-shadow:0 5px 0 -1px #f4eadd,0 7px 0 -1px #d9cbbb,0 15px 20px #30233920}.assistant-suggestions a:hover{padding-left:5px}.assistant-composer button:not(:disabled):hover{background:#503d5d}}
+@media(max-width:600px){.portfolio-assistant{--yon-edge:max(14px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom))}.portfolio-assistant .assistant-launcher{font-size:15px;padding:10px 17px;min-height:48px;min-width:143px}.portfolio-assistant .assistant-panel{width:calc(100% - 28px);right:14px;bottom:calc(var(--yon-keyboard,0px) + max(14px,env(safe-area-inset-bottom)));height:min(660px,calc(var(--yon-vh,100dvh) - 28px));max-height:calc(var(--yon-vh,100dvh) - 28px);border-radius:20px}.assistant-shell{padding:12px 20px 16px}.assistant-messages{padding-top:23px}.portfolio-assistant .assistant-intro h3{font-size:clamp(32px,10vw,39px)}.assistant-suggestions a{font-size:15px;min-height:62px}.assistant-panel__head{min-height:48px}.assistant-curiosity{right:17px;bottom:64px}}
+@media(max-height:540px){.assistant-shell{padding-block:7px 10px}.assistant-messages{padding-top:15px}.assistant-panel__head{min-height:44px;padding-bottom:2px}.portfolio-assistant .assistant-intro h3{font-size:31px}.assistant-handnote{display:none}.assistant-intro>p{margin-top:12px!important}.assistant-suggestions{margin-top:8px}.assistant-suggestions a{min-height:48px;padding-block:12px}.portfolio-assistant .assistant-footnote{margin-top:7px}}
+@media(prefers-reduced-motion:reduce){.portfolio-assistant *{animation:none!important;transition:none!important;scroll-behavior:auto!important}.portfolio-assistant .assistant-launcher:hover{transform:none}}

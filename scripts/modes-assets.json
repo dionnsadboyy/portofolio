@@ -1,0 +1,92 @@
+[
+  {
+    "file": "/assets/mode-scenes/hero.webp",
+    "width": 773,
+    "height": 1049
+  },
+  {
+    "file": "/assets/mode-scenes/seated.webp",
+    "width": 800,
+    "height": 1207
+  },
+  {
+    "file": "/assets/mode-scenes/armature-dashboard.webp",
+    "width": 1258,
+    "height": 2048
+  },
+  {
+    "file": "/assets/mode-scenes/armature-request.webp",
+    "width": 1303,
+    "height": 318
+  },
+  {
+    "file": "/assets/mode-scenes/armature-sketch.webp",
+    "width": 400,
+    "height": 110
+  },
+  {
+    "file": "/assets/mode-scenes/logo-vscode.webp",
+    "width": 186,
+    "height": 162
+  },
+  {
+    "file": "/assets/mode-scenes/logo-html.webp",
+    "width": 179,
+    "height": 182
+  },
+  {
+    "file": "/assets/mode-scenes/logo-css.webp",
+    "width": 178,
+    "height": 171
+  },
+  {
+    "file": "/assets/mode-scenes/logo-javascript.webp",
+    "width": 169,
+    "height": 161
+  },
+  {
+    "file": "/assets/mode-scenes/logo-node.webp",
+    "width": 178,
+    "height": 169
+  },
+  {
+    "file": "/assets/mode-scenes/logo-supabase.webp",
+    "width": 173,
+    "height": 149
+  },
+  {
+    "file": "/assets/mode-scenes/logo-mysql.webp",
+    "width": 220,
+    "height": 145
+  },
+  {
+    "file": "/assets/mode-scenes/logo-cloudflare.webp",
+    "width": 220,
+    "height": 146
+  },
+  {
+    "file": "/assets/mode-scenes/logo-github.webp",
+    "width": 172,
+    "height": 163
+  },
+  {
+    "file": "/assets/mode-scenes/logo-chatgpt.webp",
+    "width": 181,
+    "height": 176
+  },
+  {
+    "file": "/assets/mode-scenes/logo-codex.webp",
+    "width": 189,
+    "height": 187
+  },
+  {
+    "file": "/assets/mode-scenes/jidan-student.webp",
+    "width": 454,
+    "height": 833
+  },
+  {
+    "file": "/assets/mode-scenes/jidan-admin.webp",
+    "width": 338,
+    "height": 677
+  }
+]

@@ -2,9 +2,15 @@
 
 // Portfolio facts used by the assistant. Keep this aligned with the public page.
 module.exports = {
+  portfolio_navigation: [
+    {name:"Developer",url:"/developer/",purpose:"Ide, kode, tools, dan karya yang bisa dipakai. Empat showcase: TEAMcut, Bagong Lapar, Armature Monitoring, Jidan Quest."},
+    {name:"Both Worlds",url:"/?view=both",purpose:"Dua sisi, satu cerita. Pengenalan Dion, pengalaman produksi, karya digital, perjalanan, dan kontak."},
+    {name:"Manufacturing",url:"/manufacturing/",purpose:"Pengalaman di lantai produksi, material/kanban, proses perakitan, pencatatan harian, dan prototipe personal Armature Monitoring."},
+  ],
+  developer_perspective_tools: ["VS Code", "HTML", "CSS", "JavaScript", "Node.js", "Supabase", "MySQL", "Cloudflare", "GitHub", "ChatGPT", "Codex"],
   profile: {
     name: "Dion Pratama Syahputra",
-    role: "Creative Developer",
+    role: "Operator Produksi / Web Developer",
     location: "Indonesia",
     origin: "Malang, Jawa Timur",
     currentLocation: "Cikarang, Jawa Barat",
@@ -23,7 +29,7 @@ module.exports = {
     {
       school: "SMKN 8 Malang",
       program: "Rekayasa Perangkat Lunak (RPL)",
-      period: "Juli 2021 – Mei 2023",
+      period: "2021 – 2024",
       status: "Lulus",
       focus: ["Programming", "Web development", "Databases", "Software fundamentals"],
     },
@@ -33,13 +39,16 @@ module.exports = {
     {
       company: "PT Denso Manufacturing Indonesia",
       role: "Production Operator",
-      period: "Juli 2024 – sekarang",
+      period: "2 Juli 2024 – sekarang (sesuai CV V4, 22 Oktober 2026; verifikasi ulang sebelum publikasi)",
       location: "Cikarang Barat, Jawa Barat",
       area: "Manufacturing",
       work: [
         "Material flow",
+        "Blower Motor Assy",
         "Production-line processes",
         "Mizusumashi",
+        "Kanban dan koordinasi suplai material",
+        "Manual stamping press untuk yoke/stator",
         "Armature Bearing Press",
         "Holder Press & Tokusei",
         "Stamping & Screw Tightening",
@@ -53,7 +62,7 @@ module.exports = {
     {
       organization: "PT Universal Big Data (UBIG)",
       role: "Software Development & AI Intern",
-      period: "Februari 2023 – Mei 2023",
+      period: "Januari 2023 – Mei 2023",
       location: "Malang, Jawa Timur",
       type: "PKL / vocational school internship",
       skills: ["Python", "Natural Language Processing (NLP)"],
@@ -70,10 +79,22 @@ module.exports = {
 
   projects: [
     {
+      id: "jidan-quest",
+      name: "Jidan Quest",
+      status: "Proyek personal; tampilan mockup, bukan data belajar live",
+      description: "Jalur belajar yang Dion buat untuk adiknya: materi per bab, checkpoint, dan progres yang dapat didampingi dari jauh. Desain memiliki tampilan student dan admin. URL aplikasi belum tersedia di sumber portfolio.",
+    },
+    {
+      id: "armature-monitoring",
+      name: "Armature Monitoring",
+      status: "Prototipe pribadi / studi kasus portofolio",
+      description: "Terinspirasi kebutuhan informasi material selama tugas BOP/Mizusumashi. Dion merancang pemantauan material, status mesin, formulir permintaan, tampilan berdasarkan peran, dan riwayat status pending, ongoing, done. Tidak terhubung ke data produksi, belum menjadi sistem resmi perusahaan. Tidak ada bukti adopsi atau efisiensi terukur.",
+    },
+    {
       id: "teamcut",
       name: "TEAMcut",
       status: "selected",
-      category: "Real client · Barbershop",
+      category: "Website barbershop; tidak mengklaim proyek berbayar",
       description:
         "Presentasi mobile-only untuk pengalaman booking dan antrean barbershop. Screenshot memperlihatkan informasi antrean, pemilihan cabang dan hairstylist, layanan, serta form booking.",
       capabilities: ["UI/UX", "Frontend", "Database", "Deployment"],
@@ -93,7 +114,7 @@ module.exports = {
       id: "bagong-lapar",
       name: "Bagong Lapar",
       status: "selected",
-      category: "Real project · Outdoor",
+      category: "Proyek personal · katalog sewa perlengkapan outdoor",
       description:
         "Website penyewaan perlengkapan outdoor dengan screenshot desktop dan mobile. Keduanya ditampilkan sebagai bagian dari project.",
       capabilities: ["Visual direction", "Web design", "Frontend", "Deployment"],
@@ -172,7 +193,6 @@ module.exports = {
 
   links: {
     email: "dionpratamaart@gmail.com",
-    whatsapp: "https://wa.me/6287773058338",
     github: "https://github.com/dionnsadboyy",
     linkedin: "https://www.linkedin.com/in/dionnnprtma",
     instagram: "https://instagram.com/dionnnprtma_",

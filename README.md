@@ -1,49 +1,54 @@
-# Dion Pratama Syahputra — Creative Developer
+# Portfolio Dion Pratama Syahputra
 
-Personal portfolio built with vanilla HTML, CSS, and JavaScript. The page keeps its editorial typography, paper grain, portrait, and motion, with lavender as the dominant base and cream as the foreground material.
+Satu project vanilla HTML, CSS, JavaScript dan API Node.js untuk Both Worlds, Developer, Manufacturing, welcome, serta Yon Assistant. Semua perspektif memakai satu development server.
 
-## Page structure
+## Install dan jalankan
 
-1. Hero
-2. Selected work: TEAMcut, Dua Saudara, Bagong Lapar
-3. Archive
-4. Who I am
-5. How I build
-6. Now
-7. Contact
+Gunakan Node.js 20 atau lebih baru. Website dan build tidak memerlukan npm install atau dependency runtime tambahan.
 
-Project screenshots are real assets in the assets folder and appear directly in Selected Work. TEAMcut uses mobile screenshots only. Dua Saudara is led by desktop captures. Bagong Lapar includes selected desktop and mobile views. Archive uses an editorial list; available screenshots update the preview on hover, focus, or tap. See assets/README.txt for the original showcase guidance.
+Dari folder project, jalankan:
 
-## Files
+```powershell
+node scripts/dev-server.js
+```
 
-- index.html — page structure, project stories, links, and assistant UI
-- style.css — design tokens, responsive layouts, editorial project presentations, reduced-motion styles, and assistant styling
-- script.js — hero text/image reveal, scroll reveal and drift, Archive preview interaction, navigation, and assistant conversation behavior
-- api/portfolio-assistant.js — serverless assistant endpoint
-- api/portfolio-context.js — portfolio facts supplied to the assistant
-- .env.example — required assistant provider settings
+Buka http://localhost:3000. PORT dan HOST dapat diatur melalui environment; port default 3000. Jangan menjalankan salinan dev server lain pada port yang sama.
 
-## Run locally
+## Route
 
-Run `node scripts/dev-server.js` from this folder, then open http://localhost:3000. This built-in Node server serves the page and routes `/api/portfolio-assistant` to the existing endpoint, loading local settings from `.env`. A static server such as VS Code Live Server can preview the page, but it cannot run the assistant API and will return 405 for its POST request. For deployment, use a serverless runtime that exposes files under `api/` as routes.
+- `/`: welcome pada kunjungan pertama, lalu perspektif terakhir yang dipilih.
+- `/welcome/`: selalu membuka pemilih perspektif.
+- `/?view=both`: Both Worlds.
+- `/developer/` dan `/manufacturing/`: perspektif masing-masing.
+- Direct link dan anchor lama tetap tersedia. Pergantian perspektif memakai kapsul pilihan di bagian atas. Welcome tetap tersedia melalui /welcome/.
 
-## Assistant configuration
+Pilihan terakhir disimpan di localStorage. Histori dan draft Yon disimpan per tab melalui sessionStorage. Tanpa backend AI terkonfigurasi, Yon menyediakan bantuan navigasi dan menyatakan chat belum tersedia.
 
-The endpoint expects an OpenAI-compatible chat completions provider. Set these variables in the serverless deployment environment:
+Bilah baca yang sama tersedia di seluruh perspektif dan welcome. Warnanya mengikuti section aktif; garis bawah menunjukkan progres scroll sebenarnya. SFX aktif secara default dan dimulai sesudah klik, tap, atau penekanan tombol pertama sesuai izin audio browser. Tombol SFX menyimpan pilihan nyala/mati antarhalaman di localStorage; tidak ada suara berulang otomatis atau loading buatan.
 
-- LLM_BASE_URL — provider API base URL, such as https://api.koboillm.com/v1
-- LLM_API_KEY — provider secret; keep it server-side
-- LLM_MODEL — model identifier accepted by the provider
+## Build dan pemeriksaan
 
-The assistant keeps the latest six messages in page memory and sends them with the current section and selected Archive project when applicable. It does not save conversations in browser storage. Keep api/portfolio-context.js aligned with the facts and project status shown in index.html.
+```powershell
+node scripts/render-pages.js
+node scripts/check.js
+```
 
-For local AI checks, copy `.env.example` to `.env`, add the provider key, then run `node scripts/test-ai.js`. The tester loads `.env` without an added dependency and sends one question through the existing portfolio assistant endpoint. Keep `.env` private; it is listed in `.gitignore`.
+Edit sumber di scripts/, lalu render ulang; jangan mengedit HTML hasil build secara terpisah. check.js memeriksa build deterministik, referensi lokal, metadata aset, sintaks, dan kontrak API tanpa memanggil provider.
 
-## Project and contact links
+Pemeriksaan browser opsional: node scripts/check-browser.cjs saat server aktif dan Playwright tersedia. DION_QA_MODULES dapat menunjuk instalasi tooling, DION_BROWSER memilih Chromium, dan DION_PREVIEW_URL mengubah URL pengujian. Pengujian tidak menghasilkan folder laporan atau screenshot. Skenario error assistant hanya menguji kegagalan endpoint nyata; tidak menyediakan jawaban AI palsu.
 
-- TEAMcut: https://teamcut.pages.dev/
-- Dua Saudara: https://dua-saudara.pages.dev/
-- Bagong Lapar: no live URL is listed in the source
-- Contact: dionpratamaart@gmail.com
+## Struktur
 
-No framework or build step is required.
+- index.html, developer/, manufacturing/, welcome/: empat halaman hasil render dengan URL fisik.
+- perspectives.*, both-worlds.*, mode-scenes.*, welcome.*: layout, navigasi dan motion; reduced motion dihormati.
+- reading-bar.*: bilah section, progres scroll, warna adaptif, serta audio bersama.
+- assistant.*, script.js: Yon dan archive preview.
+- scripts/: generator halaman, fragment Both Worlds, data proyek/ukuran aset, server, serta pemeriksaan yang dapat diulang.
+- api/: endpoint portfolio-assistant dan fakta portfolio terverifikasi.
+- assets/: foto/screenshot asli dan versi web, sertifikat, dekorasi SVG/audio, font lokal beserta lisensi. Aset asli tetap tersedia untuk direct link; tidak ada duplikat byte yang ditemukan.
+
+## Konfigurasi Yon
+
+Salin .env.example menjadi .env bila ingin mengaktifkan provider. Isi LLM_BASE_URL, LLM_API_KEY, dan LLM_MODEL dengan konfigurasi server yang benar, lalu restart development server. Secret tetap di environment/server dan diabaikan Git; jangan memasukkannya ke frontend.
+
+GET /api/portfolio-assistant memeriksa ketersediaan tanpa mengirim pesan. POST baru dilakukan sesudah interaksi pengguna. Tanpa credential, bantuan navigasi tetap berfungsi; jawaban provider live belum dapat diverifikasi. Static hosting saja tidak menjalankan API ini: hosting yang digunakan harus mendukung handler Node di api/. Tidak ada deployment yang dilakukan dalam konsolidasi ini.

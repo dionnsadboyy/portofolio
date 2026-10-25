@@ -29,10 +29,13 @@ const contentTypes = {
   ".jpeg": "image/jpeg",
   ".js": "text/javascript; charset=utf-8",
   ".png": "image/png",
+  ".pdf": "application/pdf",
   ".svg": "image/svg+xml",
   ".webp": "image/webp",
+  ".wav": "audio/wav",
   ".woff": "font/woff",
   ".woff2": "font/woff2",
+  ".ttf": "font/ttf",
 };
 
 function sendJson(response, statusCode, body) {
@@ -59,13 +62,26 @@ function serveStatic(request, response, pathname) {
     return response.end("Bad request");
   }
 
-  const relativePath = decodedPath === "/" ? "index.html" : decodedPath.slice(1);
+  const directoryRoutes = ["/manufacturing", "/developer", "/welcome"];
+  if (directoryRoutes.includes(decodedPath)) {
+    response.writeHead(308, { Location: `${decodedPath}/${new URL(request.url, "http://localhost").search}` });
+    return response.end();
+  }
+  const relativePath = decodedPath === "/" ? "index.html"
+    : directoryRoutes.some((route) => decodedPath === `${route}/`) ? `${decodedPath.slice(1)}index.html`
+    : decodedPath.slice(1);
   const segments = relativePath.split(/[\\/]/);
   if (
     segments.some((segment) => !segment || segment.startsWith(".")) ||
     segments[0] === "api" ||
     segments[0] === "scripts"
   ) {
+    response.writeHead(404);
+    return response.end("Not found");
+  }
+
+  const publicFiles = new Set(["index.html", "manufacturing/index.html", "developer/index.html", "welcome/index.html", "perspectives.css", "reading-bar.css", "reading-bar.js", "assistant.css", "assistant.js", "script.js", "perspectives.js", "both-worlds.css", "both-worlds.js", "mode-scenes.css", "mode-scenes.js", "welcome.css", "welcome.js"]);
+  if (!publicFiles.has(relativePath) && !relativePath.startsWith("assets/")) {
     response.writeHead(404);
     return response.end("Not found");
   }

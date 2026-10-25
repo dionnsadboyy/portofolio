@@ -1,466 +1,731 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f3eafc">
-    <meta name="description"
-        content="Dion Pratama Syahputra — Creative Developer dari Malang yang suka bikin project web dan digital.">
-    <title>Dion Pratama Syahputra — Creative Developer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3eafc">
+<meta name="description" content="Manufaktur & karya digital. Portfolio Dion Pratama Syahputra: dua sisi, satu cerita.">
+<title>Dion Pratama Syahputra — Both Worlds</title>
+<script src="/perspectives.js">
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/perspectives.css">
+<link rel="stylesheet" href="/reading-bar.css">
+<script src="/reading-bar.js" defer>
+</script>
+<link rel="stylesheet" href="/assistant.css">
+<link rel="preload" as="image" href="/assets/both-worlds/cover.webp" fetchpriority="high">
+<link rel="stylesheet" href="/both-worlds.css">
+<script src="/both-worlds.js" defer>
+</script>
+<script src="/script.js" defer>
+</script>
+<script src="/assistant.js" defer>
+</script>
 </head>
+<body class="theme-both">
+<a class="skip-link" href="#main">Lewati ke konten</a>
+<header class="site-header" id="top">
+<div class="header-inner wrap">
+<a class="brand" href="/?view=both" aria-label="Dion Pratama Syahputra, Both Worlds">D<span>/</span>P</a>
+<span class="brand-caption">Dion Pratama<br>Syahputra</span>
+<nav class="perspective-nav" aria-label="Pilih perspektif">
+<a href="/?view=both" data-perspective="both" aria-current="page">Both Worlds</a>
+<a href="/manufacturing/" data-perspective="manufacturing">Manufacturing</a>
+<a href="/developer/" data-perspective="developer">Web Developer</a>
+</nav>
+</div>
+</header>
+<nav class="reading-bar" data-reading-bar aria-label="Progres membaca portfolio">
+<div class="reading-bar__inner">
+<a class="reading-bar__chapter" href="#cover" id="readerChapter">00 / cover</a>
+<span class="reading-bar__caption">Both Worlds / Dion</span>
+<button class="reading-bar__sound" id="soundToggle" type="button" hidden aria-pressed="true" aria-label="SFX nyala. Matikan efek suara">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+<path d="M4 9H8L13 5V19L8 15H4Z"/>
+<path d="M17 8Q22 12 17 16"/>
+</svg>
+<span>SFX <span id="soundState">nyala</span>
+</span>
+</button>
+</div>
+<span class="reading-bar__progress" aria-hidden="true">
+</span>
+</nav>
+<main id="main" tabindex="-1">
+<section class="bw-cover" id="cover" aria-labelledby="heroTitle">
+  <div class="bw-cover-top bw-container">
+<span>Dion Pratama Syahputra</span>
+<span>manufaktur & karya digital.</span>
+</div>
+  <div class="bw-cover-stage">
+    <h1 class="bw-cover-title" id="heroTitle" aria-label="portfolio">
+<span aria-hidden="true">p</span>
+<span aria-hidden="true">o</span>
+<span aria-hidden="true">r</span>
+<span aria-hidden="true">t</span>
+<span aria-hidden="true">f</span>
+<span aria-hidden="true">o</span>
+<span aria-hidden="true">l</span>
+<span aria-hidden="true">i</span>
+<span aria-hidden="true">o</span>
+</h1>
+    <p class="bw-cover-aside bw-cover-aside-left" data-cover-copy>pengalaman nyata.<br>rasa ingin tahu.</p>
+    <p class="bw-cover-aside bw-cover-aside-right" data-cover-copy>dua dunia yang<br>saling melengkapi.</p>
+    <div class="bw-cover-photo" data-bw-depth="75">
+<img src="/assets/both-worlds/cover.webp" alt="Dion mengenakan kemeja hitam dan kacamata" width="1000" height="1163" fetchpriority="high" decoding="async">
+</div>
+    <span class="bw-cover-script" aria-hidden="true">portfolio</span>
+    <span class="bw-cover-edition" aria-hidden="true">a little bit of both.</span>
+  </div>
+  <div class="bw-cover-bottom bw-container">
+<span>sedikit tentang gue & yang gue bikin.</span>
+<a class="bw-link" href="#intro">kenalan dulu <span aria-hidden="true">↓</span>
+</a>
+</div>
+</section>
 
-<body>
-    <main class="site-shell">
-        <div class="grain" aria-hidden="true"></div>
-
-        <header class="topbar">
-            <a class="monogram" href="#top" aria-label="Dion Pratama Syahputra, back to top">D<span>/</span>P</a>
-            <nav class="nav-links" aria-label="Main navigation">
-                <a href="#work">Work</a>
-                <a href="#archive">Archive</a>
-                <a href="#about">About</a>
-                <a href="#process">Process</a>
-                <a href="#now">Now</a>
-                <a href="#contact">Contact</a>
-            </nav>
-            <button aria-label="Open menu" aria-expanded="false" class="menu-toggle" type="button">
-                <svg aria-hidden="true" fill="none" height="22" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="1.7" viewBox="0 0 24 24" width="22">
-                    <path d="M4 7h16M4 12h16M4 17h16"></path>
-                </svg>
-            </button>
-            <a class="top-contact" href="mailto:dionpratamaart@gmail.com">Say hello <span
-                    aria-hidden="true">↗</span></a>
-        </header>
-
-        <section class="hero" id="top" aria-labelledby="heroTitle">
-            <div class="hero-kicker reveal">
-                <span>DION PRATAMA SYAHPUTRA</span>
-                <span class="hero-kicker-rule" aria-hidden="true"></span>
-                <span class="hero-meta">INDONESIA <i>·</i> WEB <i>·</i> AI</span>
-            </div>
-            <div class="hero-stage">
-                <h1 class="hero-title" id="heroTitle"><span>Creative</span><span>Developer</span></h1>
-                <div class="hero-image-wrap">
-                    <span class="portrait-disc" aria-hidden="true"></span>
-                    <img src="assets/profile.png" alt="Dion Pratama Syahputra" fetchpriority="high">
-                </div>
-                <div class="hero-copy">
-                    <p class="display-copy">Gue suka bikin sesuatu dari ide yang awalnya cuma di kepala.</p>
-                    <div class="hero-bottom">
-                        <p class="body-copy">Tapi beberapa ide justru datang dari tempat yang nggak gue duga — lantai
-                            produksi.</p>
-                        <div class="hero-actions">
-                            <a class="button button--dark" href="#work">View selected work <span
-                                    aria-hidden="true">↘</span></a>
-                            <a class="button button--line" href="#about">Who I am <span aria-hidden="true">↘</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-footnote"><span>RPL → MANUFACTURING → WEB → BUILDING</span><span>SCROLL TO EXPLORE <b
-                        aria-hidden="true">↓</b></span></div>
-        </section>
-
-        <section class="selected-work section-pad" id="work" aria-labelledby="workTitle">
-            <div class="section-heading reveal">
-                <div>
-                    <span class="eyebrow">02 / Selected work</span>
-                    <h2 id="workTitle">Beberapa project yang<br><em>gue pengen tunjukin.</em></h2>
-                </div>
-                <p class="section-note">Tiga project, masing-masing berangkat dari kebutuhan yang beda.</p>
-            </div>
-
-            <article class="project-story project-story--teamcut project-card reveal" data-project="teamcut">
-                <div class="project-heading">
-                    <div class="project-title-row">
-                        <span class="project-index">01</span>
-                        <h3>TEAMCUT<span class="project-period">.</span></h3>
-                    </div>
-                    <p class="project-category">REAL CLIENT <i>·</i> BARBERSHOP</p>
-                </div>
-                <div class="project-layout project-layout--teamcut">
-                    <div class="project-story-copy">
-                        <p class="project-lead">Pengalaman booking dan antrean barbershop yang dirancang mobile-first.
-                        </p>
-                        <div class="project-facts">
-                            <div><span>THE APPROACH</span>
-                                <p>Dari lihat antrean, pilih cabang dan hairstylist, sampai mengirim booking lewat admin
-                                    TEAMCUT.</p>
-                            </div>
-                            <div><span>THE BUILD</span>
-                                <p>UI/UX · Frontend · Database · Deployment</p>
-                            </div>
-                        </div>
-                        <a class="project-link" href="https://teamcut.pages.dev/" target="_blank"
-                            rel="noopener noreferrer">Visit TEAMcut <span aria-hidden="true">↗</span></a>
-                    </div>
-                    <div class="teamcut-gallery" aria-label="TEAMcut mobile project screens">
-                        <figure class="project-shot project-shot--mobile">
-                            <img src="assets/teamcut/01-home-mobile.jpeg"
-                                alt="TEAMcut mobile home screen with branch and queue information" loading="lazy">
-                            <figcaption>01 / HOME</figcaption>
-                        </figure>
-                        <figure class="project-shot project-shot--mobile project-shot--offset">
-                            <img src="assets/teamcut/02-branches-hairstylist-mobile.jpeg"
-                                alt="TEAMcut mobile branch and hairstylist selection" loading="lazy">
-                            <figcaption>02 / BRANCH + STYLIST</figcaption>
-                        </figure>
-                        <figure class="project-shot project-shot--mobile">
-                            <img src="assets/teamcut/05-services-mobile.jpeg" alt="TEAMcut mobile services screen"
-                                loading="lazy">
-                            <figcaption>03 / SERVICES</figcaption>
-                        </figure>
-                        <figure class="project-shot project-shot--mobile project-shot--offset">
-                            <img src="assets/teamcut/06-booking-mobile.jpeg" alt="TEAMcut mobile booking form"
-                                loading="lazy">
-                            <figcaption>04 / BOOKING</figcaption>
-                        </figure>
-                    </div>
-                </div>
-                <div class="project-bottomline"><span>UI/UX <i>·</i> FRONTEND <i>·</i> DATABASE <i>·</i>
-                        DEPLOYMENT</span><span>MOBILE ONLY</span></div>
-            </article>
-
-            <article class="project-story project-story--dua project-card reveal" data-project="dua-saudara">
-                <div class="project-heading">
-                    <div class="project-title-row">
-                        <span class="project-index">02</span>
-                        <h3>Dua Saudara<span class="project-period">.</span></h3>
-                    </div>
-                    <p class="project-category">BUSINESS WEBSITE <i>·</i> FURNITURE</p>
-                </div>
-                <div class="dua-feature">
-                    <figure class="project-shot project-shot--desktop project-shot--dua">
-                        <img src="assets/dua-saudara/01-home-desktop.png" alt="Dua Saudara furniture website home page"
-                            loading="lazy">
-                        <figcaption>01 / BERANDA</figcaption>
-                    </figure>
-                    <div class="dua-caption">
-                        <p class="project-lead">Website bisnis furnitur untuk lihat produk, buka katalog, lalu
-                            konsultasi langsung dengan workshop.</p>
-                        <p class="project-quiet">Rotan sintetis · HPL · Custom furniture</p>
-                        <a class="project-link" href="https://dua-saudara.pages.dev/" target="_blank"
-                            rel="noopener noreferrer">Visit Dua Saudara <span aria-hidden="true">↗</span></a>
-                    </div>
-                </div>
-                <div class="dua-gallery" aria-label="Dua Saudara desktop project screens">
-                    <figure class="project-shot project-shot--desktop">
-                        <img src="assets/dua-saudara/02-products-desktop.png" alt="Dua Saudara product page"
-                            loading="lazy">
-                        <figcaption>02 / PRODUCTS</figcaption>
-                    </figure>
-                    <figure class="project-shot project-shot--desktop">
-                        <img src="assets/dua-saudara/03-catalog-desktop.png" alt="Dua Saudara product catalog"
-                            loading="lazy">
-                        <figcaption>03 / CATALOG</figcaption>
-                    </figure>
-                    <figure class="project-shot project-shot--desktop">
-                        <img src="assets/dua-saudara/04-detail-desktop.png" alt="Dua Saudara furniture detail page"
-                            loading="lazy">
-                        <figcaption>04 / DETAIL</figcaption>
-                    </figure>
-                </div>
-                <div class="project-bottomline"><span>WEB DESIGN <i>·</i> FRONTEND <i>·</i> CONTENT STRUCTURE <i>·</i>
-                        DEPLOYMENT</span><span>MALANG—BALI</span></div>
-            </article>
-
-            <article class="project-story project-story--bagong project-card reveal" data-project="bagong-lapar">
-                <div class="project-heading">
-                    <div class="project-title-row">
-                        <span class="project-index">03</span>
-                        <h3>Bagong Lapar<span class="project-period">.</span></h3>
-                    </div>
-                    <p class="project-category">REAL PROJECT <i>·</i> OUTDOOR</p>
-                </div>
-                <div class="bagong-feature">
-                    <figure class="project-shot project-shot--desktop project-shot--bagong">
-                        <img src="assets/bagong-lapar/01-home-desktop.png"
-                            alt="Bagong Lapar outdoor equipment rental website on desktop" loading="lazy">
-                        <figcaption>DESKTOP / HOME</figcaption>
-                    </figure>
-                    <div class="bagong-intro">
-                        <p class="project-lead">Website penyewaan perlengkapan outdoor buat rencana naik, camping, dan
-                            jalan-jalan.</p>
-                        <p class="project-quiet">Visual direction · Web design · Frontend · Deployment</p>
-                    </div>
-                    <figure class="project-shot project-shot--mobile project-shot--bagong-mobile">
-                        <img src="assets/bagong-lapar/01-home-mobile.jpeg"
-                            alt="Bagong Lapar outdoor rental home page on mobile" loading="lazy">
-                        <figcaption>MOBILE / HOME</figcaption>
-                    </figure>
-                </div>
-                <div class="bagong-gallery" aria-label="Bagong Lapar desktop and mobile project screens">
-                    <figure class="project-shot project-shot--desktop">
-                        <img src="assets/bagong-lapar/02-popular-desktop.png"
-                            alt="Bagong Lapar popular outdoor gear on desktop" loading="lazy">
-                        <figcaption>DESKTOP / POPULAR GEAR</figcaption>
-                    </figure>
-                </div>
-                <div class="project-bottomline"><span>VISUAL DIRECTION <i>·</i> WEB DESIGN <i>·</i> FRONTEND <i>·</i>
-                        DEPLOYMENT</span><span>DESKTOP + MOBILE</span></div>
-            </article>
-        </section>
-
-        <section class="archive-section section-pad" id="archive" aria-labelledby="archiveTitle">
-            <div class="section-heading reveal">
-                <div>
-                    <span class="eyebrow">03 / Archive</span>
-                    <h2 id="archiveTitle">Yang pernah gue <em>coba bikin.</em></h2>
-                </div>
-                <p class="section-note">07 PROJECTS · ARCHIVE</p>
-            </div>
-            <div class="archive-layout">
-                <ol class="archive-list">
-                    <li><button class="archive-entry reveal is-active" type="button" aria-pressed="true"
-                            data-project-id="our-museum" data-preview-image="assets/ourmuseum.jpeg"
-                            data-preview-alt="Our Museum project preview" data-preview-title="Our Museum"><span
-                                class="archive-number">01</span><span class="archive-name">Our Museum</span><span
-                                class="archive-arrow" aria-hidden="true">↗</span></button></li>
-                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
-                            data-project-id="yonngpt" data-preview-image="assets/yonngpt.jpeg"
-                            data-preview-alt="Yonn Assistant / YonnGPT project preview"
-                            data-preview-title="Yonn Assistant / YonnGPT"><span class="archive-number">02</span><span
-                                class="archive-name">Yonn Assistant / YonnGPT</span><span class="archive-arrow"
-                                aria-hidden="true">↗</span></button></li>
-                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
-                            data-project-id="yonn-apotek" data-preview-image="assets/yonn-apotek.png"
-                            data-preview-alt="Yonn Apotek project preview" data-preview-title="Yonn Apotek"><span
-                                class="archive-number">03</span><span class="archive-name">Yonn Apotek</span><span
-                                class="archive-arrow" aria-hidden="true">↗</span></button></li>
-                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
-                            data-project-id="quranibot" data-preview-image="assets/quranibot.png"
-                            data-preview-alt="QuraniBotWithNLP project preview"
-                            data-preview-title="QuraniBotWithNLP"><span class="archive-number">04</span><span
-                                class="archive-name">QuraniBotWithNLP</span><span class="archive-arrow"
-                                aria-hidden="true">↗</span></button></li>
-                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
-                            data-project-id="whatsapp-bot" data-preview-title="Bot WhatsApp"><span
-                                class="archive-number">05</span><span class="archive-name">Bot WhatsApp</span><span
-                                class="archive-arrow" aria-hidden="true">↗</span></button></li>
-                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
-                            data-project-id="multiuser-php-native" data-preview-title="MultiUser PHP Native"><span
-                                class="archive-number">06</span><span class="archive-name">MultiUser PHP
-                                Native</span><span class="archive-arrow" aria-hidden="true">↗</span></button></li>
-                    <li><button class="archive-entry reveal" type="button" aria-pressed="false"
-                            data-project-id="text-to-speech" data-preview-title="TextToSpeech"><span
-                                class="archive-number">07</span><span class="archive-name">TextToSpeech</span><span
-                                class="archive-arrow" aria-hidden="true">↗</span></button></li>
-                </ol>
-                <aside class="archive-preview" id="archivePreview" aria-live="polite">
-                    <img id="archivePreviewImage" src="assets/ourmuseum.jpeg" alt="Our Museum project preview"
-                        loading="lazy">
-                    <div class="archive-preview-caption"><span>ARCHIVE PREVIEW</span>
-                        <h3 id="archivePreviewTitle">Our Museum</h3>
-                    </div>
-                </aside>
-            </div>
-        </section>
-
-        <section class="about-section section-pad" id="about" aria-labelledby="aboutTitle">
-            <div class="section-heading reveal">
-                <div>
-                    <span class="eyebrow">04 / Who I am</span>
-                    <h2 id="aboutTitle">Sedikit tentang jalan<br>yang gue tempuh <em>sampai sekarang.</em></h2>
-                </div>
-                <p class="section-note">Dari belajar software, kerja di lantai produksi, sampai tetap bikin project web.
-                </p>
-            </div>
-            <div class="timeline">
-                <article class="timeline-item reveal">
-                    <span class="timeline-index">01</span><span class="timeline-label">RPL</span>
-                    <div>
-                        <h3>Mulainya dari belajar bikin software.</h3>
-                        <p>Gue sekolah Rekayasa Perangkat Lunak di SMKN 8 Malang. Sebelum lulus, gue juga sempat magang
-                            Software Development &amp; AI di UBIG.</p><small>SMKN 8 MALANG <i>·</i> 2021—2023 <i>·</i>
-                            UBIG, FEB—MEI 2023</small>
-                    </div>
-                </article>
-                <article class="timeline-item reveal">
-                    <span class="timeline-index">02</span><span class="timeline-label">MANUFACTURING</span>
-                    <div>
-                        <h3>Habis itu, gue kerja di lantai produksi.</h3>
-                        <p>Di PT Denso Manufacturing Indonesia, gue belajar soal alur material, proses di line,
-                            ketepatan, dan konsistensi.</p><small>PT DENSO MANUFACTURING INDONESIA <i>·</i> JUL
-                            2024—SEKARANG</small>
-                    </div>
-                </article>
-                <article class="timeline-item reveal">
-                    <span class="timeline-index">03</span><span class="timeline-label">WEB</span>
-                    <div>
-                        <h3>Di luar kerja, gue tetap bikin website.</h3>
-                        <p>Sekarang yang gue tampilkan di sini: TEAMcut, Dua Saudara, dan Bagong Lapar.</p>
-                        <small>TEAMcut <i>·</i> DUA SAUDARA <i>·</i> BAGONG LAPAR</small>
-                    </div>
-                </article>
-                <article class="timeline-item reveal">
-                    <span class="timeline-index">04</span><span class="timeline-label">BUILDING</span>
-                    <div>
-                        <h3>Biasanya gue mulai dari ide yang kepikiran.</h3>
-                        <p>Gue cari bentuk yang bisa dicoba, terus lihat sejauh mana ide itu bisa jalan.</p>
-                        <small>PERSONAL PROJECTS</small>
-                    </div>
-                </article>
-            </div>
-            <div class="credentials reveal" aria-labelledby="credentialTitle">
-                <div class="credentials-heading"><span class="eyebrow" id="credentialTitle">SELECTED CREDENTIALS</span>
-                </div>
-                <div class="credential-list">
-                    <a href="https://www.credly.com/users/dion-pratama/badges/credly" target="_blank"
-                        rel="noopener noreferrer"><img
-                            src="assets/sertifikat/ai-fundamentals-foundations-certificate.jpg" alt=""
-                            loading="lazy"><span>AI Fundamentals<small>IBM SkillsBuild · 2026</small></span></a>
-                    <a href="https://www.credly.com/go/8HoG8gUy" target="_blank" rel="noopener noreferrer"><img
-                            src="assets/sertifikat/ai-literacy-certificate.jpg" alt="" loading="lazy"><span>AI
-                            Literacy<small>IBM SkillsBuild · 2026</small></span></a>
-                    <a href="https://www.credly.com/badges/5e6effb0-c898-47f9-a383-ba257aec7e2c" target="_blank"
-                        rel="noopener noreferrer"><img src="assets/sertifikat/data-fundamentals-certificate.jpg" alt=""
-                            loading="lazy"><span>Data Fundamentals<small>IBM SkillsBuild · 2026</small></span></a>
-                    <a href="assets/sertifikat/oracle-java-foundations-2024.pdf" target="_blank"
-                        rel="noopener noreferrer"><img
-                            src="assets/sertifikat/oracle-java-foundations-2024_page-0001.jpg" alt=""
-                            loading="lazy"><span>Java Foundations<small>Oracle Academy · 2024</small></span></a>
-                    <a href="assets/sertifikat/oracle-database-foundations-2024.pdf" target="_blank"
-                        rel="noopener noreferrer"><img
-                            src="assets/sertifikat/oracle-database-foundations-2024_page-0001.jpg" alt=""
-                            loading="lazy"><span>Database Foundations<small>Oracle Academy · 2024</small></span></a>
-                    <a href="assets/sertifikat/ubig-internship.jpg" target="_blank" rel="noopener noreferrer"><img
-                            src="assets/sertifikat/ubig-internship.jpg" alt="" loading="lazy"><span>Software Development
-                            &amp; AI Internship<small>UBIG · Malang</small></span></a>
-                </div>
-            </div>
-        </section>
-
-        <section class="process-section section-pad" id="process" aria-labelledby="processTitle">
-            <div class="section-heading reveal">
-                <div>
-                    <span class="eyebrow">05 / How I build</span>
-                    <h2 id="processTitle">Cara gue biasanya <em>ngerjain sesuatu.</em></h2>
-                </div>
-            </div>
-            <ol class="process-sequence">
-                <li class="process-step reveal"><span>01</span>
-                    <h3>FIND THE WHY</h3>
-                    <p>Kenapa ini perlu dibikin?</p>
-                </li>
-                <li class="process-step reveal"><span>02</span>
-                    <h3>SHAPE THE EXPERIENCE</h3>
-                    <p>Bikin alurnya kebayang dulu.</p>
-                </li>
-                <li class="process-step reveal"><span>03</span>
-                    <h3>BUILD THE SYSTEM</h3>
-                    <p>Sambungin tampilan dengan bagian yang bikin semuanya jalan.</p>
-                </li>
-                <li class="process-step reveal"><span>04</span>
-                    <h3>MAKE IT FEEL RIGHT</h3>
-                    <p>Coba dipakai, rapihin yang terasa janggal.</p>
-                </li>
-                <li class="process-step reveal"><span>05</span>
-                    <h3>SHIP IT</h3>
-                    <p>Kalau siap, deploy.</p>
-                </li>
-            </ol>
-        </section>
-
-        <section class="now-section section-pad" id="now" aria-labelledby="nowTitle">
-            <div class="section-heading reveal">
-                <div>
-                    <span class="eyebrow">06 / Now</span>
-                    <h2 id="nowTitle">Yang lagi gue <em>bangun dan pelajari.</em></h2>
-                </div>
-                <p class="section-note">Hal-hal yang sekarang masih sering gue kerjain dan utak-atik.</p>
-            </div>
-            <div class="now-list">
-                <div class="now-item reveal"><span>BUILDING</span>
-                    <p>Project web seperti TEAMcut, Dua Saudara, dan Bagong Lapar.</p>
-                </div>
-                <div class="now-item reveal"><span>LEARNING</span>
-                    <p>Software development, AI, dan data lewat praktik langsung.</p>
-                </div>
-                <div class="now-item reveal"><span>EXPLORING</span>
-                    <p>Automation dan cara pakai AI sebagai alat bantu waktu bikin sesuatu.</p>
-                </div>
-                <div class="now-item reveal"><span>LOOKING FOR</span>
-                    <p>Ide berikutnya yang bikin gue penasaran cukup lama untuk mulai dicoba.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-section section-pad" id="contact" aria-labelledby="contactTitle">
-            <div class="contact-mark" aria-hidden="true">✳</div>
-            <div class="contact-copy reveal">
-                <span class="eyebrow">07 / Contact</span>
-                <h2 id="contactTitle">Punya ide?<br><em>Ceritain aja.</em></h2>
-            </div>
-            <div class="contact-action reveal">
-                <a class="button button--light" href="mailto:dionpratamaart@gmail.com">Email Dion <span
-                        aria-hidden="true">↗</span></a>
-                <p>Gue baca lewat email.</p>
-            </div>
-        </section>
-
-        <footer class="footer section-pad">
-            <div class="footer-brand"><a class="footer-mark" href="#top">D<span>/</span>P</a><span>Dion Pratama
-                    Syahputra</span><small>Creative Developer · Indonesia</small></div>
-            <div class="footer-links"><span class="eyebrow">SAY HELLO</span><a
-                    href="mailto:dionpratamaart@gmail.com">dionpratamaart@gmail.com</a><a
-                    href="https://wa.me/6287773058338" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
-            <div class="footer-links"><span class="eyebrow">ELSEWHERE</span><a href="https://github.com/dionnsadboyy"
-                    target="_blank" rel="noopener noreferrer">GitHub</a><a
-                    href="https://www.linkedin.com/in/dionnnprtma" target="_blank"
-                    rel="noopener noreferrer">LinkedIn</a><a href="https://instagram.com/dionnnprtma_" target="_blank"
-                    rel="noopener noreferrer">Instagram</a></div>
-            <div class="footer-bottom"><span>© <span id="year"></span> Dion Pratama Syahputra</span><a href="#top">BACK
-                    TO TOP ↑</a></div>
-        </footer>
-    </main>
-
-    <div class="portfolio-assistant" data-assistant-root>
-        <section class="assistant-panel" id="assistantPanel" role="dialog" aria-modal="false"
-            aria-labelledby="assistantTitle" hidden>
-            <div class="assistant-panel__head">
-                <div><span class="eyebrow">Portfolio guide</span>
-                    <h2 id="assistantTitle">Tanya soal portfolio</h2>
-                    <p>Project, cerita, skill, atau cara gue bikin sesuatu.</p>
-                </div>
-                <button class="assistant-close" id="assistantClose" type="button"
-                    aria-label="Close assistant">×</button>
-            </div>
-            <div class="assistant-messages" id="assistantMessages" aria-live="polite"
-                aria-label="Conversation with the portfolio assistant">
-                <div class="assistant-message assistant-message--assistant">Hai. Mau tahu soal project atau cerita di
-                    balik portfolio ini?</div>
-            </div>
-            <div class="assistant-suggestions" id="assistantSuggestions" aria-label="Suggested questions">
-                <button type="button">Dion sekarang lagi bikin apa?</button>
-                <button type="button">Ceritain soal TEAMcut</button>
-                <button type="button">Project apa saja di Archive?</button>
-                <button type="button">Gimana ceritanya dari RPL ke manufacturing?</button>
-            </div>
-            <form class="assistant-form" id="assistantForm">
-                <label class="sr-only" for="assistantInput">Tanya soal portfolio Dion</label>
-                <textarea id="assistantInput" rows="1" maxlength="600"
-                    placeholder="Tanya soal project atau cerita Dion..."
-                    aria-label="Tanya soal portfolio Dion"></textarea>
-                <button type="submit" aria-label="Send question"><svg class="assistant-send-icon" aria-hidden="true"
-                        viewBox="0 0 24 24">
-                        <path d="M21 3 14 21l-4-7-7-4L21 3Z"></path>
-                        <path d="m10 14 11-11"></path>
-                    </svg></button>
-            </form>
-        </section>
-        <button class="assistant-launcher" id="assistantLauncher" type="button" aria-expanded="false"
-            aria-controls="assistantPanel"><span aria-hidden="true">✳</span> Tanya soal portfolio</button>
+<section class="bw-intro bw-section" id="intro" aria-labelledby="introTitle">
+  <svg class="bw-intro-thread" viewBox="0 0 600 250" fill="none" aria-hidden="true">
+<path d="M600 0C400 5 620 160 400 114S156 186 33 247" stroke="currentColor" stroke-width="1.5"/>
+</svg>
+  <div class="bw-container bw-intro-inner" data-bw-group>
+    <span class="bw-kicker" data-bw-reveal="up">01 / di balik portfolio</span>
+    <h2 class="bw-display bw-mask" id="introTitle">
+<span data-bw-reveal="text">gue Dion<span class="bw-purple">.</span>
+</span>
+</h2>
+    <div class="bw-intro-lines">
+      <p class="bw-mask">
+<span data-bw-reveal="text" data-bw-delay="140">keseharian gue ada di lantai produksi.</span>
+</p>
+      <p class="bw-mask">
+<span data-bw-reveal="text" data-bw-delay="260">rasa ingin tahu gue tumbuh di <em>dunia digital.</em>
+</span>
+</p>
     </div>
+    <div class="bw-intro-body">
+      <p data-bw-reveal="up" data-bw-delay="340">gue bekerja sebagai operator di PT Denso Manufacturing Indonesia sejak <strong>2 Juli 2024.</strong> sebelum itu, gue belajar Rekayasa Perangkat Lunak. sampai sekarang, ketertarikan buat membangun website tetap gue bawa di sela pekerjaan.</p>
+      <p data-bw-reveal="up" data-bw-delay="440">dari website untuk UMKM, proyek personal, sampai prototipe yang berangkat dari pengalaman kerja, di sini gue mengumpulkan apa yang sedang gue bangun dan pelajari. dua sisi itu sama-sama bagian dari cerita gue — dan portfolio ini jadi tempat keduanya bertemu.</p>
+    </div>
+    <div class="bw-intro-foot">
+<span>Dion Pratama Syahputra</span>
+<p>pengalaman nyata, karya yang terus tumbuh.</p>
+<span>01 / 07</span>
+</div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<section class="bw-worlds" id="perspectives" aria-labelledby="worldsTitle">
+  <div class="bw-worlds-inner bw-container">
+    <div class="bw-worlds-heading">
+<span class="bw-kicker" data-bw-reveal="up">02 / dua perspektif</span>
+<h2 class="bw-display" id="worldsTitle" data-bw-reveal="up">dua sisi, <em>satu cerita.</em>
+</h2>
+<svg viewBox="0 0 380 24" aria-hidden="true">
+<path d="M5 18Q180 1 374 13M36 23Q200 7 348 20" fill="none" stroke="currentColor" stroke-width="3"/>
+</svg>
+</div>
+    <figure class="bw-worlds-person" data-bw-depth="10">
+<div data-bw-reveal="object" data-bw-delay="80">
+<img src="/assets/both-worlds/dion.webp" alt="Foto terbaru Dion, berkacamata dan berbaju putih, dengan tangan bersilang" width="880" height="1327" loading="lazy" decoding="async">
+</div>
+<figcaption>Dion Pratama Syahputra</figcaption>
+</figure>
+    <article class="bw-world bw-world-dev">
+      <div data-bw-reveal="left" data-bw-delay="100">
+<h3>
+<span class="bw-paper-title">web<br> developer</span>
+</h3>
+<p>merancang dan membangun website untuk UMKM, proyek personal, dan ide yang pengin gue coba.</p>
+<a class="bw-link" href="/developer/" data-perspective="developer">lihat sisi digital <span aria-hidden="true">↗</span>
+</a>
+</div>
+      <div class="bw-world-art bw-dev-art" aria-hidden="true">
+        <div class="bw-tech-icons" data-bw-depth="32">
+<img data-bw-reveal="object" data-bw-delay="260" src="/assets/both-worlds/03-icons.webp" alt="" width="567" height="84" loading="lazy">
+</div>
+        <div class="bw-laptop" data-bw-depth="22">
+<img data-bw-reveal="left" data-bw-delay="180" src="/assets/both-worlds/03-laptop.webp" alt="" width="504" height="364" loading="lazy">
+</div>
+        <div class="bw-other-icons" data-bw-depth="42">
+<img data-bw-reveal="object" data-bw-delay="340" src="/assets/both-worlds/03-other-icons.webp" alt="" width="137" height="233" loading="lazy">
+</div>
+      </div>
+    </article>
+    <article class="bw-world bw-world-man">
+      <div data-bw-reveal="right" data-bw-delay="180">
+<h3>manufacturing</h3>
+<p>operator produksi di PT Denso Manufacturing Indonesia sejak 2 Juli 2024. keseharian gue dekat dengan proses perakitan dan aliran material.</p>
+<a class="bw-link" href="/manufacturing/" data-perspective="manufacturing">lihat sisi produksi <span aria-hidden="true">↗</span>
+</a>
+</div>
+      <div class="bw-world-art bw-man-art" aria-hidden="true">
+        <div class="bw-kanban" data-bw-depth="24">
+<img data-bw-reveal="right" data-bw-delay="280" src="/assets/both-worlds/03-kanban.webp" alt="" width="317" height="255" loading="lazy">
+</div>
+        <div class="bw-armature-part" data-bw-depth="40">
+<img data-bw-reveal="object" data-bw-delay="420" src="/assets/both-worlds/03-armature.webp" alt="" width="268" height="149" loading="lazy">
+</div>
+        <div class="bw-blower" data-bw-depth="30">
+<img data-bw-reveal="right" data-bw-delay="360" src="/assets/both-worlds/03-blower.webp" alt="" width="244" height="248" loading="lazy">
+</div>
+        <span class="bw-object-note">proses, detail,<br>dan rasa ingin tahu.</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="bw-work bw-section bw-container" id="work" aria-labelledby="workTitle">
+  <header class="bw-work-heading">
+<div>
+<span class="bw-kicker" data-bw-reveal="up">03 / karya pilihan</span>
+<h2 class="bw-display" id="workTitle" data-bw-reveal="up">
+<em>potongan karya.</em>
+</h2>
+<p class="bw-work-note" data-bw-reveal="up">yang gue bangun, satu per satu.</p>
+</div>
+<p data-bw-reveal="up">empat proyek, empat konteks.<br> dari kebutuhan sehari-hari<br> sampai rasa ingin tahu sendiri.</p>
+</header>
+  <nav class="bw-work-index" aria-label="Daftar karya">
+<a href="#teamcut">01 / TEAMcut <span aria-hidden="true">↘</span>
+</a>
+<a href="#armature">02 / Armature <span aria-hidden="true">↘</span>
+</a>
+<a href="#bagong-lapar">03 / Bagong Lapar <span aria-hidden="true">↘</span>
+</a>
+<a href="#dua-saudara">04 / Dua Saudara <span aria-hidden="true">↘</span>
+</a>
+</nav>
+  <article class="bw-project bw-teamcut" id="teamcut" aria-labelledby="teamcutTitle">
+<div class="bw-teamcut-art">
+<img class="bw-project-puzzle" src="/assets/both-worlds/puzzle.svg" width="250" height="245" alt="" loading="lazy" data-bw-reveal="left">
+<span class="bw-puzzle-word" aria-hidden="true">&lt;/&gt;</span>
+<div class="bw-phone-depth" data-bw-depth="58">
+<div data-bw-reveal="phone">
+<a class="bw-phone" href="/assets/both-worlds/teamcut.webp" target="_blank" rel="noopener noreferrer" aria-label="Buka screenshot lengkap TEAMcut">
+<img src="/assets/both-worlds/teamcut.webp" alt="Screenshot asli beranda mobile TEAMcut" width="640" height="1225" loading="lazy" decoding="async" >
+</a>
+</div>
+</div>
+<p class="bw-hand-note" data-bw-reveal="up" data-bw-delay="300">dari ide kecil,<br>jadi pengalaman.</p>
+<span class="bw-art-caption">screenshot asli / tampilan mobile</span>
+</div>
+<div class="bw-project-copy" data-bw-reveal="right">
+<span class="bw-kicker">01 / Website barbershop / mobile first</span>
+<h3 id="teamcutTitle">TEAMcut<span class="bw-purple">.</span>
+</h3>
+<p class="bw-project-lead">cari cabang, kenali hairstylist, dan lihat antrean sebelum berangkat.</p>
+<p>website untuk membantu pelanggan mengenal TEAMcut dan merencanakan kunjungannya, dari informasi layanan sampai alur booking.</p>
+<div class="bw-project-links">
+<a class="bw-link" href="/developer/#teamcut">lihat cerita proyek <span aria-hidden="true">↗</span>
+</a>
+<a class="bw-link" href="https://teamcut.pages.dev/" target="_blank" rel="noopener noreferrer">buka demo <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</article>
+ <article class="bw-project bw-armature" id="armature" aria-labelledby="armatureTitle">
+<span class="bw-anchor" id="bridge" aria-hidden="true">
+</span>
+<div class="bw-project-copy" data-bw-reveal="left">
+<span class="bw-kicker">02 / Prototipe personal / produksi × digital</span>
+<h3 id="armatureTitle">Armature<br>
+<em>Monitoring.</em>
+</h3>
+<p class="bw-project-lead">berangkat dari pengalaman di produksi, tumbuh jadi eksplorasi digital.</p>
+<p>gue membawa pertanyaan tentang alur informasi material ke sebuah prototipe web pribadi. cara lain buat belajar memahami proses yang gue temui sehari-hari.</p>
+<p class="bw-prototype-note">Prototipe personal, bukan sistem resmi Denso. Screenshot menunjukkan snapshot aplikasi; tidak terhubung ke data produksi live.</p>
+<div class="bw-project-links">
+<a class="bw-link" href="/developer/#armature">lihat cerita proyek <span aria-hidden="true">↗</span>
+</a>
+</div>
+<a class="bw-context-link" href="/manufacturing/#armature">baca konteks produksi ↗</a>
+</div>
+<div class="bw-armature-art">
+<figure class="bw-dashboard" data-bw-depth="32">
+<div data-bw-reveal="right">
+<a href="/assets/both-worlds/armature-dashboard.webp" target="_blank" rel="noopener noreferrer" aria-label="Buka screenshot dashboard lengkap Armature Monitoring">
+<div class="bw-browser bw-dashboard-crop">
+<div class="bw-browser-bar" aria-hidden="true">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<span>screenshot / prototipe personal</span>
+</div>
+<img src="/assets/both-worlds/armature-dashboard.webp" alt="Snapshot dashboard prototipe personal Armature Monitoring" width="1200" height="1954" loading="lazy" decoding="async" >
+</div>
+</a>
+<figcaption>dashboard / cuplikan tampilan, buka untuk melihat lengkap ↗</figcaption>
+</div>
+</figure>
+<figure class="bw-detail" data-bw-depth="65">
+<div data-bw-reveal="object" data-bw-delay="300">
+<a href="/assets/both-worlds/armature-detail.webp" target="_blank" rel="noopener noreferrer" aria-label="Buka screenshot detail prototipe Armature Monitoring">
+<div class="bw-browser ">
+<div class="bw-browser-bar" aria-hidden="true">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<span>screenshot / prototipe personal</span>
+</div>
+<img src="/assets/both-worlds/armature-detail.webp" alt="Snapshot detail material pada prototipe personal Armature Monitoring" width="689" height="428" loading="lazy" decoding="async" >
+</div>
+</a>
+<figcaption>detail material / snapshot prototipe ↗</figcaption>
+</div>
+</figure>
+</div>
+</article>
+ <div class="bw-project-pair">
+<article class="bw-browser-project" id="bagong-lapar" aria-labelledby="bagong-laparTitle">
+<div data-bw-reveal="left" data-bw-delay="0">
+<a class="bw-project-screen" href="/assets/both-worlds/bagong-desktop.webp" target="_blank" rel="noopener noreferrer" aria-label="Buka screenshot lengkap Bagong Lapar">
+<div class="bw-browser ">
+<div class="bw-browser-bar" aria-hidden="true">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<span>screenshot / tampilan proyek</span>
+</div>
+<img src="/assets/both-worlds/bagong-desktop.webp" alt="Screenshot asli beranda desktop Bagong Lapar" width="1200" height="675" loading="lazy" decoding="async" >
+</div>
+</a>
+</div>
+<div class="bw-browser-copy" data-bw-reveal="up">
+<span class="bw-kicker">03 / Website rental / outdoor</span>
+<h3 id="bagong-laparTitle">Bagong Lapar<span class="bw-purple">.</span>
+</h3>
+<p class="bw-project-lead">petualangan dimulai dari rencana yang jelas.</p>
+<p>katalog perlengkapan outdoor dengan tampilan desktop dan mobile. dari melihat pilihan barang sampai mengenali alur penyewaan.</p>
+<div class="bw-project-links">
+<a class="bw-link" href="/developer/#bagong-lapar">lihat cerita proyek <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</article>
+<article class="bw-browser-project" id="dua-saudara" aria-labelledby="dua-saudaraTitle">
+<div data-bw-reveal="right" data-bw-delay="180">
+<a class="bw-project-screen" href="/assets/both-worlds/dua-saudara.webp" target="_blank" rel="noopener noreferrer" aria-label="Buka screenshot lengkap Dua Saudara Furniture">
+<div class="bw-browser ">
+<div class="bw-browser-bar" aria-hidden="true">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<span>screenshot / tampilan proyek</span>
+</div>
+<img src="/assets/both-worlds/dua-saudara.webp" alt="Screenshot asli beranda desktop Dua Saudara Furniture" width="1200" height="675" loading="lazy" decoding="async" >
+</div>
+</a>
+</div>
+<div class="bw-browser-copy" data-bw-reveal="up">
+<span class="bw-kicker">04 / Website usaha / furnitur</span>
+<h3 id="dua-saudaraTitle">Dua Saudara Furniture<span class="bw-purple">.</span>
+</h3>
+<p class="bw-project-lead">memberi ruang untuk cerita di balik produk.</p>
+<p>website furnitur custom dengan beranda, katalog, dan detail produk. gue mengerjakan desain web, frontend, dan susunan kontennya.</p>
+<div class="bw-project-links">
+<a class="bw-link" href="/developer/#dua-saudara">lihat cerita proyek <span aria-hidden="true">↗</span>
+</a>
+<a class="bw-link" href="https://dua-saudara.pages.dev/" target="_blank" rel="noopener noreferrer">buka demo <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</article>
+</div>
+  <details class="bw-archive" id="archive">
+<summary>
+<span>
+<span class="bw-kicker">catatan tambahan / arsip & eksperimen</span>
+<span id="archiveTitle">yang pernah dicoba, tetap jadi bagian cerita.</span>
+</span>
+<span aria-hidden="true">＋</span>
+</summary>
+<div class="archive-layout">
+<ol class="archive-list">
+<li>
+<button type="button" class="archive-entry is-active" data-project-id="our-museum" data-preview-title="Our Museum" data-preview-image="/assets/ourmuseum.jpeg" data-preview-alt="Screenshot asli Our Museum">
+<span class="archive-number">01</span>
+<span class="archive-name">Our Museum<small>Pengalaman web personal</small>
+</span>
+<span aria-hidden="true">↗</span>
+</button>
+</li>
+<li>
+<button type="button" class="archive-entry" data-project-id="yonngpt" data-preview-title="Yonn Assistant / YonnGPT" data-preview-image="/assets/yonngpt.jpeg" data-preview-alt="Screenshot asli Yonn Assistant / YonnGPT">
+<span class="archive-number">02</span>
+<span class="archive-name">Yonn Assistant / YonnGPT<small>Eksplorasi produk AI</small>
+</span>
+<span aria-hidden="true">↗</span>
+</button>
+</li>
+<li>
+<button type="button" class="archive-entry" data-project-id="yonn-apotek" data-preview-title="Yonn Apotek" data-preview-image="/assets/yonn-apotek.png" data-preview-alt="Screenshot asli Yonn Apotek">
+<span class="archive-number">03</span>
+<span class="archive-name">Yonn Apotek<small>Laravel · MySQL</small>
+</span>
+<span aria-hidden="true">↗</span>
+</button>
+</li>
+<li>
+<button type="button" class="archive-entry" data-project-id="quranibot" data-preview-title="QuraniBotWithNLP" data-preview-image="/assets/quranibot.png" data-preview-alt="Screenshot asli QuraniBotWithNLP">
+<span class="archive-number">04</span>
+<span class="archive-name">QuraniBotWithNLP<small>Chatbot · NLP · Database</small>
+</span>
+<span aria-hidden="true">↗</span>
+</button>
+</li>
+<li>
+<button type="button" class="archive-entry" data-project-id="whatsapp-bot" data-preview-title="Bot WhatsApp">
+<span class="archive-number">05</span>
+<span class="archive-name">Bot WhatsApp<small>Eksplorasi bot</small>
+</span>
+<span aria-hidden="true">—</span>
+</button>
+</li>
+<li>
+<button type="button" class="archive-entry" data-project-id="multiuser-php-native" data-preview-title="MultiUser PHP Native">
+<span class="archive-number">06</span>
+<span class="archive-name">MultiUser PHP Native<small>Eksplorasi PHP</small>
+</span>
+<span aria-hidden="true">—</span>
+</button>
+</li>
+<li>
+<button type="button" class="archive-entry" data-project-id="text-to-speech" data-preview-title="TextToSpeech">
+<span class="archive-number">07</span>
+<span class="archive-name">TextToSpeech<small>Eksperimen suara</small>
+</span>
+<span aria-hidden="true">—</span>
+</button>
+</li>
+</ol>
+<aside class="archive-preview" id="archivePreview" aria-live="polite">
+<img id="archivePreviewImage" src="/assets/ourmuseum.jpeg" alt="Screenshot asli Our Museum" width="1366" height="768" loading="lazy">
+<div class="archive-preview-caption">
+<span class="eyebrow">Preview arsip</span>
+<h3 id="archivePreviewTitle">Our Museum</h3>
+<p class="archive-no-image">Arsip eksplorasi. Dokumentasi visual belum tersedia.</p>
+</div>
+</aside>
+</div>
+<p class="bw-archive-sources">Buka screenshot asli: <a href="/assets/ourmuseum.jpeg" target="_blank" rel="noopener noreferrer">Our Museum ↗</a> · <a href="/assets/yonngpt.jpeg" target="_blank" rel="noopener noreferrer">Yonn Assistant / YonnGPT ↗</a> · <a href="/assets/yonn-apotek.png" target="_blank" rel="noopener noreferrer">Yonn Apotek ↗</a> · <a href="/assets/quranibot.png" target="_blank" rel="noopener noreferrer">QuraniBotWithNLP ↗</a>
+</p>
+</details>
+  <noscript>
+<style>.theme-both .archive-list{display:none}</style>
+</noscript>
+</section>
+
+<section class="bw-journey bw-section" id="about" aria-labelledby="aboutTitle">
+  <header class="bw-container bw-journey-heading">
+<span class="bw-kicker" data-bw-reveal="up">04 / perjalanan</span>
+<h2 class="bw-display" id="aboutTitle" data-bw-reveal="up">
+<em>ada benang merah<br>di setiap langkah.</em>
+</h2>
+<p data-bw-reveal="up">dari belajar bikin program, bekerja di produksi,<br> sampai membangun proyek sendiri.</p>
+</header>
+  <div class="bw-journey-board bw-container" id="journeyBoard">
+    <svg class="bw-thread-svg" aria-hidden="true" fill="none">
+<path class="bw-thread-base"/>
+<path class="bw-thread-progress" id="journeyThread"/>
+</svg>
+    <article class="bw-journey-node">
+<span class="bw-pin" aria-hidden="true">
+</span>
+<div data-bw-reveal="left">
+<div class="bw-note-sheet">
+<div class="bw-note-body">
+<span class="bw-kicker">01 / 2021 — 2024</span>
+<h3>mulainya dari RPL.</h3>
+<p>gue belajar Rekayasa Perangkat Lunak di SMKN 8 Malang. dari sini, gue mulai mengenal cara membangun program dan website.</p>
+<span class="bw-note-label">SMKN 8 Malang</span>
+</div>
+<div class="bw-note-art bw-code-art" aria-hidden="true">
+<span>&lt;/&gt;</span>
+</div>
+</div>
+</div>
+</article>
+    <article class="bw-journey-node">
+<span class="bw-pin" aria-hidden="true">
+</span>
+<div data-bw-reveal="right">
+<div class="bw-note-sheet bw-note-purple">
+<div class="bw-note-body">
+<span class="bw-kicker">02 / Januari — Mei 2023</span>
+<h3>belajar lewat praktik.</h3>
+<p>saat PKL di PT Universal Big Data, gue ikut belajar pengembangan chatbot, NLP, dan database. ketemu pekerjaan nyata, ketemu pertanyaan baru.</p>
+<span class="bw-note-label">Universal Big Data / PKL</span>
+</div>
+<div class="bw-note-art bw-chat-art" aria-hidden="true">
+<span>···</span>
+<span>···</span>
+</div>
+</div>
+</div>
+</article>
+    <article class="bw-journey-node">
+<span class="bw-pin" aria-hidden="true">
+</span>
+<div data-bw-reveal="left">
+<div class="bw-note-sheet">
+<div class="bw-note-body">
+<span class="bw-kicker">03 / sejak 2 Juli 2024</span>
+<h3>masuk ke dunia produksi.</h3>
+<p>gue mulai bekerja sebagai operator produksi di PT Denso Manufacturing Indonesia. keseharian gue dekat dengan perakitan, kanban, dan aliran material.</p>
+<span class="bw-note-label">PT Denso Manufacturing Indonesia</span>
+</div>
+<div class="bw-note-art" aria-hidden="true">
+<img src="/assets/both-worlds/03-armature.webp" alt="" width="268" height="149" loading="lazy">
+</div>
+</div>
+</div>
+</article>
+    <article class="bw-journey-node">
+<span class="bw-pin" aria-hidden="true">
+</span>
+<div data-bw-reveal="right">
+<div class="bw-note-sheet">
+<div class="bw-note-body">
+<span class="bw-kicker">04 / berjalan beriringan</span>
+<h3>dua sisi yang mulai ketemu.</h3>
+<p>di sela kerja, gue tetap membangun website untuk UMKM dan proyek personal. pengalaman di produksi juga jadi titik awal prototipe Armature Monitoring.</p>
+<span class="bw-note-label">manufaktur & karya digital.</span>
+<p class="bw-note-disclaimer">Armature Monitoring — prototipe personal,<br>bukan sistem resmi perusahaan.</p>
+</div>
+<div class="bw-note-art bw-note-puzzle" aria-hidden="true">
+<img src="/assets/both-worlds/puzzle.svg" alt="" width="250" height="245" loading="lazy">
+<span>&lt;/&gt;</span>
+</div>
+</div>
+</div>
+</article>
+  </div>
+  <div class="bw-container bw-journey-close">
+<p class="bw-journey-still" data-bw-reveal="up">ceritanya <em>masih jalan.</em>
+</p>
+<div class="bw-journey-continuation">
+<div id="process" data-bw-reveal="up">
+<span id="build" class="bw-anchor" aria-hidden="true">
+</span>
+<span class="bw-kicker">cara bekerja</span>
+<h3 id="processTitle">pahami. bangun. periksa lagi.</h3>
+<p>di lini produksi maupun saat mengembangkan website, gue mulai dari memahami kebutuhan. menata urutan kerja, mengerjakan detailnya, lalu memeriksa hasil sebelum melanjutkan.</p>
+<a class="bw-link" href="/developer/#process">proses pengembangan <span aria-hidden="true">↗</span>
+</a>
+</div>
+<div id="now" data-bw-reveal="up">
+<span class="bw-kicker">saat ini</span>
+<h3 id="nowTitle">belajar. bekerja. terus bikin.</h3>
+<p>gue terus mengembangkan proyek web dan antarmuka, sambil menjalani pekerjaan di manufaktur. dua dunia ini tetap saling memberi cerita.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="bw-learning bw-section bw-container" id="learning" aria-labelledby="credentialTitle">
+  <div class="bw-learning-copy">
+<span class="bw-kicker" data-bw-reveal="up">05 / sertifikat & catatan belajar</span>
+<h2 class="bw-display" id="credentialTitle" data-bw-reveal="up">
+<em>arsip<br>belajar.</em>
+</h2>
+<p data-bw-reveal="up">beberapa hal yang gue pelajari,<br> dan catatan proses di baliknya.</p>
+    <ol class="bw-credential-list">
+      <li data-bw-reveal="up" data-bw-delay="100">
+<a href="/assets/sertifikat/oracle-java-foundations-2024.pdf" target="_blank" rel="noopener noreferrer" data-cert-id="java">
+<span class="bw-credential-number">01</span>
+<span>
+<strong>Java Foundations</strong>
+<small>Oracle Academy · 18 Maret 2024</small>
+<span class="bw-credential-type">Buka sertifikat PDF ↗</span>
+</span>
+</a>
+</li>
+      <li data-bw-reveal="up" data-bw-delay="200">
+<a href="/assets/sertifikat/oracle-database-foundations-2024.pdf" target="_blank" rel="noopener noreferrer" data-cert-id="database">
+<span class="bw-credential-number">02</span>
+<span>
+<strong>Database Foundations</strong>
+<small>Oracle Academy · 28 Maret 2024</small>
+<span class="bw-credential-type">Buka sertifikat PDF ↗</span>
+</span>
+</a>
+</li>
+      <li data-bw-reveal="up" data-bw-delay="300">
+<a href="/assets/sertifikat/data-fundamentals-certificate.jpg" target="_blank" rel="noopener noreferrer" data-cert-id="data">
+<span class="bw-credential-number">03</span>
+<span>
+<strong>Data Fundamentals</strong>
+<small>IBM SkillsBuild · Agustus 2026</small>
+<span class="bw-credential-type">Buka sertifikat JPG ↗</span>
+</span>
+</a>
+</li>
+    </ol>
+    <a class="bw-link" href="/manufacturing/#education">latar pendidikan & pelatihan <span aria-hidden="true">↗</span>
+</a>
+  </div>
+  <div class="bw-folder-visual" aria-hidden="true">
+    <div class="bw-folder-depth" data-bw-depth="24">
+<div class="bw-folder-back" data-bw-reveal="left">
+<span>catatan belajar</span>
+</div>
+</div>
+    <div class="bw-cert bw-cert-database" data-bw-depth="36">
+<div data-bw-reveal="right" data-bw-delay="180">
+<img src="/assets/both-worlds/certificate-database.webp" alt="" width="560" height="432" loading="lazy">
+</div>
+</div>
+    <div class="bw-cert bw-cert-data" data-bw-depth="52">
+<div data-bw-reveal="object" data-bw-delay="300">
+<img src="/assets/both-worlds/certificate-data.webp" alt="" width="560" height="432" loading="lazy">
+</div>
+</div>
+    <div class="bw-cert bw-cert-java" data-bw-depth="64">
+<div data-bw-reveal="left" data-bw-delay="400">
+<img src="/assets/both-worlds/certificate-java.webp" alt="" width="560" height="432" loading="lazy">
+</div>
+</div>
+    <span class="bw-folder-scribble">sedikit demi sedikit,<br>tetap belajar.</span>
+  </div>
+</section>
+
+<section class="bw-contact bw-section bw-container" id="contact" aria-labelledby="contactTitle">
+  <div class="bw-contact-copy">
+<span class="bw-kicker" data-bw-reveal="up">06 / sampai ketemu</span>
+<h2 class="bw-display" id="contactTitle">
+<span class="bw-mask">
+<span data-bw-reveal="text">ada cerita</span>
+</span>
+<span class="bw-mask">
+<span data-bw-reveal="text" data-bw-delay="160">atau ide baru?</span>
+</span>
+</h2>
+<p data-bw-reveal="up" data-bw-delay="300">buat ngobrol soal proyek, peluang kerja,<br> atau sekadar kenalan — boleh banget.</p>
+<div class="bw-contact-links" data-bw-reveal="up" data-bw-delay="400">
+<a class="bw-email" href="mailto:dionpratamaart@gmail.com">dionpratamaart@gmail.com <span aria-hidden="true">↗</span>
+</a>
+<a class="bw-link" href="https://linkedin.com/in/dionnnprtma" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span>
+</a>
+<a class="bw-link" href="https://github.com/dionnsadboyy" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+  <div class="bw-contact-art" aria-hidden="true">
+<svg class="bw-contact-thread" viewBox="0 0 560 620" fill="none">
+<path d="M50 0C14 80 480 10 430 173S34 229 80 370S256 420 208 542" stroke="#b18acb" stroke-width="2" data-bw-reveal="thread"/>
+</svg>
+<div class="bw-contact-puzzle" data-bw-depth="45">
+<div data-bw-reveal="puzzle" data-bw-delay="120">
+<img src="/assets/both-worlds/puzzle.svg" alt="" width="250" height="245" loading="lazy">
+<span>sampai ketemu.</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bw-footer">
+<div class="bw-container">
+<div class="bw-footer-top">
+<div>
+<p class="bw-footer-name">Dion Pratama Syahputra</p>
+<span>manufaktur & karya digital.</span>
+</div>
+<nav aria-label="Perspektif di footer">
+<a href="/?view=both" data-perspective="both">Both Worlds ↗</a>
+<a href="/developer/" data-perspective="developer">Web Developer ↗</a>
+<a href="/manufacturing/" data-perspective="manufacturing">Manufacturing ↗</a>
+</nav>
+</div>
+<div class="bw-footer-bottom">
+<span>© <span id="year" data-year>2026</span> Dion Pratama Syahputra</span>
+<a class="bw-link" href="#top">balik ke atas <span aria-hidden="true">↑</span>
+</a>
+</div>
+</div>
+</footer>
+<div class="portfolio-assistant" data-assistant-root>
+  <span class="assistant-curiosity" id="assistantCuriosity" aria-hidden="true" hidden>penasaran? <span>↘</span>
+</span>
+  <button class="assistant-launcher" id="assistantLauncher" type="button" aria-expanded="false" aria-controls="assistantPanel" aria-haspopup="dialog">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.8-5.5a8.5 8.5 0 1 1 16.2-4Z"/>
+</svg>
+    <span>tanya yon <span aria-hidden="true">↗</span>
+</span>
+  </button>
+  <dialog class="assistant-panel" id="assistantPanel" aria-labelledby="assistantTitle">
+    <div class="assistant-shell">
+      <header class="assistant-panel__head">
+        <h2 id="assistantTitle">YON ASSISTANT</h2>
+        <button class="assistant-close" id="assistantClose" type="button" aria-label="Tutup Yon Assistant" autofocus>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+<path d="m6 6 12 12M18 6 6 18"/>
+</svg>
+</button>
+      </header>
+      <div class="assistant-messages" id="assistantMessages" role="region" aria-label="Percakapan dengan Yon Assistant" tabindex="0">
+        <div class="assistant-intro" id="assistantIntro">
+          <h3>ada yang pengen<br>lo tahu?</h3>
+          <p>gue bantu lo kenalan sama Dion, lewat karya dan cerita di baliknya.</p>
+          <span class="assistant-handnote" aria-hidden="true">tanya aja.</span>
+          <nav class="assistant-suggestions" id="assistantSuggestions" aria-label="Mulai kenalan">
+            <a href="/developer/#work" data-assistant-prompt="Mulai dari karya Dion yang mana?">mulai dari karya yang mana? <span aria-hidden="true">↗</span>
+</a>
+            <a href="/?view=both#perspectives" data-assistant-prompt="Gimana cerita dua dunia Dion, developer dan manufaktur?">gimana cerita dua dunianya? <span aria-hidden="true">↗</span>
+</a>
+            <a href="/?view=both#contact" data-assistant-prompt="Mau ngobrol soal proyek dengan Dion, lewat mana?">mau ngobrol soal proyek <span aria-hidden="true">↗</span>
+</a>
+          </nav>
+        </div>
+        <div class="assistant-thread" id="assistantThread">
+</div>
+      </div>
+      <div class="assistant-bottom">
+        <button class="assistant-latest" id="assistantLatest" type="button" hidden>pesan terbaru ↓</button>
+        <div class="assistant-notice" id="assistantNotice">
+<p id="assistantStatus" role="status">Pilih salah satu cerita di atas.</p>
+<button id="assistantReconnect" type="button" hidden>Cek lagi ↗</button>
+</div>
+        <nav class="assistant-local-links" id="assistantLocalLinks" aria-label="Bantuan navigasi" hidden>
+<a href="/developer/#work" data-perspective="developer">lihat karya ↗</a>
+<a href="/manufacturing/#experience" data-perspective="manufacturing">manufaktur ↗</a>
+<a href="/?view=both#contact" data-perspective="both">hubungi Dion ↗</a>
+</nav>
+        <form class="assistant-form" id="assistantForm" hidden>
+          <label class="assistant-sr-only" for="assistantInput">Tanya soal Dion, maksimum 600 karakter</label>
+          <div class="assistant-composer">
+<textarea id="assistantInput" name="message" rows="1" maxlength="600" placeholder="tanya soal Dion…" required>
+</textarea>
+<button id="assistantSend" type="submit" aria-label="Kirim pertanyaan">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="m5 12 14-7-6 15-2-6-6-2Zm6 2 8-9"/>
+</svg>
+</button>
+</div>
+        </form>
+        <p class="assistant-footnote" id="assistantFootnote">panduan lokal • tentang Dion &amp; portfolionya</p>
+        <span class="assistant-sr-only" id="assistantAnnouncement" role="status" aria-live="polite">
+</span>
+      </div>
+    </div>
+  </dialog>
+</div>
 </body>
-
 </html>

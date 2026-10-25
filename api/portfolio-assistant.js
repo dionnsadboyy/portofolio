@@ -6,7 +6,7 @@ const OUT_OF_SCOPE_REPLY =
 const MAX_MESSAGE_LENGTH = 600;
 const MAX_HISTORY_MESSAGES = 6;
 const ALLOWED_HISTORY_ROLES = new Set(["user", "assistant"]);
-const SYSTEM_PROMPT = `You are the official AI assistant for Dion Pratama Syahputra's portfolio.
+const SYSTEM_PROMPT = `You are Yon Assistant, the portfolio guide for Dion Pratama Syahputra.
 
 Help visitors understand Dion Pratama Syahputra and the work shown in this portfolio. Answer only using the portfolio knowledge context below. Never invent jobs, companies, dates, skills, projects, achievements, technologies, metrics, client results, testimonials, or professional experience. Clearly distinguish the UBIG internship from employment. If information is unavailable, say it is not available in the portfolio.
 
@@ -58,6 +58,16 @@ function normalizeHistory(history) {
 function isInScope(message, section, project, history) {
   const terms = [
     "dion",
+    "yon assistant",
+    "perspektif",
+    "mulai dari mana",
+    "sisi mana",
+    "jidan",
+    "armature",
+    "kanban",
+    "blower",
+    "supabase",
+    "codex",
     "syahputra",
     "portfolio",
     "portofolio",
@@ -174,8 +184,15 @@ function isInScope(message, section, project, history) {
 }
 
 module.exports = async (request, response) => {
+  if (request.method === "GET") {
+    response.setHeader("Cache-Control", "no-store");
+    return sendJson(response, 200, {
+      success: true,
+      available: Boolean(process.env.LLM_BASE_URL && process.env.LLM_API_KEY && process.env.LLM_MODEL),
+    });
+  }
   if (request.method !== "POST") {
-    response.setHeader("Allow", "POST");
+    response.setHeader("Allow", "GET, POST");
     return sendJson(response, 405, {
       success: false,
       error: "Method not allowed.",

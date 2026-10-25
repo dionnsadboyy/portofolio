@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F4EADD">
+<meta name="description" content="Satu orang, beberapa cerita. Kenali Dion Pratama Syahputra lewat Developer, Both Worlds, atau Manufacturing.">
+<title>Mau kenal gue dari sisi mana? — Dion Pratama Syahputra</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/mode-scenes/fonts/Outfit-Bold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/assets/mode-scenes/hero.webp" as="image" fetchpriority="high">
+<link rel="stylesheet" href="/welcome.css">
+<link rel="stylesheet" href="/reading-bar.css">
+<script src="/reading-bar.js" defer>
+</script>
+<link rel="stylesheet" href="/assistant.css">
+<script src="/assistant.js" defer>
+</script>
+<script src="/perspectives.js" defer>
+</script>
+<script src="/welcome.js" defer>
+</script>
+</head>
+<body class="theme-welcome">
+<a class="welcome-skip" href="#perspectives">Lewati ke pilihan perspektif</a>
+<div class="welcome-page">
+<header class="welcome-header">
+<a href="/?view=both" class="welcome-brand" data-perspective="both" aria-label="Dion Pratama Syahputra, Both Worlds">D / P</a>
+<p>Dion Pratama Syahputra</p>
+</header>
+<nav class="reading-bar" data-reading-bar aria-label="Progres membaca portfolio">
+<div class="reading-bar__inner">
+<a class="reading-bar__chapter" href="#perspectives" id="readerChapter">00 / welcome</a>
+<span class="reading-bar__caption">Welcome / Dion</span>
+<button class="reading-bar__sound" id="soundToggle" type="button" hidden aria-pressed="true" aria-label="SFX nyala. Matikan efek suara">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+<path d="M4 9H8L13 5V19L8 15H4Z"/>
+<path d="M17 8Q22 12 17 16"/>
+</svg>
+<span>SFX <span id="soundState">nyala</span>
+</span>
+</button>
+</div>
+<span class="reading-bar__progress" aria-hidden="true">
+</span>
+</nav>
+<main id="main">
+<div class="welcome-intro">
+<h1>
+<span>mau kenal gue</span> <span>dari sisi mana?</span>
+</h1>
+<p>satu orang, beberapa cerita.</p>
+</div>
+<nav class="welcome-spread" id="perspectives" aria-label="Pilih perspektif portfolio">
+<div class="welcome-panel welcome-developer" data-welcome-enter="left">
+<a class="welcome-choice" href="/developer/" data-perspective="developer" aria-labelledby="welcomeDeveloper welcomeDeveloperCta" aria-describedby="welcomeDeveloperCopy">
+<span class="welcome-register" aria-hidden="true">01 / ide jadi karya</span>
+<div class="welcome-side-copy">
+<h2 id="welcomeDeveloper">developer<span aria-hidden="true">.</span>
+</h2>
+<p id="welcomeDeveloperCopy">ide, kode, dan karya yang bisa dipakai.</p>
+<span class="welcome-cta" id="welcomeDeveloperCta">lihat karya <span aria-hidden="true">↗</span>
+</span>
+</div>
+<span class="welcome-code-note" aria-hidden="true">HTML, CSS, JavaScript.<br>
+<span>dari rasa ingin tahu.</span>
+</span>
+<span class="welcome-tape" aria-hidden="true">
+</span>
+</a>
+</div>
+<div class="welcome-panel welcome-both" data-welcome-enter="up">
+<a class="welcome-choice" href="/?view=both" data-perspective="both" aria-labelledby="welcomeBoth welcomeBothCta" aria-describedby="welcomeBothCopy">
+<span class="welcome-register" aria-hidden="true">02 / satu identitas</span>
+<h2 id="welcomeBoth">
+<span>both</span>
+<span>worlds<span aria-hidden="true">.</span>
+</span>
+</h2>
+<div class="welcome-portrait">
+<img src="/assets/mode-scenes/hero.webp" width="773" height="1049" alt="Dion Pratama Syahputra mengenakan kemeja hitam dan kacamata" fetchpriority="high" decoding="async">
+</div>
+<span class="welcome-signature" aria-hidden="true">dionpratama</span>
+<div class="welcome-both-caption">
+<p id="welcomeBothCopy">dua sisi, satu cerita.</p>
+<span class="welcome-cta" id="welcomeBothCta">kenalan sama gue <span aria-hidden="true">↗</span>
+</span>
+</div>
+</a>
+</div>
+<div class="welcome-panel welcome-manufacturing" data-welcome-enter="right">
+<a class="welcome-choice" href="/manufacturing/" data-perspective="manufacturing" aria-labelledby="welcomeManufacturing welcomeManufacturingCta" aria-describedby="welcomeManufacturingCopy">
+<span class="welcome-register" aria-hidden="true">03 / pengalaman nyata</span>
+<div class="welcome-side-copy">
+<h2 id="welcomeManufacturing">manufacturing<span aria-hidden="true">.</span>
+</h2>
+<p id="welcomeManufacturingCopy">pengalaman di lantai produksi.</p>
+<span class="welcome-cta" id="welcomeManufacturingCta">lihat pengalaman <span aria-hidden="true">↗</span>
+</span>
+</div>
+<img class="welcome-armature" src="/assets/mode-scenes/armature-sketch.webp" width="400" height="110" alt="" aria-hidden="true" decoding="async">
+</a>
+</div>
+</nav>
+<details class="welcome-help" id="yonHelp">
+<summary id="yonOpen" data-assistant-open>belum tahu mulai dari mana? <span>tanya Yon Assistant. <span aria-hidden="true">↗</span>
+</span>
+</summary>
+<div class="welcome-help-content">
+<p>chat AI belum tersedia tanpa JavaScript. Pilih tujuan untuk kenalan sama Dion.</p>
+<nav class="welcome-quick-links" aria-label="Bantuan navigasi">
+<a href="/developer/#work" data-perspective="developer">lihat karya ?</a>
+<a href="/manufacturing/#experience" data-perspective="manufacturing">pengalaman manufaktur ?</a>
+<a href="/?view=both#contact" data-perspective="both">hubungi Dion ?</a>
+</nav>
+</div>
+</details>
+</main>
+<footer class="welcome-footer">pilih perspektif, ceritanya tetap gue.</footer>
+</div>
+<div class="portfolio-assistant" data-assistant-root>
+  <span class="assistant-curiosity" id="assistantCuriosity" aria-hidden="true" hidden>penasaran? <span>↘</span>
+</span>
+  <button class="assistant-launcher" id="assistantLauncher" type="button" aria-expanded="false" aria-controls="assistantPanel" aria-haspopup="dialog">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.8-5.5a8.5 8.5 0 1 1 16.2-4Z"/>
+</svg>
+    <span>tanya yon <span aria-hidden="true">↗</span>
+</span>
+  </button>
+  <dialog class="assistant-panel" id="assistantPanel" aria-labelledby="assistantTitle">
+    <div class="assistant-shell">
+      <header class="assistant-panel__head">
+        <h2 id="assistantTitle">YON ASSISTANT</h2>
+        <button class="assistant-close" id="assistantClose" type="button" aria-label="Tutup Yon Assistant" autofocus>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+<path d="m6 6 12 12M18 6 6 18"/>
+</svg>
+</button>
+      </header>
+      <div class="assistant-messages" id="assistantMessages" role="region" aria-label="Percakapan dengan Yon Assistant" tabindex="0">
+        <div class="assistant-intro" id="assistantIntro">
+          <h3>ada yang pengen<br>lo tahu?</h3>
+          <p>gue bantu lo kenalan sama Dion, lewat karya dan cerita di baliknya.</p>
+          <span class="assistant-handnote" aria-hidden="true">tanya aja.</span>
+          <nav class="assistant-suggestions" id="assistantSuggestions" aria-label="Mulai kenalan">
+            <a href="/developer/#work" data-assistant-prompt="Mulai dari karya Dion yang mana?">mulai dari karya yang mana? <span aria-hidden="true">↗</span>
+</a>
+            <a href="/?view=both#perspectives" data-assistant-prompt="Gimana cerita dua dunia Dion, developer dan manufaktur?">gimana cerita dua dunianya? <span aria-hidden="true">↗</span>
+</a>
+            <a href="/?view=both#contact" data-assistant-prompt="Mau ngobrol soal proyek dengan Dion, lewat mana?">mau ngobrol soal proyek <span aria-hidden="true">↗</span>
+</a>
+          </nav>
+        </div>
+        <div class="assistant-thread" id="assistantThread">
+</div>
+      </div>
+      <div class="assistant-bottom">
+        <button class="assistant-latest" id="assistantLatest" type="button" hidden>pesan terbaru ↓</button>
+        <div class="assistant-notice" id="assistantNotice">
+<p id="assistantStatus" role="status">Pilih salah satu cerita di atas.</p>
+<button id="assistantReconnect" type="button" hidden>Cek lagi ↗</button>
+</div>
+        <nav class="assistant-local-links" id="assistantLocalLinks" aria-label="Bantuan navigasi" hidden>
+<a href="/developer/#work" data-perspective="developer">lihat karya ↗</a>
+<a href="/manufacturing/#experience" data-perspective="manufacturing">manufaktur ↗</a>
+<a href="/?view=both#contact" data-perspective="both">hubungi Dion ↗</a>
+</nav>
+        <form class="assistant-form" id="assistantForm" hidden>
+          <label class="assistant-sr-only" for="assistantInput">Tanya soal Dion, maksimum 600 karakter</label>
+          <div class="assistant-composer">
+<textarea id="assistantInput" name="message" rows="1" maxlength="600" placeholder="tanya soal Dion…" required>
+</textarea>
+<button id="assistantSend" type="submit" aria-label="Kirim pertanyaan">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="m5 12 14-7-6 15-2-6-6-2Zm6 2 8-9"/>
+</svg>
+</button>
+</div>
+        </form>
+        <p class="assistant-footnote" id="assistantFootnote">panduan lokal • tentang Dion &amp; portfolionya</p>
+        <span class="assistant-sr-only" id="assistantAnnouncement" role="status" aria-live="polite">
+</span>
+      </div>
+    </div>
+  </dialog>
+</div>
+</body>
+</html>

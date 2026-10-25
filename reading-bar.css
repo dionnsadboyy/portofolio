@@ -1,0 +1,16 @@
+.reading-bar{--reader-bg:var(--mode-paper,var(--bw-lavender,var(--cream,#F4EADD)));--reader-ink:var(--ink,#302339);--reader-accent:#7850a7;--reader-line:#9175be40;position:sticky;top:0;z-index:12;flex:none;background:var(--reader-bg);color:var(--reader-ink);border-bottom:1px solid var(--reader-line);font:400 10px/1.4 var(--sans,'Dion Outfit',Arial,sans-serif);transition:background-color 180ms ease,color 180ms ease,border-color 180ms ease;isolation:isolate}
+.reading-bar *{box-sizing:border-box}
+.reading-bar [hidden]{display:none!important}
+.reading-bar__inner{width:min(100%,1600px);margin-inline:auto;padding-inline:clamp(24px,5.2vw,84px);min-height:44px;display:flex;align-items:center;gap:24px}
+.reading-bar__chapter{display:flex;align-items:center;min-height:44px;min-width:0;max-width:55%;overflow-wrap:anywhere;color:inherit!important;text-decoration:none;font-size:10px;letter-spacing:.07em}
+.reading-bar__chapter:hover{text-decoration:underline;text-underline-offset:4px}
+.reading-bar__caption{margin-left:auto;font-size:9px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.reading-bar__sound{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:90px;flex:none;padding:0 0 0 20px;background:none;border:0;border-left:1px solid var(--reader-line);color:inherit;font:inherit;cursor:pointer;touch-action:manipulation}
+.reading-bar__sound svg{flex:none;display:block;width:15px;height:15px}
+.reading-bar__sound[aria-pressed="true"]{font-weight:600}
+.reading-bar__sound:disabled{cursor:default;opacity:.7}
+.reading-bar :focus-visible{outline:2px solid currentColor;outline-offset:-4px;border-radius:3px}
+.reading-bar__progress{position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:var(--reader-accent);transform-origin:left;transform:scaleX(0);pointer-events:none}
+body:has(.reading-bar) :is(main section[id],main article[id],main details[id]){scroll-margin-top:56px}
+@media(max-width:600px){.reading-bar__inner{gap:12px}.reading-bar__caption{display:none}.reading-bar__sound{margin-left:auto;padding-left:12px;min-width:86px}.reading-bar__chapter{font-size:9px;max-width:calc(100% - 100px)}}
+@media(prefers-reduced-motion:reduce){.reading-bar{transition:none}}
