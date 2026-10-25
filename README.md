@@ -24,7 +24,7 @@ Buka http://localhost:3000. PORT dan HOST dapat diatur melalui environment; port
 
 Pilihan terakhir disimpan di localStorage. Histori dan draft Yon disimpan per tab melalui sessionStorage. Tanpa backend AI terkonfigurasi, Yon menyediakan bantuan navigasi dan menyatakan chat belum tersedia.
 
-Bilah baca yang sama tersedia di seluruh perspektif dan welcome. Warnanya mengikuti section aktif; garis bawah menunjukkan progres scroll sebenarnya. SFX aktif secara default dan dimulai sesudah klik, tap, atau penekanan tombol pertama sesuai izin audio browser. Tombol SFX menyimpan pilihan nyala/mati antarhalaman di localStorage; tidak ada suara berulang otomatis atau loading buatan.
+Bilah baca yang sama tersedia di seluruh perspektif dan welcome. Warnanya mengikuti section aktif; garis bawah menunjukkan progres scroll sebenarnya. SFX selalu aktif tanpa tombol on/off atau pengaturan mute di website, dan dimulai sesudah klik, tap, atau penekanan tombol pertama sesuai izin audio browser. Tidak ada suara berulang otomatis atau loading buatan.
 
 ## Build dan pemeriksaan
 

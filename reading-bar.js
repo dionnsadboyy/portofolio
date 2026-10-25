@@ -7,27 +7,18 @@
     if (!bar) return;
     const controller = new AbortController(), signal = controller.signal;
     const chapter = document.getElementById('readerChapter'), progress = bar.querySelector('.reading-bar__progress');
-    const button = document.getElementById('soundToggle'), state = document.getElementById('soundState');
     const sections = [...document.querySelectorAll('#main > section[id]')];
     const labels = {cover:'cover',hero:'cover',intro:'kenalan',profile:'kenalan',perspectives:'dua sisi',work:'potongan karya',about:'perjalanan',learning:'arsip belajar',tools:'tools',experience:'pengalaman produksi',teamcut:'TEAMcut','bagong-lapar':'Bagong Lapar',armature:'Armature Monitoring','jidan-quest':'Jidan Quest','project-index':'indeks proyek',certificates:'sertifikat',contact:'sampai ketemu'};
-    const soundKey = 'dion-sfx-enabled-v1';
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    let soundEnabled = true, context, buffers, preparing, unavailable = false, lastSound = -1000;
+    let context, buffers, preparing, lastSound = -1000;
     let frame = 0, current = null, lastColor = '', alive = true;
     const sources = new Set();
-    try { soundEnabled = localStorage.getItem(soundKey) !== 'off'; } catch { /* Audio preference is optional. */ }
-    function syncSound() {
-      button.setAttribute('aria-pressed',String(soundEnabled && !unavailable));
-      state.textContent = unavailable ? 'tak tersedia' : soundEnabled ? 'nyala' : 'mati';
-      button.setAttribute('aria-label',unavailable ? 'Efek suara belum tersedia. Coba lagi' : soundEnabled ? 'SFX nyala. Matikan efek suara' : 'SFX mati. Aktifkan efek suara');
-      button.title = soundEnabled && context?.state !== 'running' ? 'Efek suara mulai setelah interaksi pertama' : '';
-    }
     function stopSounds() {
       sources.forEach(source => { try { source.stop(); } catch { /* Already ended. */ } });
       sources.clear();
     }
     function sound(kind, preview = false) {
-      if (!alive || !soundEnabled || !buffers || context?.state !== 'running' || document.hidden || (!preview && performance.now() - lastSound < 900)) return;
+      if (!alive || !buffers || context?.state !== 'running' || document.hidden || (!preview && performance.now() - lastSound < 900)) return;
       lastSound = performance.now();
       const source = context.createBufferSource(), gain = context.createGain();
       source.buffer = buffers[kind === 'snap' ? 'snap' : 'swipe'];
@@ -37,7 +28,7 @@
       source.start();
     }
     async function armAudio(preview = false) {
-      if (!alive || !soundEnabled || !AudioContextClass || document.hidden) return;
+      if (!alive || !AudioContextClass || document.hidden) return;
       if (preparing) return preparing;
       // Creation/resume happen synchronously inside the gesture; fetching follows.
       try {
@@ -54,27 +45,19 @@
             buffers = {swipe:decoded[0],snap:decoded[1]};
           }
           if (!alive) return;
-          unavailable = false; syncSound();
           if (preview) sound('snap',true);
-        })().catch(() => {if (alive) {unavailable = true;syncSound();}}).finally(() => {preparing = null;});
+        })().catch(() => { /* Retry on the next gesture if audio is blocked or unavailable. */ }).finally(() => {preparing = null;});
         return preparing;
-      } catch { unavailable = true; syncSound(); }
+      } catch { /* Audio failure must not interrupt browsing. */ }
     }
     function unlock(event) {
-      if (event.target.closest?.('#soundToggle') || !soundEnabled || unavailable || context?.state === 'running') return;
+      if (context?.state === 'running' && buffers) return;
       if (event.type === 'keydown' && (event.isComposing || event.ctrlKey || event.metaKey || event.altKey)) return;
       armAudio(true);
     }
     if (AudioContextClass) {
-      button.hidden = false; syncSound();
       document.addEventListener('pointerdown',unlock,{capture:true,passive:true,signal});
       document.addEventListener('keydown',unlock,{capture:true,signal});
-      button.addEventListener('click',() => {
-        if (unavailable) {unavailable = false;soundEnabled = true;} else soundEnabled = !soundEnabled;
-        try {localStorage.setItem(soundKey,soundEnabled ? 'on' : 'off');} catch { /* Browsing works without storage. */ }
-        syncSound();
-        if (soundEnabled) armAudio(true); else {stopSounds();context?.suspend().catch(() => {});}
-      },{signal});
     }
     document.addEventListener('portfolio-sfx',event => sound(event.detail?.kind),{signal});
     function background(element) {
@@ -120,7 +103,7 @@
     addEventListener('hashchange',schedule,{signal});
     document.addEventListener('visibilitychange',() => {
       if (document.hidden) {stopSounds();context?.suspend().catch(() => {});}
-      else {schedule();if (soundEnabled && context) context.resume().then(syncSound).catch(() => {});}
+      else {schedule();context?.resume().catch(() => {});}
     },{signal});
     const observer = 'ResizeObserver' in window ? new ResizeObserver(schedule) : null;
     observer?.observe(document.querySelector('#main') || document.body);
