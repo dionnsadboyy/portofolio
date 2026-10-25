@@ -48,5 +48,6 @@ async function main(){
   assert.equal(providerCalls,0);
  }finally{global.fetch=previous;for(const key of keys)if(env[key]===undefined)delete process.env[key];else process.env[key]=env[key];}
  console.log(`PASS: four deterministic pages, ${references.size} local references, dynamic audio, asset metadata, JavaScript syntax and fourteen API contracts. No provider request sent.`);
+ await require('./check-pages.cjs')();
 }
 main().catch(error=>{console.error(error.message);process.exitCode=1;});

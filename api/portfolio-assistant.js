@@ -67,12 +67,12 @@ function normalizeHistory(history) {
   return cleaned;
 }
 
-module.exports = async (request, response) => {
+module.exports = async (request, response, env = globalThis.process?.env || {}) => {
   if (request.method === "GET") {
     response.setHeader("Cache-Control", "no-store");
     return sendJson(response, 200, {
       success: true,
-      available: Boolean(process.env.LLM_BASE_URL && process.env.LLM_API_KEY && process.env.LLM_MODEL),
+      available: Boolean(env.LLM_BASE_URL && env.LLM_API_KEY && env.LLM_MODEL),
     });
   }
   if (request.method !== "POST") {
@@ -105,9 +105,9 @@ module.exports = async (request, response) => {
       success: false,
       error: "Invalid conversation history.",
     });
-  const baseUrl = process.env.LLM_BASE_URL;
-  const apiKey = process.env.LLM_API_KEY;
-  const model = process.env.LLM_MODEL;
+  const baseUrl = env.LLM_BASE_URL;
+  const apiKey = env.LLM_API_KEY;
+  const model = env.LLM_MODEL;
   if (!baseUrl || !apiKey || !model)
     return sendJson(response, 503, {
       success: false,

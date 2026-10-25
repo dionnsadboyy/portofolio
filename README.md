@@ -55,4 +55,24 @@ Konfigurasi lokal menggunakan KoboiLLM dengan model `openai/gpt-4.1-mini`. Key h
 
 Pertanyaan calon klien soal sistem, fitur, jasa, harga, jadwal, dan kerja sama dipahami bersama histori, tanpa filter kata kunci yang memblokir pertanyaan sebelum sampai ke model. Yon dapat membantu memperjelas kebutuhan dan mengaitkannya dengan karya terverifikasi. Kemampuan menyelesaikan pesanan, penawaran harga, serta ketersediaan tetap perlu dikonfirmasi langsung ke Dion; Yon tidak menerima pesanan atau menjanjikan pengerjaan.
 
-GET /api/portfolio-assistant memeriksa ketersediaan konfigurasi tanpa mengirim pesan. POST baru dilakukan sesudah interaksi pengguna. Koneksi dan jawaban provider asli telah diuji secara lokal. Tanpa credential, bantuan navigasi tetap berfungsi. Static hosting saja tidak menjalankan API ini: hosting yang digunakan harus mendukung handler Node di api/. Tidak ada deployment yang dilakukan.
+GET /api/portfolio-assistant memeriksa ketersediaan konfigurasi tanpa mengirim pesan. POST baru dilakukan sesudah interaksi pengguna. Koneksi dan jawaban provider asli telah diuji secara lokal. Tanpa credential, bantuan navigasi tetap berfungsi. Static hosting saja tidak menjalankan API ini: gunakan handler Node di api/ atau adapter Cloudflare Pages Functions di functions/api/portfolio-assistant.js.
+
+### Cloudflare Pages
+
+Konfigurasi Pages yang dicatat dalam paket perbaikan: direktori root repository, build command `exit 0`, output `.`, dan branch production `main`. Folder `functions/` dikompilasi otomatis oleh integrasi Git Cloudflare menjadi endpoint `/api/portfolio-assistant`.
+
+Di Workers & Pages → portofolio → Settings → Variables and secrets, pilih Production dan isi:
+
+| Nama | Tipe | Nilai |
+| --- | --- | --- |
+| LLM_BASE_URL | Text | https://api.koboillm.com/v1 |
+| LLM_MODEL | Text | openai/gpt-4.1-mini |
+| LLM_API_KEY | Secret | Key provider yang dipakai di `.env` lokal |
+
+Simpan lalu redeploy supaya konfigurasi berlaku pada deployment baru. Jangan upload `.env`, memasukkan key ke kode/frontend, atau memakai awalan environment frontend seperti `VITE_`. Preview memakai environment terpisah; aktifkan hanya bila diperlukan.
+
+Adapter memakai handler dan konteks portfolio yang sama dengan server lokal. Environment Cloudflare diteruskan per request tanpa mengubah `process.env`, dan ukuran body tetap dibatasi 32 KB. Tidak memerlukan Workers AI binding atau Cloudflare Tunnel.
+
+`node scripts/check.js` juga menjalankan pemeriksaan adapter Pages: konfigurasi antar-request tetap terpisah, validasi pesan/histori/JSON, batas body termasuk stream UTF-8, metode HTTP, serta kegagalan provider. Pemeriksaan ini tidak memanggil AI live.
+
+Validasi lokal integrasi: kompilasi Wrangler 4.152.0 serta health check dan satu jawaban provider asli lewat bundle hasil kompilasi (dijalankan di Node) berhasil. Emulator workerd pada Windows ini crash saat startup, sehingga runtime Cloudflare penuh belum diverifikasi. Konfigurasi dashboard dan deployment produksi tidak diubah.
